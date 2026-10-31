@@ -1,0 +1,3 @@
+#pragma once
+
+#define AS_TRAINER_VERSION "@PROJECT_VERSION@"

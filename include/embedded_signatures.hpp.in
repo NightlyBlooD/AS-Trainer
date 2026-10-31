@@ -1,0 +1,5 @@
+#pragma once
+
+namespace azs {
+inline constexpr char current_signature_profile[] = R"as_profile(@AS_SIGNATURE_PROFILE@)as_profile";
+}
