@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.0
+# AS-Trainer 1.1.1
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,12 +6,12 @@ Ein C++20-/Dear-ImGui-Trainer für Azeroth Survivors unter Windows x64. Er biete
 
 ## Herunterladen und starten
 
-Lade **`AS-Trainer-1.1.0-windows-x64.zip`** von [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) herunter. Entpacke das gesamte Archiv. `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, Dokumentation und Lizenzhinweise müssen zusammenbleiben. DLL, Loader und `SHA256SUMS.txt` werden auch einzeln angeboten.
+Lade **`AS-Trainer-1.1.1-windows-x64.zip`** von [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) herunter. Entpacke das gesamte Archiv. `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, Dokumentation und Lizenzhinweise müssen zusammenbleiben. DLL, Loader und `SHA256SUMS.txt` werden auch einzeln angeboten.
 
 1. Starte die unterstützte Spielversion im Fenster oder im randlosen Fenstermodus.
 2. Starte `load_overlay.cmd` oder `load_overlay.exe` mit denselben Berechtigungen wie das Spiel.
 3. **Insert** blendet das Fenster ein oder aus. Bearbeite Werte oder lade unter **Konfigurationen** ein Profil. Bestätige Automatisierungsänderungen mit **Regeln anwenden**.
-4. **End** verwirft ausstehende Schreibbefehle, Fixierungen und Start-Markierungen, deaktiviert Automatisierung und Gruppenmodus, setzt die Zeit auf 1× und blendet das Fenster aus. Bereits geänderte Spielwerte und Konfigurationsdateien bleiben erhalten.
+4. **End** verwirft ausstehende Schreibbefehle, Fixierungen und Start-Markierungen, deaktiviert Automatisierung, Gottmodus und Gruppenmodus, setzt die Zeit auf 1× und blendet das Fenster aus. Bereits geänderte Spielwerte und Konfigurationsdateien bleiben erhalten.
 
 Bei mehreren Spielprozessen: `load_overlay.exe --pid 12345`. Die DLL bleibt bis zum Spielende geladen. **Starte das Spiel vor einem Update neu**; ein erneuter Loader-Aufruf ersetzt die geladene DLL nicht.
 
@@ -21,6 +21,7 @@ Unterstützte Builds von `AzerothSurvivors.exe` mit ihrem SHA-256:
 
 | Spielversion | SHA-256 |
 |---|---|
+| `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
@@ -56,6 +57,8 @@ Die Zahlen sind **absolute Zielwerte**, keine Zuschläge: Schaden `20` bedeutet 
 ## Belohnungen und Zeit
 
 Zauber und Schmuck haben getrennte Schalter und Prioritäten. Verwende interne Schlüssel aus [reference_keys.txt](../configs/reference_keys.txt), etwa `wrath`, `hurricane`, `chosen` oder `legendary:wrath`. Ein früherer Schlüssel gewinnt vor höherer Seltenheit; bei Gleichstand gewinnt die erste Karte. Ohne passenden Schlüssel zählt die Seltenheit. Die Verzögerung beträgt **50–5000 ms Echtzeit**. Nur geöffnete Angebote werden ausgewählt; gespeicherte Stufenaufstiege musst du zuerst mit der Spielschaltfläche öffnen.
+
+**Gottmodus** fügt jedem Gegner beim Erscheinen sofort Schaden in Höhe seiner verbleibenden Lebenspunkte zu, unabhängig von der Entfernung und ohne Zauber zu wirken. Der Schaden wird deinem Charakter zugerechnet. Der Modus funktioniert nur im Einzelspieler und ist in Netzwerkspielen, einschließlich selbst gehosteter Räume, deaktiviert. Der Schalter wirkt sofort und kann schon vor einem Durchlauf aktiviert werden. Die Einstellung wird als `god_mode` in Profilen gespeichert.
 
 Die Endboss-Regel vergibt das legendäre Rüstungs-/Waffenset der **aktuellen Klasse** aus der Ahn'Qiraj-/Naxxramas-Tabelle nach dem Endboss **jeder Zone**: meist 9 Gegenstände, bei Schurke und Schamane 10. Die normale Beuteverarbeitung fügt sie der Ausrüstungssammlung hinzu. Schmuck im Durchlauf und Zauberseltenheit sind davon getrennt.
 

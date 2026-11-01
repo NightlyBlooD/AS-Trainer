@@ -553,6 +553,7 @@ int trainer_test_suite::run() {
     rules.time_scale = 16;
     rules.auto_choose_spells = true;
     rules.legendary_final_boss = true;
+    rules.god_mode = true;
     rules.spell_priorities = {"wrath", "hurricane"};
     check(state.set_automation(rules) && state.get_automation()->time_scale == 16,
           "automation and 16x clock settings are stored without a game pointer");
@@ -580,8 +581,9 @@ int trainer_test_suite::run() {
           "invalid input time cannot reach the native simulation");
     state.reset_all();
     check(state.get_automation()->time_scale == 1 && !state.get_automation()->auto_choose_spells &&
-          !state.get_automation()->legendary_final_boss && !state.get_field(cooldown).frozen,
-          "panic reset stops freezes, auto-choice, loot and acceleration together");
+          !state.get_automation()->legendary_final_boss && !state.get_automation()->god_mode &&
+          !state.get_field(cooldown).frozen,
+          "panic reset stops freezes, auto-choice, loot, god mode and acceleration together");
     test_lifesteal(first, second);
     state.set_hooks_ready(false);
     VirtualFree(first, 0, MEM_RELEASE);

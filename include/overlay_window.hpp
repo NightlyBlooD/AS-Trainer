@@ -282,6 +282,7 @@ private:
     bool auto_choose_spells_{};
     bool auto_choose_jewelry_{};
     bool legendary_final_boss_{};
+    bool god_mode_{};
 };
 
 } // namespace azs

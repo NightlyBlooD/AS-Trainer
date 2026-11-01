@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.0
+# AS-Trainer 1.1.1
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,12 +6,12 @@
 
 ## 下载与启动
 
-从 [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) 下载 **`AS-Trainer-1.1.0-windows-x64.zip`**。请完整解压，保留同目录下的 `azs_overlay.dll`、`load_overlay.exe`、`load_overlay.cmd`、`signature_scan.exe`、`configs`、`signatures`、`fonts`、文档和许可证。发布页面也单独提供 DLL、加载器和 `SHA256SUMS.txt`。
+从 [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) 下载 **`AS-Trainer-1.1.1-windows-x64.zip`**。请完整解压，保留同目录下的 `azs_overlay.dll`、`load_overlay.exe`、`load_overlay.cmd`、`signature_scan.exe`、`configs`、`signatures`、`fonts`、文档和许可证。发布页面也单独提供 DLL、加载器和 `SHA256SUMS.txt`。
 
 1. 以窗口或无边框窗口模式启动受支持的游戏版本。
 2. 以与游戏相同的权限运行 `load_overlay.cmd` 或 `load_overlay.exe`。
 3. 按 **Insert** 显示或隐藏面板。手动设置数值，或在**配置**中加载预设。修改自动化选项后，点击**应用规则**。
-4. 按 **End** 取消待执行写入、锁定和“开局”选项，关闭自动化与全队模式，将时间恢复为 1×，并隐藏面板。已经修改的游戏数值和配置文件会保留。
+4. 按 **End** 取消待执行写入、锁定和“开局”选项，关闭自动化、上帝模式与全队模式，将时间恢复为 1×，并隐藏面板。已经修改的游戏数值和配置文件会保留。
 
 运行多个游戏进程时可使用 `load_overlay.exe --pid 12345`。DLL 会一直驻留到游戏退出，因此**更新前必须重启游戏**。再次运行加载器不会替换已加载的 DLL。
 
@@ -21,6 +21,7 @@
 
 | 游戏版本 | SHA-256 |
 |---|---|
+| `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
@@ -56,6 +57,8 @@
 ## 奖励与时间
 
 法术和饰品拥有独立的自动选择开关及优先级。请使用 [reference_keys.txt](../configs/reference_keys.txt) 中的内部键名，例如 `wrath`、`hurricane`、`chosen` 或 `legendary:wrath`。先比较键名在列表中的顺序，再比较稀有度，仍相同则选择第一张卡。未匹配优先级时按稀有度选择。延迟为 **50–5000 毫秒实际时间**。仅处理已经打开的奖励界面；储存的升级选择需先通过游戏原生按钮打开。
+
+**上帝模式**会在每个敌人出现时，立即对其造成等于剩余生命值的伤害，不受距离影响，也不会施放法术。伤害归属于你的角色。该模式仅限单人游戏，联网游戏中禁用，包括自己创建的房间。开关立即生效，可以在开局前启用；设置以 `god_mode` 保存在配置中。
 
 最终首领选项会在**任意区域**的最终首领掉落处理中，发放 Ahn'Qiraj/Naxxramas 装备表中属于**当前职业**的传说护甲与武器套装。大多数职业为 9 件，盗贼和萨满祭司为 10 件。物品通过原生掉落处理进入装备收藏。这与局内饰品及法术稀有度是不同机制。
 

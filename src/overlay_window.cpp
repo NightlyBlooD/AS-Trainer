@@ -723,6 +723,14 @@ void overlay_window::draw_automation_section(bool controls_ready) {
     }
     controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::auto_spells), auto_choose_spells_);
     controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::auto_jewelry), auto_choose_jewelry_);
+    controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::god_mode_toggle), god_mode_);
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+        ImGui::BeginTooltip();
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+        ImGui::TextUnformatted(ui_strings::get(ui_text_id::god_mode_help));
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
     controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::legendary_toggle), legendary_final_boss_);
     if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
         ImGui::BeginTooltip();
@@ -839,6 +847,7 @@ bool overlay_window::publish_automation_controls() noexcept {
         settings.auto_choose_spells = auto_choose_spells_;
         settings.auto_choose_jewelry = auto_choose_jewelry_;
         settings.legendary_final_boss = legendary_final_boss_;
+        settings.god_mode = god_mode_;
         settings.choice_delay_ms = static_cast<std::uint32_t>(std::clamp(choice_delay_ms_, 50, 5000));
         settings.time_scale = time_scale_;
         if (state.set_automation(settings)) {
@@ -900,6 +909,7 @@ void overlay_window::refresh_automation_controls() noexcept {
     auto_choose_spells_ = settings->auto_choose_spells;
     auto_choose_jewelry_ = settings->auto_choose_jewelry;
     legendary_final_boss_ = settings->legendary_final_boss;
+    god_mode_ = settings->god_mode;
     choice_delay_ms_ = static_cast<int>(settings->choice_delay_ms);
     time_scale_ = settings->time_scale;
 }

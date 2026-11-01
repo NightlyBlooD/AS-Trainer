@@ -197,6 +197,8 @@ std::string config_store::serialize(const trainer_preset& preset) {
     text += automation.auto_choose_jewelry ? "true" : "false";
     text += "\nlegendary_final_boss=";
     text += automation.legendary_final_boss ? "true" : "false";
+    text += "\ngod_mode=";
+    text += automation.god_mode ? "true" : "false";
     text += "\napply_to_party=";
     text += automation.apply_to_party ? "true" : "false";
     text += "\nchoice_delay_ms=" + std::to_string(automation.choice_delay_ms);
@@ -322,6 +324,7 @@ bool config_store::parse(const std::string& text, trainer_preset& preset, std::s
                 else if (key == "spell_priorities") bit = 32;
                 else if (key == "jewelry_priorities") bit = 64;
                 else if (key == "apply_to_party") bit = 128;
+                else if (key == "god_mode") bit = 256;
                 if (bit != 0 && (automation_mask & bit) == 0) {
                     auto& automation = candidate.automation;
                     if (bit == 1) accepted = parse_boolean(value, automation.auto_choose_spells);
@@ -334,7 +337,8 @@ bool config_store::parse(const std::string& text, trainer_preset& preset, std::s
                     } else if (bit == 16) accepted = parse_number(value, automation.time_scale);
                     else if (bit == 32) accepted = parse_priorities(value, automation.spell_priorities);
                     else if (bit == 64) accepted = parse_priorities(value, automation.jewelry_priorities);
-                    else accepted = parse_boolean(value, automation.apply_to_party);
+                    else if (bit == 128) accepted = parse_boolean(value, automation.apply_to_party);
+                    else accepted = parse_boolean(value, automation.god_mode);
                     if (accepted) {
                         automation_mask |= bit;
                     }

@@ -3,6 +3,7 @@
 #include "trainer_state.hpp"
 #include "auto_choice.hpp"
 #include "legendary_loot.hpp"
+#include "god_mode.hpp"
 #include "simulation_clock.hpp"
 #include "party_runtime.hpp"
 #include "game_layout.hpp"
@@ -422,6 +423,7 @@ void __fastcall game_runtime::tick_hook(void* run_address, float delta_seconds) 
     party_runtime::observe_owner(run_address);
     const auto settings = state.get_automation();
     const auto steps = simulation_clock::split_frame(delta_seconds, settings->time_scale);
+    static thread_local std::shared_ptr<const automation_settings> failed_god_mode_settings;
     for (std::uint32_t step = 0; step < steps.count; ++step) {
         process_run(run_address, false);
         LARGE_INTEGER owner_started{};
@@ -438,6 +440,17 @@ void __fastcall game_runtime::tick_hook(void* run_address, float delta_seconds) 
         party_runtime::process_owner(run_address);
         if (host_active) {
             const auto current = state.get_automation();
+            if (!current->god_mode) {
+                failed_god_mode_settings.reset();
+            } else if (failed_god_mode_settings != current && !god_mode::supported()) {
+                failed_god_mode_settings = current;
+                state.set_message(localization::translate(
+                    "God mode is unavailable for this game build; other features remain active."));
+            } else if (failed_god_mode_settings != current && !god_mode::process_run(run_address)) {
+                failed_god_mode_settings = current;
+                state.set_message(localization::translate(
+                    "God mode stopped after a native damage validation failure. Toggle it off and on to retry."));
+            }
             const auto choice = auto_choice::process_run(run_address, *current, GetTickCount64());
             if (choice.status == auto_choice_status::apply_failed) {
                 state.set_message(localization::translate("Auto-choice stopped for this reward: the native handler returned an error."));
@@ -571,6 +584,7 @@ bool game_runtime::initialize() noexcept {
         hook_failure("MH_Initialize", status);
         return false;
     }
+    god_mode::initialize(module_base_, module_path.data(), actual_hash);
     void* tick_trampoline = nullptr;
     void* recalculate_trampoline = nullptr;
     void* lifesteal_trampoline = nullptr;

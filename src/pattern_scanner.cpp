@@ -354,6 +354,13 @@ std::span<const std::uint8_t> pattern_scanner::view_rva(std::uint32_t rva, std::
 }
 
 bool pattern_scanner::function_start(std::uint32_t rva, std::uint32_t& result) const noexcept {
+    std::uint32_t end{};
+    return function_range(rva, result, end);
+}
+
+bool pattern_scanner::function_range(std::uint32_t rva, std::uint32_t& begin,
+    std::uint32_t& end) const noexcept {
+    error_ = "";
     const auto after = std::upper_bound(functions_.begin(), functions_.end(), rva,
         [](std::uint32_t address, const runtime_function& function) { return address < function.begin; });
     if (after == functions_.begin()) return fail("Matched RVA has no runtime function entry.");
@@ -375,7 +382,8 @@ bool pattern_scanner::function_start(std::uint32_t rva, std::uint32_t& result) c
         const auto info = view_rva(function.unwind, required);
         if (info.empty()) return fail("Unwind codes or chained function data are truncated.");
         if ((flags & 4u) == 0) {
-            result = function.begin;
+            begin = function.begin;
+            end = function.end;
             return true;
         }
         read_unsigned(info, extra_offset, function.begin);

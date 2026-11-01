@@ -46,7 +46,7 @@ target_compile_definitions(trainer_scanning PUBLIC UNICODE _UNICODE WIN32_LEAN_A
 target_compile_options(trainer_scanning PRIVATE /W4 /permissive- /utf-8 /EHsc)
 target_link_libraries(trainer_scanning PUBLIC trainer_bridge bcrypt)
 
-add_library(trainer_actions STATIC src/auto_choice.cpp src/legendary_loot.cpp)
+add_library(trainer_actions STATIC src/auto_choice.cpp src/legendary_loot.cpp src/god_mode.cpp src/god_mode_events.cpp src/god_mode_bindings.cpp)
 target_include_directories(trainer_actions PUBLIC include)
 target_compile_definitions(trainer_actions PUBLIC UNICODE _UNICODE WIN32_LEAN_AND_MEAN NOMINMAX)
 target_compile_options(trainer_actions PRIVATE /W4 /permissive- /utf-8 /EHsc)
@@ -101,6 +101,18 @@ if(BUILD_TESTING)
     target_link_libraries(legendary_loot_tests PRIVATE trainer_actions)
     target_compile_options(legendary_loot_tests PRIVATE /W4 /permissive- /utf-8 /EHsc)
     add_test(NAME final_boss_legendary_set COMMAND legendary_loot_tests)
+
+    add_executable(god_mode_tests tests/god_mode_tests.cpp)
+    target_include_directories(god_mode_tests PRIVATE tests)
+    target_link_libraries(god_mode_tests PRIVATE trainer_actions)
+    target_compile_options(god_mode_tests PRIVATE /W4 /permissive- /utf-8 /EHsc)
+    add_test(NAME offline_god_mode COMMAND god_mode_tests)
+
+    add_executable(god_mode_bindings_tests tests/god_mode_bindings_tests.cpp)
+    target_include_directories(god_mode_bindings_tests PRIVATE tests)
+    target_link_libraries(god_mode_bindings_tests PRIVATE trainer_actions)
+    target_compile_options(god_mode_bindings_tests PRIVATE /W4 /permissive- /utf-8 /EHsc)
+    add_test(NAME adaptive_god_mode_bindings COMMAND god_mode_bindings_tests)
 
     add_executable(auto_choice_tests tests/auto_choice_tests.cpp)
     target_include_directories(auto_choice_tests PRIVATE tests)

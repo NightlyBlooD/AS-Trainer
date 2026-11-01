@@ -215,9 +215,14 @@ void pattern_scanner_tests::test_unwind() {
     pattern_scanner scanner;
     pattern_match match;
     pattern_resolution result;
+    std::uint32_t begin = 7, end = 9;
     check(scanner.load_bytes(image) && scanner.find_unique("CC", match) &&
           scanner.resolve(match, pattern_resolve_mode::function_start, result) && result.rva == 0x1080,
         "interior match resolves through the containing pdata runtime function range");
+    check(scanner.function_range(0x1090, begin, end) && begin == 0x1080 && end == 0x1100,
+        "public function range returns the exact containing primary entry and exclusive end");
+    check(!scanner.function_range(0x1190, begin, end) && begin == 0x1080 && end == 0x1100,
+        "uncovered function-range queries preserve both output boundaries");
     check(scanner.find_unique("CD", match) && !scanner.resolve(match, pattern_resolve_mode::function_start, result),
         "function end and following uncovered bytes never inherit the preceding function start");
     image[0x820] = 0x21;
@@ -227,6 +232,8 @@ void pattern_scanner_tests::test_unwind() {
     check(scanner.load_bytes(image) && scanner.find_unique("CC", match) &&
           scanner.resolve(match, pattern_resolve_mode::function_start, result) && result.rva == 0x1000,
         "UNW_FLAG_CHAININFO fragment resolves to its primary function rather than the fragment start");
+    check(scanner.function_range(0x1090, begin, end) && begin == 0x1000 && end == 0x1080,
+        "public function range follows a fragment to its bounded primary range");
     put_unsigned<std::uint32_t>(image, 0x82c, 0x3020);
     check(scanner.load_bytes(image) && scanner.find_unique("CC", match) &&
           !scanner.resolve(match, pattern_resolve_mode::function_start, result) &&

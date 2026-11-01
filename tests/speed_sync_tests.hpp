@@ -74,6 +74,14 @@ private:
      */
     static void test_accelerated_publication(void* run_address);
 
+    /** @brief Verify optional god-mode failure suppression and explicit retry publications.
+     * @param run_address Owned legacy-layout writable run fixture with a stub native owner.
+     * @return None; checks the unsupported-build diagnostic, unchanged-settings suppression,
+     * off/on publications without an intervening frame and retry after a ready-phase frame.
+     * God-mode native bindings remain uninitialized; no game damage or hooks are invoked.
+     */
+    static void test_god_mode_retry(void* run_address);
+
     /** @brief Verify native lifesteal float-return forwarding and owner-scoped overrides.
      * @param run_address Adopted writable current-layout run fixture owned by this thread.
      * @return None; checks disabled/foreign delegation, active-getter bypass, health math,

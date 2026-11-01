@@ -173,7 +173,7 @@ std::vector<std::string> ui_strings_tests::format_arguments(const char* text) {
 
 void ui_strings_tests::check_catalog() {
     const auto count = static_cast<std::size_t>(ui_text_id::count);
-    check(count == 110, "all 110 UI entries are included");
+    check(count == 112, "all 112 UI entries are included");
     for (std::size_t index = 0; index < count; ++index) {
         const auto id = static_cast<ui_text_id>(index);
         const char* english = ui_strings::get(id, client_language::english);

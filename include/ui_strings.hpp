@@ -116,6 +116,8 @@ enum class ui_text_id : std::size_t {
     field_buff_power,
     field_lives,
     field_lifesteal,
+    god_mode_toggle,
+    god_mode_help,
     count
 };
 

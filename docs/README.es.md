@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.0
+# AS-Trainer 1.1.1
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,12 +6,12 @@ Un trainer C++20 / Dear ImGui para Azeroth Survivors en Windows x64. Permite mod
 
 ## Descargar e iniciar
 
-Descarga **`AS-Trainer-1.1.0-windows-x64.zip`** desde [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extrae todo el archivo. Mantén juntos `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, la documentación y las licencias. La DLL, el cargador y `SHA256SUMS.txt` también se ofrecen por separado.
+Descarga **`AS-Trainer-1.1.1-windows-x64.zip`** desde [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extrae todo el archivo. Mantén juntos `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, la documentación y las licencias. La DLL, el cargador y `SHA256SUMS.txt` también se ofrecen por separado.
 
 1. Inicia la versión compatible del juego en modo ventana o sin bordes.
 2. Ejecuta `load_overlay.cmd` o `load_overlay.exe` con los mismos permisos que el juego.
 3. **Insert** muestra u oculta el panel. Ajusta los valores o carga un perfil en **Configuraciones**. Confirma los cambios de automatización con **Aplicar reglas**.
-4. **End** cancela escrituras pendientes, bloqueos y marcas Inicio, desactiva la automatización y el modo de grupo, devuelve el tiempo a 1× y oculta el panel. Los valores ya cambiados en el juego y los archivos INI se conservan.
+4. **End** cancela escrituras pendientes, bloqueos y marcas Inicio, desactiva la automatización, el modo dios y el modo de grupo, devuelve el tiempo a 1× y oculta el panel. Los valores ya cambiados en el juego y los archivos INI se conservan.
 
 Con varios procesos: `load_overlay.exe --pid 12345`. La DLL permanece cargada hasta cerrar el juego. **Reinicia el juego antes de actualizarla**; volver a ejecutar el cargador no sustituye una DLL cargada.
 
@@ -21,6 +21,7 @@ Versiones compatibles de `AzerothSurvivors.exe` y su SHA-256:
 
 | Versión del juego | SHA-256 |
 |---|---|
+| `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
@@ -56,6 +57,8 @@ Los números son **objetivos absolutos**, no bonificaciones aditivas: daño `20`
 ## Recompensas y tiempo
 
 Hechizos y joyas tienen interruptores y prioridades independientes. Usa claves internas de [reference_keys.txt](../configs/reference_keys.txt), como `wrath`, `hurricane`, `chosen` o `legendary:wrath`. Gana la clave que aparezca antes, después la mayor rareza y, en caso de empate, la primera carta. Sin coincidencias, decide la rareza. El retardo es de **50–5000 ms reales**. Solo se procesan ofertas abiertas; primero abre los niveles guardados con el botón del juego.
+
+**Modo dios** inflige a cada enemigo, en cuanto aparece, daño igual a su salud restante, a cualquier distancia y sin lanzar hechizos. El daño se atribuye a tu personaje. Solo funciona en partidas de un jugador y está desactivado en red, incluso si eres el anfitrión. El interruptor se aplica inmediatamente y puede activarse antes de iniciar una partida. La opción se guarda en los perfiles como `god_mode`.
 
 La opción del jefe final concede el conjunto legendario de armadura y armas de la **clase actual**, de la tabla Ahn'Qiraj/Naxxramas, tras el jefe final de **cualquier zona**: normalmente 9 objetos, 10 para Pícaro y Chamán. El gestor normal de botín los añade a la colección de equipo. Es independiente de las joyas de la partida y la rareza de los hechizos.
 

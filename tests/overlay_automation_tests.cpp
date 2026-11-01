@@ -110,12 +110,14 @@ int overlay_automation_tests::run() noexcept {
         overlay.auto_choose_spells_ = true;
         overlay.auto_choose_jewelry_ = true;
         overlay.legendary_final_boss_ = true;
+        overlay.god_mode_ = true;
         overlay.choice_delay_ms_ = 250;
         overlay.time_scale_ = 5.0;
         check(overlay.publish_automation_controls(), "invalid priority draft does not block immediate controls");
         const auto immediate = state.get_automation();
         check(immediate->apply_to_party && immediate->auto_choose_spells
             && immediate->auto_choose_jewelry && immediate->legendary_final_boss
+            && immediate->god_mode
             && immediate->choice_delay_ms == 250 && immediate->time_scale == 5.0,
             "all immediate controls publish without applying priorities");
         check(immediate->spell_priorities == original.spell_priorities
@@ -132,6 +134,7 @@ int overlay_automation_tests::run() noexcept {
         newer_live.auto_choose_spells = false;
         newer_live.auto_choose_jewelry = false;
         newer_live.legendary_final_boss = false;
+        newer_live.god_mode = false;
         newer_live.choice_delay_ms = 750;
         newer_live.time_scale = 2.0;
         check(state.set_automation(newer_live), "fixture updates live controls independently of cached editors");
@@ -140,6 +143,7 @@ int overlay_automation_tests::run() noexcept {
         const auto prioritized = state.get_automation();
         check(!prioritized->apply_to_party && !prioritized->auto_choose_spells
             && !prioritized->auto_choose_jewelry && !prioritized->legendary_final_boss
+            && !prioritized->god_mode
             && prioritized->choice_delay_ms == 750 && prioritized->time_scale == 2.0,
             "priority application preserves fresh live settings rather than stale UI controls");
         check(prioritized->spell_priorities == std::vector<std::string>{"frostbolt", "wrath"}
@@ -148,7 +152,7 @@ int overlay_automation_tests::run() noexcept {
 
         strcpy_s(overlay.spell_priority_text_.data(), overlay.spell_priority_text_.size(), "unpublished_spell");
         overlay.refresh_automation_controls();
-        check(!overlay.auto_choose_spells_ && overlay.time_scale_ == 2.0
+        check(!overlay.auto_choose_spells_ && !overlay.god_mode_ && overlay.time_scale_ == 2.0
             && std::strcmp(overlay.spell_priority_text_.data(), "unpublished_spell") == 0,
             "refreshing live controls preserves unfinished priority text");
         overlay.time_scale_ = 17.0;

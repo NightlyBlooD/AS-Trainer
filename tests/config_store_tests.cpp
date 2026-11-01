@@ -23,6 +23,7 @@ trainer_preset config_store_tests::sample_preset() {
     preset.automation.auto_choose_spells = true;
     preset.automation.auto_choose_jewelry = true;
     preset.automation.legendary_final_boss = true;
+    preset.automation.god_mode = true;
     preset.automation.apply_to_party = true;
     preset.automation.choice_delay_ms = 750;
     preset.automation.time_scale = 2.5;
@@ -126,13 +127,14 @@ int config_store_tests::run() {
         "serialized schema 4 preset parses completely");
     check(config_store::serialize(parsed) == serialized && parsed.fields.size() == 3 &&
           parsed.fields.front().key == "damage" && parsed.fields.front().value == 3.125 &&
-          parsed.automation.legendary_final_boss && parsed.automation.apply_to_party &&
+          parsed.automation.legendary_final_boss && parsed.automation.god_mode && parsed.automation.apply_to_party &&
           parsed.automation.time_scale == 2.5 &&
           parsed.automation.spell_priorities == sample.automation.spell_priorities &&
           parsed.automation.jewelry_priorities == sample.automation.jewelry_priorities,
         "round trip preserves values, flags, stable descriptor order and priority order");
     check(serialized.find("frozen=true") != std::string::npos &&
           serialized.find("legendary_final_boss=true") != std::string::npos &&
+          serialized.find("god_mode=true") != std::string::npos &&
           serialized.find("apply_to_party=true") != std::string::npos &&
           serialized.find("spell_priorities=wrath,hurricane") != std::string::npos,
         "INI booleans and list delimiters use canonical locale-independent spellings");
@@ -153,6 +155,16 @@ int config_store_tests::run() {
               party_disabled, error) && !party_disabled.automation.apply_to_party &&
           party_disabled.automation.time_scale == 1,
         "explicit false party flag preserves normal multiplayer time scale");
+    auto legacy_god_text = serialized;
+    const auto god_line = legacy_god_text.find("god_mode=true\n");
+    check(god_line != std::string::npos, "schema 4 fixture contains the optional god mode flag");
+    if (god_line != std::string::npos) {
+        legacy_god_text.erase(god_line, sizeof("god_mode=true\n") - 1);
+        auto legacy = sample;
+        check(config_store::parse(legacy_god_text, legacy, error) && !legacy.automation.god_mode &&
+              legacy.automation.apply_to_party && legacy.automation.legendary_final_boss,
+            "legacy presets disable omitted god mode without changing other automation flags");
+    }
 
     const std::string field_prefix = "[trainer]\nversion=3\n[field.damage]\nvalue=";
     const std::string field_suffix = "\nfrozen=false\napply_on_start=true\n";
@@ -176,6 +188,9 @@ int config_store_tests::run() {
         "[trainer]\nversion=3\n[automation]\napply_to_party=True\n",
         "[trainer]\nversion=3\n[automation]\napply_to_party=1\n",
         "[trainer]\nversion=3\n[automation]\napply_to_party=true\napply_to_party=false\n",
+        "[trainer]\nversion=4\n[automation]\ngod_mode=True\n",
+        "[trainer]\nversion=4\n[automation]\ngod_mode=1\n",
+        "[trainer]\nversion=4\n[automation]\ngod_mode=true\ngod_mode=false\n",
         "[trainer]\nversion=3\n[automation]\nspell_priorities=wrath,,hurricane\n",
         "[trainer]\nversion=3\n[automation]\nspell_priorities=wrath,\n",
         "[trainer]\nversion=3\n[field.damage]\nvalue=2\nfrozen=false\n",
@@ -203,7 +218,8 @@ int config_store_tests::run() {
     check(config_store::parse("\xef\xbb\xbf; UTF-8 preset\r\n [trainer] \r\n version = 3 \r\n",
               safe_defaults, error) && safe_defaults.fields.empty() &&
           !safe_defaults.automation.auto_choose_spells && !safe_defaults.automation.auto_choose_jewelry &&
-          !safe_defaults.automation.legendary_final_boss && !safe_defaults.automation.apply_to_party &&
+          !safe_defaults.automation.legendary_final_boss && !safe_defaults.automation.god_mode &&
+          !safe_defaults.automation.apply_to_party &&
           safe_defaults.automation.time_scale == 1,
         "BOM/comments/CRLF are accepted and omitted automation remains disabled");
     check_schema_migration();

@@ -40,6 +40,7 @@ struct automation_settings {
     bool auto_choose_spells{};
     bool auto_choose_jewelry{};
     bool legendary_final_boss{};
+    bool god_mode{};
     bool apply_to_party{};
     std::uint32_t choice_delay_ms{500};
     double time_scale{1.0};

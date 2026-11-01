@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.0
+# AS-Trainer 1.1.1
 
 [English](README.md) · [Русский](docs/README.ru.md) · [Deutsch](docs/README.de.md) · [Français](docs/README.fr.md) · [Español](docs/README.es.md) · [Українська](docs/README.uk.md) · [简体中文](docs/README.zh-CN.md)
 
@@ -6,12 +6,12 @@ A C++20 / Dear ImGui trainer for Azeroth Survivors on Windows x64. Edit 26 chara
 
 ## Download and launch
 
-Download **`AS-Trainer-1.1.0-windows-x64.zip`** from [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extract the entire archive: keep `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, documentation and license notices together. The release also provides the DLL, loader and `SHA256SUMS.txt` separately.
+Download **`AS-Trainer-1.1.1-windows-x64.zip`** from [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extract the entire archive: keep `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, documentation and license notices together. The release also provides the DLL, loader and `SHA256SUMS.txt` separately.
 
 1. Start the supported game in windowed or borderless mode.
 2. Run `load_overlay.cmd` or `load_overlay.exe` with the same privileges as the game.
 3. **Insert** shows or hides the panel. Use the **Parameters**, **Auto-choice** and **Configs** tabs. Automation switches, delay and speed apply immediately; **Apply rules** confirms only spell and jewelry priorities.
-4. **End** cancels queued writes, freezes and Start flags, disables automation and party scope, returns time to 1×, and hides the panel. Existing game values and config files remain in place.
+4. **End** cancels queued writes, freezes and Start flags, disables automation, God mode and party scope, returns time to 1×, and hides the panel. Existing game values and config files remain in place.
 
 For multiple processes, use `load_overlay.exe --pid 12345`. The DLL stays loaded until the game exits: **restart the game before updating it**. Running the loader again does not replace a loaded DLL.
 
@@ -21,6 +21,7 @@ Supported executables and their SHA-256 identities:
 
 | Game version | SHA-256 |
 |---|---|
+| `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
@@ -67,7 +68,11 @@ Numbers are **absolute targets**, not additive bonuses: damage `20` means a 20×
 
 Spell and jewelry auto-choice have separate switches and priorities. Use stable keys from [reference_keys.txt](configs/reference_keys.txt), such as `wrath`, `hurricane`, `chosen` or `legendary:wrath`. Earlier keys win, then higher rarity, then the first card. Unmatched cards are ranked by rarity. Delay is **50–5000 ms of real time**. Only open offers are processed; stored level-ups must first be opened using the game's own button.
 
-Party scope, spell/jewelry auto-choice, legendary loot, delay and game speed apply as soon as their controls change. **Apply rules** saves only the two priority lists. Unapplied priority text stays in the editor while other controls change.
+Party scope, spell/jewelry auto-choice, God mode, legendary loot, delay and game speed apply as soon as their controls change. **Apply rules** saves only the two priority lists. Unapplied priority text stays in the editor while other controls change.
+
+**God mode** deals lethal damage equal to each enemy's remaining health when it appears, at any distance, without casting spells. Damage is credited to your character. The mode works only in single player and is blocked in network games, including locally hosted rooms. It can be enabled before starting a run and is saved in presets as `god_mode`.
+
+God mode discovers its native damage and spell-event functions once at startup using certified signatures. It accepts new executable hashes and relocated addresses when the complete normalized functions, linked helpers, constants and core layout still match the verified contracts. The current contracts cover v0.132.0, v0.135.1 and v0.136.0. Changes to enemy layout, calling conventions or damage logic require a new compatibility proof; an incomplete proof disables only God mode.
 
 The final-boss option awards the **current class's** legendary armor/weapon set from the Ahn'Qiraj/Naxxramas table after the final boss of **any zone**: 9 items for most classes, 10 for Rogue and Shaman. Items enter the equipment collection through the normal loot handler. This is separate from run jewelry and spell rarity.
 

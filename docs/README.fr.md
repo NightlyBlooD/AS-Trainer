@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.0
+# AS-Trainer 1.1.1
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,12 +6,12 @@ Un trainer C++20 / Dear ImGui pour Azeroth Survivors sous Windows x64 : jusqu’
 
 ## Télécharger et lancer
 
-Téléchargez **`AS-Trainer-1.1.0-windows-x64.zip`** depuis [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extrayez toute l'archive. Gardez ensemble `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, la documentation et les licences. La DLL, le chargeur et `SHA256SUMS.txt` sont aussi proposés séparément.
+Téléchargez **`AS-Trainer-1.1.1-windows-x64.zip`** depuis [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extrayez toute l'archive. Gardez ensemble `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, la documentation et les licences. La DLL, le chargeur et `SHA256SUMS.txt` sont aussi proposés séparément.
 
 1. Lancez la version compatible du jeu en mode fenêtré ou sans bordure.
 2. Lancez `load_overlay.cmd` ou `load_overlay.exe` avec les mêmes privilèges que le jeu.
 3. **Insert** affiche ou masque le panneau. Réglez les valeurs ou chargez un profil dans **Configurations**. Confirmez l'automatisation avec **Appliquer les règles**.
-4. **End** annule les écritures en attente, les blocages et les options Début, désactive l'automatisation et le mode groupe, rétablit la vitesse 1× et masque le panneau. Les valeurs déjà modifiées dans le jeu et les fichiers INI restent en place.
+4. **End** annule les écritures en attente, les blocages et les options Début, désactive l'automatisation, le mode dieu et le mode groupe, rétablit la vitesse 1× et masque le panneau. Les valeurs déjà modifiées dans le jeu et les fichiers INI restent en place.
 
 Avec plusieurs processus : `load_overlay.exe --pid 12345`. La DLL reste chargée jusqu'à la fermeture du jeu. **Redémarrez le jeu avant une mise à jour** ; relancer le chargeur ne remplace pas une DLL déjà chargée.
 
@@ -21,6 +21,7 @@ Versions prises en charge de `AzerothSurvivors.exe` et leur SHA-256 :
 
 | Version du jeu | SHA-256 |
 |---|---|
+| `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
@@ -56,6 +57,8 @@ Les nombres sont des **valeurs cibles absolues**, pas des bonus ajoutés : dég�
 ## Récompenses et temps
 
 Sorts et bijoux ont leurs propres interrupteurs et priorités. Utilisez les clés internes de [reference_keys.txt](../configs/reference_keys.txt), comme `wrath`, `hurricane`, `chosen` ou `legendary:wrath`. L'ordre des clés prime, puis la rareté, puis la première carte. Sans correspondance, la rareté décide. Le délai est de **50 à 5000 ms réelles**. Seules les offres ouvertes sont traitées ; ouvrez d'abord les niveaux stockés avec le bouton du jeu.
+
+**Mode dieu** inflige à chaque ennemi, dès son apparition, des dégâts égaux à ses points de vie restants, quelle que soit la distance et sans lancer de sort. Les dégâts sont attribués à votre personnage. Ce mode fonctionne uniquement en solo et est désactivé en réseau, même dans une salle que vous hébergez. Le changement prend effet immédiatement et le mode peut être activé avant le début de la partie. Le réglage est enregistré dans les profils sous `god_mode`.
 
 L'option du boss final accorde l'ensemble légendaire d'armure et d'armes de la **classe actuelle**, issu de la table Ahn'Qiraj/Naxxramas, après le boss final de **n'importe quelle zone** : 9 objets en général, 10 pour Voleur et Chaman. Le gestionnaire de butin normal les ajoute à la collection d'équipement. Ce mécanisme est distinct des bijoux de la partie et de la rareté des sorts.
 

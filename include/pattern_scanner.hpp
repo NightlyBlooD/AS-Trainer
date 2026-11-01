@@ -96,6 +96,16 @@ public:
         pattern_resolution& result, std::size_t displacement_offset = 0,
         std::size_t instruction_size = 0) const noexcept;
 
+    /** @brief Resolve one RVA to the primary unwind-described function range.
+     * @param rva File-backed instruction RVA covered by the validated exception directory.
+     * @param begin Output primary function entry RVA; unchanged on failure.
+     * @param end Output exclusive end of that primary range; unchanged on failure.
+     * @return True after bounded unwind-chain validation; false for uncovered, cyclic or
+     * malformed metadata. Chained fragments return their primary range rather than an
+     * invented enclosing span. No executable bytes are invoked or process memory accessed.
+     */
+    bool function_range(std::uint32_t rva, std::uint32_t& begin, std::uint32_t& end) const noexcept;
+
     /** @brief Convert an RVA range to its unique contiguous file-layout offset.
      * @param rva Image-relative address; @param result Output file offset, unchanged on failure.
      * @param size Required nonzero file-backed byte count.

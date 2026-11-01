@@ -1,6 +1,8 @@
 #include "speed_sync_tests.hpp"
 #include "game_layout.hpp"
 #include "game_runtime.hpp"
+#include "god_mode.hpp"
+#include "localization.hpp"
 #include "trainer_state.hpp"
 
 #include <Windows.h>
@@ -414,6 +416,62 @@ void speed_sync_tests::test_accelerated_publication(void* run_address) {
     prepare_run(run_address);
 }
 
+void speed_sync_tests::test_god_mode_retry(void* run_address) {
+    const auto saved_owner = game_runtime::original_tick_.load();
+    const bool saved_recording = record_owner_values_;
+    game_runtime::original_tick_.store(&owner_frame);
+    record_owner_values_ = false;
+    prepare_run(run_address);
+    auto& state = trainer_state::instance();
+    check(!god_mode::supported(), "isolated tick fixture leaves optional native damage unbound");
+    const char* unavailable = localization::translate(
+        "God mode is unavailable for this game build; other features remain active.");
+    constexpr const char* sentinel = "god mode diagnostic sentinel";
+    constexpr float delta = 1.0f / 64.0f;
+    auto settings = *state.get_automation();
+    settings.god_mode = true;
+    check(state.set_automation(settings), "god-mode retry fixture accepts the enabled option");
+    owner_calls_ = 0;
+    game_runtime::tick_hook(run_address, delta);
+    check(state.get_message() == unavailable && owner_calls_ == 1 && state.get_runtime().run_active,
+        "unsupported god mode reports once while preserving the native owner and active bridge");
+
+    const auto failed_settings = state.get_automation();
+    state.set_message(sentinel);
+    game_runtime::tick_hook(run_address, delta);
+    check(state.get_message() == sentinel && state.get_automation() == failed_settings && owner_calls_ == 2,
+        "unchanged failed settings suppress repeated diagnostics without suppressing native frames");
+
+    settings.god_mode = false;
+    check(state.set_automation(settings), "god mode can be disabled between native frames");
+    settings.god_mode = true;
+    check(state.set_automation(settings), "god mode can be reenabled before another native frame");
+    game_runtime::tick_hook(run_address, delta);
+    check(state.get_message() == unavailable && owner_calls_ == 3 &&
+          state.get_automation() != failed_settings,
+        "off-on publications retry optional god mode even without an intervening native frame");
+
+    state.set_message(sentinel);
+    settings.god_mode = false;
+    check(state.set_automation(settings), "ready-phase retry fixture disables god mode");
+    write_value<std::uint8_t>(run_address, 0xda3, 0);
+    game_runtime::tick_hook(run_address, delta);
+    check(state.get_message() == sentinel && owner_calls_ == 4,
+        "disabled god mode preserves diagnostics while a ready-phase native frame continues");
+    settings.god_mode = true;
+    check(state.set_automation(settings), "ready-phase retry fixture reenables god mode");
+    write_value<std::uint8_t>(run_address, 0xda3, 1);
+    game_runtime::tick_hook(run_address, delta);
+    check(state.get_message() == unavailable && owner_calls_ == 5 && state.get_runtime().run_active,
+        "returning from ready phase retries god mode after an explicit setting publication");
+
+    state.reset_all();
+    game_runtime::tick_hook(run_address, delta);
+    game_runtime::original_tick_.store(saved_owner);
+    record_owner_values_ = saved_recording;
+    prepare_run(run_address);
+}
+
 void __fastcall speed_sync_tests::grow_queue(void* queue_address) {
     ++grow_calls_;
     if (growth_mode_ == grow_mode::newer_command) {
@@ -640,6 +698,7 @@ int speed_sync_tests::run() {
     game_runtime::original_tick_.store(saved_owner);
 
     test_accelerated_publication(run_address);
+    test_god_mode_retry(run_address);
     test_current_layout(run_address, first_queue, speed);
 
     game_runtime::features_enabled_.store(false);
