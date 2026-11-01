@@ -1,4 +1,4 @@
-# AS-Trainer 1.0.0
+# AS-Trainer 1.1.0
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## 下载与启动
 
-从 [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) 下载 **`AS-Trainer-1.0.0-windows-x64.zip`**。请完整解压，保留同目录下的 `azs_overlay.dll`、`load_overlay.exe`、`load_overlay.cmd`、`signature_scan.exe`、`configs`、`signatures`、`fonts`、文档和许可证。发布页面也单独提供 DLL、加载器和 `SHA256SUMS.txt`。
+从 [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) 下载 **`AS-Trainer-1.1.0-windows-x64.zip`**。请完整解压，保留同目录下的 `azs_overlay.dll`、`load_overlay.exe`、`load_overlay.cmd`、`signature_scan.exe`、`configs`、`signatures`、`fonts`、文档和许可证。发布页面也单独提供 DLL、加载器和 `SHA256SUMS.txt`。
 
 1. 以窗口或无边框窗口模式启动受支持的游戏版本。
 2. 以与游戏相同的权限运行 `load_overlay.cmd` 或 `load_overlay.exe`。

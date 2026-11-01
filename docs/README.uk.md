@@ -1,4 +1,4 @@
-# AS-Trainer 1.0.0
+# AS-Trainer 1.1.0
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## Завантаження та запуск
 
-Завантажте **`AS-Trainer-1.0.0-windows-x64.zip`** із [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Розпакуйте весь архів: тримайте разом `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, каталоги `configs`, `signatures`, `fonts`, документацію та ліцензії. DLL, завантажувач і `SHA256SUMS.txt` також доступні окремо.
+Завантажте **`AS-Trainer-1.1.0-windows-x64.zip`** із [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Розпакуйте весь архів: тримайте разом `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, каталоги `configs`, `signatures`, `fonts`, документацію та ліцензії. DLL, завантажувач і `SHA256SUMS.txt` також доступні окремо.
 
 1. Запустіть підтримувану версію гри у віконному режимі або вікні без рамки.
 2. Запустіть `load_overlay.cmd` чи `load_overlay.exe` з тими самими правами, що й гру.

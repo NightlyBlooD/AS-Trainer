@@ -1,4 +1,4 @@
-# AS-Trainer 1.0.0
+# AS-Trainer 1.1.0
 
 [English](README.md) · [Русский](docs/README.ru.md) · [Deutsch](docs/README.de.md) · [Français](docs/README.fr.md) · [Español](docs/README.es.md) · [Українська](docs/README.uk.md) · [简体中文](docs/README.zh-CN.md)
 
@@ -6,7 +6,7 @@ A C++20 / Dear ImGui trainer for Azeroth Survivors on Windows x64. Edit 26 chara
 
 ## Download and launch
 
-Download **`AS-Trainer-1.0.0-windows-x64.zip`** from [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extract the entire archive: keep `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, documentation and license notices together. The release also provides the DLL, loader and `SHA256SUMS.txt` separately.
+Download **`AS-Trainer-1.1.0-windows-x64.zip`** from [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extract the entire archive: keep `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, documentation and license notices together. The release also provides the DLL, loader and `SHA256SUMS.txt` separately.
 
 1. Start the supported game in windowed or borderless mode.
 2. Run `load_overlay.cmd` or `load_overlay.exe` with the same privileges as the game.

@@ -1,4 +1,4 @@
-# AS-Trainer 1.0.0
+# AS-Trainer 1.1.0
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,7 +6,7 @@ Ein C++20-/Dear-ImGui-Trainer für Azeroth Survivors unter Windows x64. Er biete
 
 ## Herunterladen und starten
 
-Lade **`AS-Trainer-1.0.0-windows-x64.zip`** von [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) herunter. Entpacke das gesamte Archiv. `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, Dokumentation und Lizenzhinweise müssen zusammenbleiben. DLL, Loader und `SHA256SUMS.txt` werden auch einzeln angeboten.
+Lade **`AS-Trainer-1.1.0-windows-x64.zip`** von [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) herunter. Entpacke das gesamte Archiv. `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, Dokumentation und Lizenzhinweise müssen zusammenbleiben. DLL, Loader und `SHA256SUMS.txt` werden auch einzeln angeboten.
 
 1. Starte die unterstützte Spielversion im Fenster oder im randlosen Fenstermodus.
 2. Starte `load_overlay.cmd` oder `load_overlay.exe` mit denselben Berechtigungen wie das Spiel.
