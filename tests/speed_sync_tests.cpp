@@ -5,6 +5,7 @@
 
 #include <Windows.h>
 
+#include <algorithm>
 #include <bit>
 #include <cstdio>
 #include <limits>
@@ -56,7 +57,7 @@ void speed_sync_tests::prepare_run(void* run_address) {
     std::memset(run_address, 0, 0x2000);
     for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
         const auto& descriptor = trainer_state::field_at(index);
-        if (descriptor.kind == value_kind::real) {
+        if (descriptor.kind == value_kind::real && descriptor.access != field_access::native_getter) {
             write_value(run_address, descriptor.offset, static_cast<float>(descriptor.minimum));
         }
     }
@@ -111,7 +112,7 @@ void speed_sync_tests::test_current_layout(void* run_address, void* packet_buffe
     std::memset(packet_buffer, 0, 4 * sizeof(game_runtime::game_packet));
     for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
         const auto& descriptor = trainer_state::field_at(index);
-        if (descriptor.kind == value_kind::real) {
+        if (descriptor.kind == value_kind::real && descriptor.access != field_access::native_getter) {
             write_value(run_address, descriptor.offset, static_cast<float>(descriptor.minimum));
         }
     }
@@ -176,6 +177,8 @@ void speed_sync_tests::test_current_layout(void* run_address, void* packet_buffe
           read_value<game_runtime::game_packet>(packet_buffer, 2 * 32).protocol == 0xe2,
         "current freeze reapplies after native changes without touching the legacy queue or allocator");
 
+    test_current_lifesteal(run_address);
+
     auto* map = static_cast<unsigned char*>(run_address) + 0xd98;
     constexpr auto hp_bits = std::bit_cast<std::uint32_t>(751.0f);
     constexpr std::uint32_t crit_bits = 0x42c80000;
@@ -209,6 +212,92 @@ void speed_sync_tests::test_current_layout(void* run_address, void* packet_buffe
     game_runtime::object_field_float_ = saved_float_setter;
     game_runtime::object_field_bits_ = saved_bits_setter;
     game_runtime::features_enabled_.store(saved_features);
+}
+
+float __fastcall speed_sync_tests::native_lifesteal(void* run_address) noexcept {
+    ++lifesteal_original_calls_;
+    lifesteal_observed_run_ = run_address;
+    return 0.125f;
+}
+
+void __fastcall speed_sync_tests::native_lifesteal_recalculate(void* run_address) noexcept {
+    lifesteal_recalculated_value_ = game_runtime::lifesteal_hook(run_address);
+}
+
+void speed_sync_tests::test_current_lifesteal(void* run_address) {
+    auto& state = trainer_state::instance();
+    const auto saved_getter = game_runtime::original_lifesteal_.load();
+    const auto saved_recalculate = game_runtime::original_recalculate_.load();
+    const bool saved_features = game_runtime::features_enabled_.load();
+    game_runtime::original_lifesteal_.store(&native_lifesteal);
+    game_runtime::original_recalculate_.store(&native_lifesteal_recalculate);
+    lifesteal_original_calls_ = 0;
+    lifesteal_observed_run_ = nullptr;
+    constexpr std::size_t lifesteal = 25;
+    check(trainer_state::field_count() == 26 &&
+          std::strcmp(trainer_state::field_at(lifesteal).key, "lifesteal") == 0 &&
+          trainer_state::field_at(lifesteal).access == field_access::native_getter,
+        "current lifesteal has a dedicated computed descriptor instead of a fake scalar offset");
+
+    auto* foreign_run = reinterpret_cast<void*>(std::uintptr_t{0x12348});
+    game_runtime::features_enabled_.store(false);
+    check(game_runtime::lifesteal_hook(foreign_run) == 0.125f &&
+          lifesteal_original_calls_ == 1 && lifesteal_observed_run_ == foreign_run,
+        "disabled lifesteal hook forwards the exact RCX identity and XMM0 float once");
+    game_runtime::features_enabled_.store(true);
+    check(game_runtime::lifesteal_hook(foreign_run) == 0.125f &&
+          lifesteal_original_calls_ == 2 && lifesteal_observed_run_ == foreign_run,
+        "unowned getter context delegates once without writing or adopting foreign memory");
+    check(game_runtime::lifesteal_hook(run_address) == 0.125f && lifesteal_original_calls_ == 3,
+        "an owner without a lifesteal command observes the original getter once");
+    check(game_runtime::process_run(run_address, true) && state.get_field(lifesteal).available &&
+          state.get_field(lifesteal).current_value == 0.125,
+        "owner-thread native lifesteal observations reach the published UI snapshot");
+
+    check(state.apply(lifesteal, 0.25) && game_runtime::process_run(run_address, true),
+        "lifesteal one-shot command activates through the validated owning bridge");
+    const auto calls_before_override = lifesteal_original_calls_;
+    const float effective_rate = game_runtime::lifesteal_hook(run_address);
+    const float healed_health = std::min(100.0f, 40.0f + 20.0f * effective_rate);
+    check(effective_rate == 0.25f && healed_health == 45.0f &&
+          lifesteal_original_calls_ == calls_before_override && !state.get_field(lifesteal).pending,
+        "active override bypasses the pure native sum and supplies the fraction consumed by native-style health math");
+    check(game_runtime::lifesteal_hook(foreign_run) == 0.125f &&
+          lifesteal_original_calls_ == calls_before_override + 1,
+        "an active owner override cannot leak into another native context");
+    game_runtime::features_enabled_.store(false);
+    check(game_runtime::lifesteal_hook(run_address) == 0.125f &&
+          lifesteal_original_calls_ == calls_before_override + 2,
+        "disabling runtime features bypasses even an already active lifesteal override");
+    game_runtime::features_enabled_.store(true);
+
+    game_runtime::recalculate_hook(run_address);
+    check(lifesteal_recalculated_value_ == 0.125f &&
+          game_runtime::lifesteal_hook(run_address) == 0.125f,
+        "native recalculation invalidates a consumed one-shot before the original rebuild runs");
+    check(state.apply(lifesteal, 0) && game_runtime::process_run(run_address, true),
+        "zero lifesteal is a valid explicit command rather than an absent override");
+    const auto calls_before_zero = lifesteal_original_calls_;
+    check(game_runtime::lifesteal_hook(run_address) == 0 &&
+          lifesteal_original_calls_ == calls_before_zero,
+        "an explicit zero suppresses native lifesteal and still bypasses the original getter");
+    check(state.freeze(lifesteal, true, 0.5) && game_runtime::process_run(run_address, true),
+        "lifesteal freeze is accepted without writing a scalar run field");
+    game_runtime::recalculate_hook(run_address);
+    check(lifesteal_recalculated_value_ == 0.125f &&
+          game_runtime::lifesteal_hook(run_address) == 0.5f,
+        "a rebuild sees the original value then frozen lifesteal is reapplied after native recalculation");
+    state.reset_all();
+    const auto calls_before_reset = lifesteal_original_calls_;
+    check(game_runtime::lifesteal_hook(run_address) == 0.125f &&
+          lifesteal_original_calls_ == calls_before_reset + 1,
+        "panic reset immediately restores the original native lifesteal getter");
+    state.set_hooks_ready(false);
+    game_runtime::original_lifesteal_.store(saved_getter);
+    game_runtime::original_recalculate_.store(saved_recalculate);
+    game_runtime::features_enabled_.store(saved_features);
+    state.set_hooks_ready(true);
+    game_runtime::process_run(run_address, true);
 }
 
 void* __fastcall speed_sync_tests::set_field_float(void* map, std::uint16_t field_id,
@@ -245,9 +334,84 @@ void* __fastcall speed_sync_tests::create_packet(void* output, std::uint64_t gui
 }
 
 void __fastcall speed_sync_tests::owner_frame(void* run_address, float delta_seconds) noexcept {
+    if (record_owner_values_ && owner_calls_ < owner_values_.size()) {
+        owner_values_[owner_calls_] = read_value<float>(run_address, 0x4cc);
+        owner_snapshots_[owner_calls_] = trainer_state::instance().get_field(find_field(0x4cc)).current_value;
+        write_value(run_address, 0x4cc, owner_values_[owner_calls_] + 1.0f);
+    }
     ++owner_calls_;
     owner_total_seconds_ += delta_seconds;
     write_value(run_address, 0xce0, read_value<float>(run_address, 0xce0) + delta_seconds);
+}
+
+void speed_sync_tests::test_accelerated_publication(void* run_address) {
+    const auto saved_owner = game_runtime::original_tick_.load();
+    game_runtime::original_tick_.store(&owner_frame);
+    prepare_run(run_address);
+    auto& state = trainer_state::instance();
+    const auto damage = find_field(0x4cc);
+    auto settings = *state.get_automation();
+    settings.time_scale = 5;
+    check(state.set_automation(settings), "x5 publication fixture settings accepted");
+    owner_calls_ = 0;
+    owner_values_.fill(0);
+    owner_snapshots_.fill(0);
+    record_owner_values_ = true;
+    constexpr float delta = 1.0f / 64.0f;
+    game_runtime::tick_hook(run_address, delta);
+    bool final_only = owner_calls_ == 5;
+    for (std::size_t index = 0; index < 5; ++index) {
+        final_only = final_only && owner_snapshots_[index] == 1 &&
+            owner_values_[index] == static_cast<float>(index + 1);
+    }
+    check(final_only && state.get_field(damage).current_value == 6 && state.get_runtime().run_active,
+        "x5 native steps all execute while field snapshots publish only the final value");
+
+    check(state.freeze(damage, true, 20), "per-substep freeze accepted");
+    owner_calls_ = 0;
+    game_runtime::tick_hook(run_address, delta);
+    bool every_step_frozen = owner_calls_ == 5;
+    for (std::size_t index = 0; index < 5; ++index) {
+        every_step_frozen = every_step_frozen && owner_values_[index] == 20;
+    }
+    check(every_step_frozen && read_value<float>(run_address, 0x4cc) == 20 &&
+          state.get_field(damage).current_value == 20,
+        "deferred snapshots preserve freeze writes before and after every accelerated step");
+
+    check(state.freeze(damage, false, 20) && state.apply(damage, 9) &&
+          state.set_apply_on_start(damage, true), "new-run start command prepared");
+    write_value<float>(run_address, 0x4cc, 1);
+    write_value<float>(run_address, 0xce0, 0);
+    owner_calls_ = 0;
+    game_runtime::tick_hook(run_address, delta);
+    check(owner_calls_ == 5 && owner_values_[0] == 1 && owner_values_[1] == 9 &&
+          state.get_field(damage).current_value == 13 && !state.get_field(damage).pending,
+        "clock rewind adopts a new run and applies start commands at its first substep");
+    check(!state.process_run(reinterpret_cast<void*>(1), true, nullptr, false),
+        "deferred field publication retains full invalid-pointer validation");
+
+    LARGE_INTEGER frequency{};
+    check(QueryPerformanceFrequency(&frequency) != 0 && frequency.QuadPart > 0,
+        "performance counter frequency is available for deterministic aggregate checks");
+    game_runtime::record_frame_performance(0, 0, 0, 0);
+    game_runtime::record_frame_performance(100, 100 + frequency.QuadPart,
+        frequency.QuadPart / 2, 5);
+    const auto timing = state.get_runtime();
+    check(timing.owner_chain_ms > 499 && timing.owner_chain_ms <= 500 &&
+          timing.bridge_ms >= 500 && timing.bridge_ms < 501 && timing.simulation_steps == 5,
+        "one-second timing aggregate separates owner-chain and outer bridge wall time");
+    state.set_frame_performance(std::numeric_limits<double>::quiet_NaN(), 1, 1);
+    check(state.get_runtime().simulation_steps == 5,
+        "invalid timing sample cannot overwrite the last finite aggregate");
+    state.set_hooks_ready(false);
+    const auto disabled_timing = state.get_runtime();
+    check(disabled_timing.owner_chain_ms == 0 && disabled_timing.bridge_ms == 0 &&
+          disabled_timing.simulation_steps == 0,
+        "disabled hook bridge immediately invalidates timing snapshots");
+    game_runtime::record_frame_performance(0, 0, 0, 0);
+    record_owner_values_ = false;
+    game_runtime::original_tick_.store(saved_owner);
+    prepare_run(run_address);
 }
 
 void __fastcall speed_sync_tests::grow_queue(void* queue_address) {
@@ -475,6 +639,7 @@ int speed_sync_tests::run() {
         "panic reset restores real owner ticks to 1x without mutating the retained settings snapshot");
     game_runtime::original_tick_.store(saved_owner);
 
+    test_accelerated_publication(run_address);
     test_current_layout(run_address, first_queue, speed);
 
     game_runtime::features_enabled_.store(false);

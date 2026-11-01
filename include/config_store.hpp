@@ -49,16 +49,19 @@ public:
      */
     static std::string get_message();
 
-    /** @brief Serialize a validated preset using stable ASCII field/automation keys.
+    /** @brief Serialize a validated preset using canonical schema 4 ASCII field/automation keys.
      * @param preset Desired snapshot; no live game pointer is accessed.
      * @return Complete UTF-8 INI text.
      */
     static std::string serialize(const trainer_preset& preset);
 
-    /** @brief Parse an INI document without changing global trainer state.
+    /** @brief Parse schema 3/4 INI text without changing global trainer state or its source file.
      * @param text Complete document up to one MiB; @param preset Parsed output on success.
      * @param error Human-readable reason on failure.
-     * @return True for valid supported schema, false without replacing preset on error.
+     * @return True with canonical schema 4 field semantics; false without replacing preset
+     * on any error. Schema 3 thorns/buff_power become buff_power/dot_haste respectively,
+     * preserving stored values and flags; values exceeding the corrected DoT cap are rejected.
+     * The trainer/version section may follow field sections without changing interpretation.
      */
     static bool parse(const std::string& text, trainer_preset& preset, std::string& error) noexcept;
 

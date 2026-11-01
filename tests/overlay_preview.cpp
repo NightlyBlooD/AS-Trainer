@@ -2,6 +2,7 @@
 #include "overlay_window.hpp"
 #include "trainer_state.hpp"
 #include "config_store.hpp"
+#include "game_layout.hpp"
 
 #include <algorithm>
 #include <cstring>
@@ -12,30 +13,41 @@ void preview_host::initialize_data() {
     std::memset(data_, 0, 0x2000);
     for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
         const auto& descriptor = trainer_state::field_at(index);
-        if (descriptor.kind == value_kind::real) {
+        if (descriptor.access == field_access::scalar && descriptor.kind == value_kind::real) {
             const auto value = static_cast<float>(std::max(1.0, descriptor.minimum));
             std::memcpy(data_ + descriptor.offset, &value, sizeof(value));
         }
     }
-    *reinterpret_cast<std::uint8_t*>(data_ + 0x354) = 11;
-    *reinterpret_cast<std::uint32_t*>(data_ + 0x530) = 30;
-    *reinterpret_cast<std::uint8_t*>(data_ + 0xda3) = 1;
-    *reinterpret_cast<float*>(data_ + 0x4c8) = 250;
-    *reinterpret_cast<float*>(data_ + 0x538) = 250;
-    *reinterpret_cast<float*>(data_ + 0x4cc) = 1.5f;
-    *reinterpret_cast<float*>(data_ + 0x4e0) = 15;
-    *reinterpret_cast<float*>(data_ + 0x4f4) = 0.2f;
-    *reinterpret_cast<std::uint32_t*>(data_ + 0x544) = 12345;
-    *reinterpret_cast<std::uint32_t*>(data_ + 0xd40) = 25;
-    *reinterpret_cast<std::uint32_t*>(data_ + 0x59c) = 3;
+    *reinterpret_cast<std::uint64_t*>(data_ + game_layout::run_offset(0x4b0)) = 101;
+    *reinterpret_cast<std::uint8_t*>(data_ + game_layout::run_offset(0x354)) = 11;
+    *reinterpret_cast<std::uint32_t*>(data_ + game_layout::run_offset(0x530)) = 30;
+    *reinterpret_cast<std::uint8_t*>(data_ + game_layout::run_offset(0xda3)) = 1;
+    *reinterpret_cast<float*>(data_ + game_layout::run_offset(0x4c8)) = 250;
+    *reinterpret_cast<float*>(data_ + game_layout::run_offset(0x538)) = 250;
+    *reinterpret_cast<float*>(data_ + game_layout::run_offset(0x4cc)) = 1.5f;
+    *reinterpret_cast<float*>(data_ + game_layout::run_offset(0x4e0)) = 15;
+    *reinterpret_cast<float*>(data_ + game_layout::run_offset(0x4f4)) = 0.2f;
+    *reinterpret_cast<std::uint32_t*>(data_ + game_layout::run_offset(0x544)) = 12345;
+    *reinterpret_cast<std::uint32_t*>(data_ + game_layout::run_offset(0xd40)) = 25;
+    *reinterpret_cast<std::uint32_t*>(data_ + game_layout::run_offset(0x59c)) = 3;
     trainer_state::instance().set_hooks_ready(true);
     trainer_state::instance().set_message("Тестовое окно: изменяется только синтетический буфер, игра не подключена.");
     trainer_state::instance().process_run(data_, true);
+    update_data();
+}
+
+void preview_host::update_data() {
+    trainer_state& state = trainer_state::instance();
+    state.process_run(data_, false);
+    float lifesteal = 0.25f;
+    state.try_lifesteal_override(data_, lifesteal);
+    state.observe_lifesteal(data_, lifesteal);
+    state.process_run(data_, true);
 }
 
 LRESULT CALLBACK preview_host::window_proc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
     if (message == WM_TIMER) {
-        trainer_state::instance().process_run(data_, true);
+        update_data();
         if (GetTickCount64() - started_ms_ > 180000) {
             DestroyWindow(window);
         }
@@ -62,6 +74,7 @@ LRESULT CALLBACK preview_host::window_proc(HWND window, UINT message, WPARAM wpa
 
 int preview_host::run(HINSTANCE instance) {
     SetProcessDPIAware();
+    game_layout::select(layout_id::current);
     data_ = static_cast<std::byte*>(VirtualAlloc(nullptr, 0x2000, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
     if (!data_) {
         return 1;

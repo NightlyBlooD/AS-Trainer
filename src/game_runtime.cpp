@@ -185,7 +185,9 @@ bool game_runtime::matching_code(std::uintptr_t address,
 }
 
 bool game_runtime::verify_code(std::uintptr_t module_base) noexcept {
-    if (native_addresses::uses_patterns()) return native_addresses::verify_all();
+    if (native_addresses::uses_patterns()) {
+        return native_addresses::verify_all();
+    }
     return matching_code(module_base + tick_rva, tick_prologue, sizeof(tick_prologue)) &&
         matching_code(module_base + recalculate_rva, recalculate_prologue, sizeof(recalculate_prologue)) &&
         matching_code(module_base + speed_packet_rva, speed_packet_prologue, sizeof(speed_packet_prologue)) &&
@@ -233,7 +235,7 @@ bool game_runtime::synchronize_speed(void* run_address, speed_sync_diagnostic& d
     diagnostic = {};
     auto* run_bytes = static_cast<unsigned char*>(run_address);
     diagnostic.reason = "run_memory";
-    if (!writable_data(run_bytes + game_layout::run_offset(0x4b0), 0x1d8)) {
+    if (!writable_data(run_bytes, game_layout::scalar_size())) {
         return false;
     }
     __try {
@@ -324,13 +326,13 @@ bool game_runtime::synchronize_speed(void* run_address, speed_sync_diagnostic& d
     }
 }
 
-bool game_runtime::process_run(void* run_address, bool publish) noexcept {
+bool game_runtime::process_run(void* run_address, bool publish, bool publish_fields) noexcept {
     if (!features_enabled_.load(std::memory_order_acquire) || party_runtime::is_member_context(run_address)) {
         return false;
     }
     auto& state = trainer_state::instance();
     speed_update update{};
-    if (!state.process_run(run_address, publish, &update)) {
+    if (!state.process_run(run_address, publish, &update, publish_fields)) {
         return false;
     }
     if (!update.written) {
@@ -366,20 +368,73 @@ void* __fastcall game_runtime::set_member_field(void* map, std::uint16_t field_i
     return object_field_bits_ ? object_field_bits_(map, field_id, value_bits) : nullptr;
 }
 
+void game_runtime::record_frame_performance(std::int64_t started_ticks,
+    std::int64_t finished_ticks, std::int64_t owner_ticks, std::uint32_t steps) noexcept {
+    static const std::int64_t frequency = []() noexcept {
+        LARGE_INTEGER value{};
+        return QueryPerformanceFrequency(&value) ? value.QuadPart : std::int64_t{0};
+    }();
+    static thread_local std::int64_t window_started{};
+    static thread_local std::int64_t frame_ticks{};
+    static thread_local std::int64_t native_ticks{};
+    static thread_local std::uint64_t frame_count{};
+    static thread_local std::uint64_t step_count{};
+    if (steps == 0 || frequency <= 0 || started_ticks <= 0 ||
+        finished_ticks < started_ticks || owner_ticks < 0 ||
+        owner_ticks > finished_ticks - started_ticks) {
+        window_started = 0;
+        frame_ticks = 0;
+        native_ticks = 0;
+        frame_count = 0;
+        step_count = 0;
+        return;
+    }
+    if (window_started == 0) window_started = started_ticks;
+    frame_ticks += finished_ticks - started_ticks;
+    native_ticks += owner_ticks;
+    ++frame_count;
+    step_count += steps;
+    if (finished_ticks - window_started < frequency) return;
+    const double milliseconds_per_tick = 1000.0 / static_cast<double>(frequency);
+    const double samples = static_cast<double>(frame_count);
+    trainer_state::instance().set_frame_performance(
+        static_cast<double>(native_ticks) * milliseconds_per_tick / samples,
+        static_cast<double>(frame_ticks - native_ticks) * milliseconds_per_tick / samples,
+        static_cast<double>(step_count) / samples);
+    window_started = 0;
+    frame_ticks = 0;
+    native_ticks = 0;
+    frame_count = 0;
+    step_count = 0;
+}
+
 void __fastcall game_runtime::tick_hook(void* run_address, float delta_seconds) noexcept {
     const auto original = original_tick_.load(std::memory_order_acquire);
     if (!features_enabled_.load(std::memory_order_acquire)) {
+        record_frame_performance(0, 0, 0, 0);
         original(run_address, delta_seconds);
         return;
     }
+    LARGE_INTEGER frame_started{};
+    bool timing_valid = QueryPerformanceCounter(&frame_started) != 0;
+    std::int64_t owner_ticks = 0;
     auto& state = trainer_state::instance();
     party_runtime::observe_owner(run_address);
     const auto settings = state.get_automation();
     const auto steps = simulation_clock::split_frame(delta_seconds, settings->time_scale);
     for (std::uint32_t step = 0; step < steps.count; ++step) {
         process_run(run_address, false);
+        LARGE_INTEGER owner_started{};
+        LARGE_INTEGER owner_finished{};
+        timing_valid = QueryPerformanceCounter(&owner_started) != 0 && timing_valid;
         original(run_address, steps.seconds_per_step);
-        const bool host_active = process_run(run_address, true);
+        timing_valid = QueryPerformanceCounter(&owner_finished) != 0 && timing_valid;
+        if (owner_finished.QuadPart >= owner_started.QuadPart) {
+            owner_ticks += owner_finished.QuadPart - owner_started.QuadPart;
+        } else {
+            timing_valid = false;
+        }
+        const bool host_active = process_run(run_address, true, step + 1 == steps.count);
         party_runtime::process_owner(run_address);
         if (host_active) {
             const auto current = state.get_automation();
@@ -388,6 +443,13 @@ void __fastcall game_runtime::tick_hook(void* run_address, float delta_seconds) 
                 state.set_message(localization::translate("Auto-choice stopped for this reward: the native handler returned an error."));
             }
         }
+    }
+    LARGE_INTEGER frame_finished{};
+    if (QueryPerformanceCounter(&frame_finished) && timing_valid) {
+        record_frame_performance(frame_started.QuadPart, frame_finished.QuadPart,
+            owner_ticks, steps.count);
+    } else {
+        record_frame_performance(0, 0, 0, 0);
     }
 }
 
@@ -402,12 +464,30 @@ void game_runtime::report_extension(const char* message) noexcept {
 
 void __fastcall game_runtime::recalculate_hook(void* run_address) noexcept {
     const auto original = original_recalculate_.load(std::memory_order_acquire);
+    if (features_enabled_.load(std::memory_order_acquire)) {
+        trainer_state::instance().invalidate_lifesteal(run_address);
+    }
     original(run_address);
     if (features_enabled_.load(std::memory_order_acquire) && party_runtime::is_member_context(run_address)) {
         party_runtime::process_recalculated(run_address);
         return;
     }
     process_run(run_address, false);
+}
+
+float __fastcall game_runtime::lifesteal_hook(void* run_address) noexcept {
+    const auto original = original_lifesteal_.load(std::memory_order_acquire);
+    if (!features_enabled_.load(std::memory_order_acquire)) {
+        return original(run_address);
+    }
+    auto& state = trainer_state::instance();
+    float value{};
+    if (state.try_lifesteal_override(run_address, value)) {
+        return value;
+    }
+    value = original(run_address);
+    state.observe_lifesteal(run_address, value);
+    return value;
 }
 
 void game_runtime::hook_failure(const char* operation, int status) noexcept {
@@ -470,7 +550,7 @@ bool game_runtime::initialize() noexcept {
     party_functions.swap_player = reinterpret_cast<decltype(party_functions.swap_player)>(module_base_ + native_addresses::rva(native_symbol::swap_player));
     party_functions.flush_updates = reinterpret_cast<decltype(party_functions.flush_updates)>(module_base_ + native_addresses::rva(native_symbol::flush_updates));
     party_functions.route_queues = reinterpret_cast<decltype(party_functions.route_queues)>(module_base_ + native_addresses::rva(native_symbol::route_queues));
-    if (native_addresses::uses_patterns()) {
+    if (native_addresses::object_field_uses_float()) {
         object_field_float_ = reinterpret_cast<decltype(object_field_float_)>(module_base_ + native_addresses::rva(native_symbol::set_object_field));
         object_field_bits_ = nullptr;
     } else {
@@ -493,8 +573,11 @@ bool game_runtime::initialize() noexcept {
     }
     void* tick_trampoline = nullptr;
     void* recalculate_trampoline = nullptr;
+    void* lifesteal_trampoline = nullptr;
     auto* tick_address = reinterpret_cast<void*>(module_base_ + native_addresses::rva(native_symbol::owner_frame));
     auto* recalculate_address = reinterpret_cast<void*>(module_base_ + native_addresses::rva(native_symbol::recalculate));
+    auto* lifesteal_address = native_addresses::supports_lifesteal()
+        ? reinterpret_cast<void*>(module_base_ + native_addresses::rva(native_symbol::lifesteal)) : nullptr;
     status = MH_CreateHook(tick_address, reinterpret_cast<void*>(&tick_hook), &tick_trampoline);
     if (status != MH_OK) {
         hook_failure("create tick", status);
@@ -507,6 +590,14 @@ bool game_runtime::initialize() noexcept {
         return false;
     }
     original_recalculate_.store(reinterpret_cast<recalculate_function>(recalculate_trampoline), std::memory_order_release);
+    if (lifesteal_address != nullptr) {
+        status = MH_CreateHook(lifesteal_address, reinterpret_cast<void*>(&lifesteal_hook), &lifesteal_trampoline);
+        if (status != MH_OK) {
+            hook_failure("create lifesteal", status);
+            return false;
+        }
+        original_lifesteal_.store(reinterpret_cast<lifesteal_function>(lifesteal_trampoline), std::memory_order_release);
+    }
     if (!legendary_loot::initialize(module_base_, legendary_enabled, report_extension)) {
         state.set_message(localization::translate("Legendary set support could not be initialized. Verify the game build and restart."));
         initialization_state_.store(3, std::memory_order_release);
@@ -515,6 +606,9 @@ bool game_runtime::initialize() noexcept {
     status = MH_QueueEnableHook(tick_address);
     if (status == MH_OK) {
         status = MH_QueueEnableHook(recalculate_address);
+    }
+    if (status == MH_OK && lifesteal_address != nullptr) {
+        status = MH_QueueEnableHook(lifesteal_address);
     }
     if (status == MH_OK) {
         status = MH_ApplyQueued();

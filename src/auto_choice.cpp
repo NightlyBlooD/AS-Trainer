@@ -35,6 +35,11 @@ bool auto_choice::initialize(std::uintptr_t module_base) noexcept {
         return false;
     }
     const auto address = module_base + apply_choice_rva;
+    if (native_addresses::uses_patterns()) {
+        if (!native_addresses::verify_all()) return false;
+        apply_choice_ = reinterpret_cast<apply_function>(address);
+        return true;
+    }
     MEMORY_BASIC_INFORMATION region{};
     if (VirtualQuery(reinterpret_cast<const void*>(address), &region, sizeof(region)) != sizeof(region) ||
         region.State != MEM_COMMIT || region.Type != MEM_IMAGE ||

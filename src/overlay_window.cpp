@@ -9,6 +9,7 @@
 #include "backends/imgui_impl_win32.h"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdio>
 #include <cstring>
 #include <cwchar>
@@ -109,17 +110,40 @@ bool overlay_window::initialize() noexcept {
 
     ImGui::StyleColorsDark();
     ImGuiStyle& style = ImGui::GetStyle();
-    style.WindowRounding = 8.0f;
-    style.FrameRounding = 4.0f;
-    style.ScrollbarRounding = 5.0f;
-    style.WindowPadding = ImVec2(16.0f, 14.0f);
-    style.CellPadding = ImVec2(7.0f, 5.0f);
-    style.Colors[ImGuiCol_WindowBg] = ImVec4(0.065f, 0.075f, 0.095f, 1.0f);
-    style.Colors[ImGuiCol_ChildBg] = ImVec4(0.07f, 0.08f, 0.10f, 1.0f);
-    style.Colors[ImGuiCol_PopupBg] = ImVec4(0.10f, 0.11f, 0.14f, 1.0f);
-    style.Colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.13f, 0.18f, 1.0f);
-    style.Colors[ImGuiCol_TitleBgActive] = ImVec4(0.13f, 0.20f, 0.29f, 1.0f);
-    style.Colors[ImGuiCol_FrameBg] = ImVec4(0.12f, 0.15f, 0.20f, 1.0f);
+    style.WindowRounding = 5.0f;
+    style.FrameRounding = 3.0f;
+    style.TabRounding = 3.0f;
+    style.ScrollbarRounding = 4.0f;
+    style.ScrollbarSize = 10.0f;
+    style.WindowPadding = ImVec2(10.0f, 8.0f);
+    style.FramePadding = ImVec2(5.0f, 2.0f);
+    style.ItemSpacing = ImVec2(6.0f, 5.0f);
+    style.ItemInnerSpacing = ImVec2(4.0f, 3.0f);
+    style.CellPadding = ImVec2(4.0f, 2.0f);
+    style.Colors[ImGuiCol_WindowBg] = ImVec4(0.055f, 0.059f, 0.067f, 1.0f);
+    style.Colors[ImGuiCol_ChildBg] = ImVec4(0.055f, 0.059f, 0.067f, 1.0f);
+    style.Colors[ImGuiCol_PopupBg] = ImVec4(0.085f, 0.091f, 0.102f, 1.0f);
+    style.Colors[ImGuiCol_Border] = ImVec4(0.20f, 0.22f, 0.25f, 1.0f);
+    style.Colors[ImGuiCol_TitleBg] = ImVec4(0.075f, 0.082f, 0.090f, 1.0f);
+    style.Colors[ImGuiCol_TitleBgActive] = ImVec4(0.10f, 0.11f, 0.125f, 1.0f);
+    style.Colors[ImGuiCol_FrameBg] = ImVec4(0.105f, 0.114f, 0.129f, 1.0f);
+    style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.16f, 0.18f, 0.20f, 1.0f);
+    style.Colors[ImGuiCol_FrameBgActive] = ImVec4(0.19f, 0.22f, 0.25f, 1.0f);
+    style.Colors[ImGuiCol_Button] = ImVec4(0.13f, 0.15f, 0.17f, 1.0f);
+    style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.20f, 0.23f, 0.26f, 1.0f);
+    style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.25f, 0.29f, 0.32f, 1.0f);
+    style.Colors[ImGuiCol_Header] = ImVec4(0.16f, 0.19f, 0.20f, 1.0f);
+    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.21f, 0.26f, 0.27f, 1.0f);
+    style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.25f, 0.32f, 0.32f, 1.0f);
+    style.Colors[ImGuiCol_Tab] = ImVec4(0.085f, 0.094f, 0.106f, 1.0f);
+    style.Colors[ImGuiCol_TabHovered] = ImVec4(0.19f, 0.25f, 0.25f, 1.0f);
+    style.Colors[ImGuiCol_TabSelected] = ImVec4(0.15f, 0.21f, 0.21f, 1.0f);
+    style.Colors[ImGuiCol_TabSelectedOverline] = ImVec4(0.30f, 0.73f, 0.53f, 1.0f);
+    style.Colors[ImGuiCol_CheckMark] = ImVec4(0.32f, 0.84f, 0.57f, 1.0f);
+    style.Colors[ImGuiCol_SliderGrab] = ImVec4(0.25f, 0.61f, 0.44f, 1.0f);
+    style.Colors[ImGuiCol_SliderGrabActive] = ImVec4(0.35f, 0.79f, 0.55f, 1.0f);
+    style.Colors[ImGuiCol_TableHeaderBg] = ImVec4(0.105f, 0.117f, 0.129f, 1.0f);
+    style.Colors[ImGuiCol_TableRowBgAlt] = ImVec4(1.0f, 1.0f, 1.0f, 0.025f);
 
     win32_backend_ready_ = ImGui_ImplWin32_Init(window_);
     if (!win32_backend_ready_) {
@@ -203,7 +227,8 @@ bool overlay_window::add_font_file(const wchar_t* path, bool merge) noexcept {
         ImFontGlyphRangesBuilder builder;
         builder.AddRanges(ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
         for (std::size_t index = 0; index < static_cast<std::size_t>(ui_text_id::count); ++index) {
-            for (std::uint32_t language = 0; language < 7; ++language) {
+            for (std::uint32_t language = 0;
+                 language < static_cast<std::uint32_t>(client_language::count); ++language) {
                 builder.AddText(ui_strings::get(static_cast<ui_text_id>(index),
                                                 static_cast<client_language>(language)));
             }
@@ -536,16 +561,24 @@ void overlay_window::draw_interface() {
     trainer_state& state = trainer_state::instance();
     const runtime_snapshot runtime = state.get_runtime();
     const ImVec2 display_size = ImGui::GetIO().DisplaySize;
-    const float available_width = std::max(320.0f, display_size.x - 40.0f);
-    const float available_height = std::max(240.0f, display_size.y - 40.0f);
-    ImGui::SetNextWindowPos(ImVec2(20.0f, 20.0f), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(std::min(850.0f, available_width),
-                                   std::min(740.0f, available_height)), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSizeConstraints(ImVec2(std::min(560.0f, available_width),
-                                             std::min(320.0f, available_height)),
+    const float available_width = std::max(320.0f, display_size.x - 24.0f);
+    const float available_height = std::max(240.0f, display_size.y - 24.0f);
+    ImGui::SetNextWindowPos(ImVec2(12.0f, 12.0f), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(std::min(500.0f, available_width),
+                                   std::min(460.0f, available_height)), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSizeConstraints(ImVec2(std::min(460.0f, available_width),
+                                             std::min(300.0f, available_height)),
                                         ImVec2(available_width, available_height));
     bool open = true;
     if (ImGui::Begin(ui_strings::get(ui_text_id::title), &open, ImGuiWindowFlags_NoCollapse)) {
+        const float frame_height = ImGui::GetFrameHeight();
+        const float reset_width = ImGui::CalcTextSize(ui_strings::get(ui_text_id::reset_short), nullptr, true).x
+            + ImGui::GetStyle().FramePadding.x * 2.0f;
+        const float status_width = std::max(100.0f, ImGui::GetContentRegionAvail().x
+            - reset_width - frame_height - ImGui::GetStyle().ItemSpacing.x * 2.0f);
+        ImGui::BeginChild("run_status", ImVec2(status_width, frame_height), ImGuiChildFlags_None,
+                          ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+        ImGui::AlignTextToFramePadding();
         if (runtime.hooks_ready && runtime.run_active) {
             ImGui::TextColored(ImVec4(0.45f, 0.88f, 0.62f, 1.0f),
                                ui_strings::get(ui_text_id::run_active_format), runtime.level);
@@ -556,28 +589,56 @@ void overlay_window::draw_interface() {
             ImGui::TextColored(ImVec4(0.95f, 0.58f, 0.48f, 1.0f),
                                ui_strings::get(ui_text_id::not_ready));
         }
-        ImGui::TextWrapped("%s", ui_strings::get(ui_text_id::hotkeys));
-        if (ImGui::Button(ui_strings::get(ui_text_id::reset))) {
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("%s", ui_strings::get(ui_text_id::hotkeys));
+        }
+        ImGui::EndChild();
+        ImGui::SameLine();
+        if (ImGui::Button(ui_strings::get(ui_text_id::reset_short))) {
             state.reset_all();
             refresh_automation_editor();
             state.set_message(ui_strings::get(ui_text_id::reset_done));
         }
         if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip(ui_strings::get(ui_text_id::reset_hint));
+            ImGui::SetTooltip("%s", ui_strings::get(ui_text_id::reset_hint));
         }
         ImGui::SameLine();
-        if (ImGui::Button(ui_strings::get(ui_text_id::hide))) {
-            open = false;
+        ImGui::Button("?##overlay_help", ImVec2(frame_height, frame_height));
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("%s\n\n%s", ui_strings::get(ui_text_id::hotkeys),
+                              ui_strings::get(ui_text_id::hold_start_hint));
         }
+        const float footer_height = frame_height + ImGui::GetStyle().ItemSpacing.y * 2.0f;
+        if (ImGui::BeginTabBar("overlay_tabs", ImGuiTabBarFlags_FittingPolicyScroll)) {
+            if (ImGui::BeginTabItem(ui_strings::get(ui_text_id::tab_parameters))) {
+                draw_fields(runtime.hooks_ready, runtime.run_active);
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem(ui_strings::get(ui_text_id::tab_automation))) {
+                ImGui::BeginChild("automation_content", ImVec2(0.0f, -footer_height),
+                                  ImGuiChildFlags_None);
+                draw_automation_section(runtime.hooks_ready);
+                ImGui::EndChild();
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem(ui_strings::get(ui_text_id::configs))) {
+                ImGui::BeginChild("config_content", ImVec2(0.0f, -footer_height),
+                                  ImGuiChildFlags_None);
+                draw_config_section();
+                ImGui::EndChild();
+                ImGui::EndTabItem();
+            }
+            ImGui::EndTabBar();
+        }
+        ImGui::Separator();
         const std::string status_message = state.get_message();
         if (!status_message.empty()) {
-            ImGui::TextWrapped("%s", ui_strings::translate_message(status_message.c_str()));
+            const char* translated_message = ui_strings::translate_message(status_message.c_str());
+            ImGui::TextDisabled("%s", translated_message);
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip("%s", translated_message);
+            }
         }
-        draw_config_section();
-        draw_automation_section(runtime.hooks_ready);
-        ImGui::Separator();
-        draw_fields(runtime.hooks_ready, runtime.run_active);
-        ImGui::TextWrapped(ui_strings::get(ui_text_id::hold_start_hint));
     }
     ImGui::End();
     if (!open) {
@@ -586,9 +647,6 @@ void overlay_window::draw_interface() {
 }
 
 void overlay_window::draw_config_section() {
-    if (!ImGui::CollapsingHeader(ui_strings::get(ui_text_id::configs))) {
-        return;
-    }
     if (!config_list_ready_) {
         refresh_config_list();
     }
@@ -631,8 +689,9 @@ void overlay_window::draw_config_section() {
             refresh_config_list();
         }
     }
-    ImGui::SameLine();
-    ImGui::TextDisabled(ui_strings::get(ui_text_id::save_hint));
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("%s", ui_strings::get(ui_text_id::save_hint));
+    }
     const std::string config_message = config_store::get_message();
     if (!config_message.empty()) {
         ImGui::TextWrapped("%s", ui_strings::translate_message(config_message.c_str()));
@@ -640,78 +699,180 @@ void overlay_window::draw_config_section() {
 }
 
 void overlay_window::draw_automation_section(bool controls_ready) {
-    if (!ImGui::CollapsingHeader(ui_strings::get(ui_text_id::automation))) {
-        return;
-    }
     if (!automation_editor_ready_) {
         refresh_automation_editor();
     }
+    refresh_automation_controls();
     ImGui::BeginDisabled(!controls_ready);
-    ImGui::Checkbox("##apply_to_party", &apply_to_party_);
-    ImGui::SameLine();
-    ImGui::TextWrapped(ui_strings::get(ui_text_id::party_toggle));
-    if (apply_to_party_) {
+    bool controls_changed = draw_wrapped_checkbox(ui_strings::get(ui_text_id::party_toggle), apply_to_party_);
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+        ImGui::BeginTooltip();
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+        ImGui::TextUnformatted(ui_strings::get(ui_text_id::party_help));
         const runtime_snapshot runtime = trainer_state::instance().get_runtime();
-        if (runtime.party_host) {
+        if (apply_to_party_ && runtime.party_host) {
+            ImGui::Separator();
             ImGui::Text(ui_strings::get(ui_text_id::party_status_format),
                         runtime.party_members, static_cast<unsigned long long>(runtime.party_writes));
-        } else {
-            ImGui::TextDisabled(ui_strings::get(ui_text_id::party_wait));
+        } else if (apply_to_party_) {
+            ImGui::Separator();
+            ImGui::TextUnformatted(ui_strings::get(ui_text_id::party_wait));
         }
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
     }
-    ImGui::TextWrapped("%s", ui_strings::get(ui_text_id::party_help));
-    ImGui::Checkbox(ui_strings::get(ui_text_id::auto_spells), &auto_choose_spells_);
-    ImGui::Checkbox(ui_strings::get(ui_text_id::auto_jewelry), &auto_choose_jewelry_);
-    ImGui::Checkbox("##legendary_final_boss", &legendary_final_boss_);
-    ImGui::SameLine();
-    ImGui::TextWrapped(ui_strings::get(ui_text_id::legendary_toggle));
-    ImGui::TextWrapped(ui_strings::get(ui_text_id::legendary_help));
+    controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::auto_spells), auto_choose_spells_);
+    controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::auto_jewelry), auto_choose_jewelry_);
+    controls_changed |= draw_wrapped_checkbox(ui_strings::get(ui_text_id::legendary_toggle), legendary_final_boss_);
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+        ImGui::BeginTooltip();
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+        ImGui::TextUnformatted(ui_strings::get(ui_text_id::legendary_help));
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
 
-    ImGui::SetNextItemWidth(180.0f);
-    ImGui::InputInt(ui_strings::get(ui_text_id::choice_delay), &choice_delay_ms_, 50, 250);
-    if (ImGui::IsItemDeactivatedAfterEdit()) {
+    ImGui::SetNextItemWidth(90.0f);
+    if (ImGui::InputInt(ui_strings::get(ui_text_id::choice_delay), &choice_delay_ms_, 0, 0)) {
         choice_delay_ms_ = std::clamp(choice_delay_ms_, 50, 5000);
+        controls_changed = true;
+    }
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+        ImGui::SetTooltip("50–5000 ms");
     }
     const double minimum_time_scale = 1.0;
     const double maximum_time_scale = 16.0;
-    ImGui::SetNextItemWidth(std::max(100.0f, ImGui::GetContentRegionAvail().x - 200.0f));
-    ImGui::SliderScalar(ui_strings::get(ui_text_id::game_time), ImGuiDataType_Double, &time_scale_,
-                        &minimum_time_scale, &maximum_time_scale, "%.2fx",
-                        ImGuiSliderFlags_AlwaysClamp);
+    const float speed_label_width = ImGui::CalcTextSize(ui_strings::get(ui_text_id::game_time), nullptr, true).x;
+    ImGui::SetNextItemWidth(std::max(100.0f, ImGui::GetContentRegionAvail().x - speed_label_width - 65.0f));
+    controls_changed |= ImGui::SliderScalar(ui_strings::get(ui_text_id::game_time), ImGuiDataType_Double,
+        &time_scale_, &minimum_time_scale, &maximum_time_scale, "%.2fx", ImGuiSliderFlags_AlwaysClamp);
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+        ImGui::BeginTooltip();
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+        ImGui::TextUnformatted(ui_strings::get(ui_text_id::time_help));
+        const runtime_snapshot runtime = trainer_state::instance().get_runtime();
+        if (runtime.simulation_steps > 0.0) {
+            ImGui::Separator();
+            ImGui::Text(ui_strings::get(ui_text_id::performance_stats), runtime.owner_chain_ms,
+                        runtime.bridge_ms, runtime.simulation_steps);
+        }
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
     ImGui::SameLine();
     if (ImGui::Button(ui_strings::get(ui_text_id::speed_16x))) {
         time_scale_ = 16.0;
+        controls_changed = true;
     }
-    ImGui::TextWrapped(ui_strings::get(ui_text_id::time_help));
+    if (controls_changed) {
+        publish_automation_controls();
+    }
 
-    ImGui::TextWrapped("%s", ui_strings::get(ui_text_id::priority_help));
-    ImGui::TextUnformatted(ui_strings::get(ui_text_id::spell_priority_title));
-    ImGui::InputTextMultiline("##spell_priorities", spell_priority_text_.data(),
-                             spell_priority_text_.size(), ImVec2(-1.0f, 80.0f));
-    ImGui::TextUnformatted(ui_strings::get(ui_text_id::jewelry_priority_title));
-    ImGui::InputTextMultiline("##jewelry_priorities", jewelry_priority_text_.data(),
-                             jewelry_priority_text_.size(), ImVec2(-1.0f, 80.0f));
-    ImGui::TextDisabled(ui_strings::get(ui_text_id::priority_limits));
+    ImGui::Separator();
+    if (ImGui::BeginTable("priority_editors", 2, ImGuiTableFlags_SizingStretchSame)) {
+        ImGui::TableNextColumn();
+        ImGui::TextUnformatted(ui_strings::get(ui_text_id::spell_priority_title));
+        ImGui::InputTextMultiline("##spell_priorities", spell_priority_text_.data(),
+                                 spell_priority_text_.size(), ImVec2(-1.0f, 64.0f));
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+            ImGui::TextUnformatted(ui_strings::get(ui_text_id::priority_help));
+            ImGui::TextUnformatted(ui_strings::get(ui_text_id::priority_limits));
+            ImGui::PopTextWrapPos();
+            ImGui::EndTooltip();
+        }
+        ImGui::TableNextColumn();
+        ImGui::TextUnformatted(ui_strings::get(ui_text_id::jewelry_priority_title));
+        ImGui::InputTextMultiline("##jewelry_priorities", jewelry_priority_text_.data(),
+                                 jewelry_priority_text_.size(), ImVec2(-1.0f, 64.0f));
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+            ImGui::TextUnformatted(ui_strings::get(ui_text_id::priority_help));
+            ImGui::TextUnformatted(ui_strings::get(ui_text_id::priority_limits));
+            ImGui::PopTextWrapPos();
+            ImGui::EndTooltip();
+        }
+        ImGui::EndTable();
+    }
     if (ImGui::Button(ui_strings::get(ui_text_id::apply_rules))) {
-        automation_settings settings{};
+        apply_automation_priorities();
+    }
+    ImGui::EndDisabled();
+}
+
+bool overlay_window::apply_field_edit(std::size_t index, bool run_active) noexcept {
+    trainer_state& state = trainer_state::instance();
+    if (index < maximum_fields && state.apply(index, edited_values_[index])) {
+        dirty_values_[index] = false;
+        state.set_message(ui_strings::get(run_active ? ui_text_id::value_sent : ui_text_id::value_prepared));
+        return true;
+    }
+    state.set_message(ui_strings::get(ui_text_id::value_rejected));
+    return false;
+}
+
+bool overlay_window::toggle_field_start(std::size_t index, bool enabled, bool run_active) noexcept {
+    trainer_state& state = trainer_state::instance();
+    if (index < maximum_fields && (!enabled || state.apply(index, edited_values_[index]))
+        && state.set_apply_on_start(index, enabled)) {
+        if (enabled) {
+            dirty_values_[index] = false;
+            state.set_message(ui_strings::get(run_active ? ui_text_id::value_sent : ui_text_id::value_prepared));
+        }
+        return true;
+    }
+    state.set_message(ui_strings::get(ui_text_id::start_rejected));
+    return false;
+}
+
+bool overlay_window::publish_automation_controls() noexcept {
+    trainer_state& state = trainer_state::instance();
+    try {
+        const auto current = state.get_automation();
+        if (!current) {
+            return false;
+        }
+        automation_settings settings = *current;
         settings.apply_to_party = apply_to_party_;
         settings.auto_choose_spells = auto_choose_spells_;
         settings.auto_choose_jewelry = auto_choose_jewelry_;
         settings.legendary_final_boss = legendary_final_boss_;
         settings.choice_delay_ms = static_cast<std::uint32_t>(std::clamp(choice_delay_ms_, 50, 5000));
         settings.time_scale = time_scale_;
+        if (state.set_automation(settings)) {
+            return true;
+        }
+    } catch (...) {
+    }
+    refresh_automation_controls();
+    state.set_message(ui_strings::get(ui_text_id::rules_rejected));
+    return false;
+}
+
+bool overlay_window::apply_automation_priorities() noexcept {
+    trainer_state& state = trainer_state::instance();
+    try {
+        const auto current = state.get_automation();
+        if (!current) {
+            return false;
+        }
+        automation_settings settings = *current;
         std::string error;
         if (!parse_priorities(spell_priority_text_.data(), settings.spell_priorities, error)
             || !parse_priorities(jewelry_priority_text_.data(), settings.jewelry_priorities, error)) {
-            trainer_state::instance().set_message(error.c_str());
-        } else if (trainer_state::instance().set_automation(settings)) {
-            refresh_automation_editor();
-            trainer_state::instance().set_message(ui_strings::get(ui_text_id::rules_applied));
-        } else {
-            trainer_state::instance().set_message(ui_strings::get(ui_text_id::rules_rejected));
+            state.set_message(error.c_str());
+            return false;
         }
+        if (state.set_automation(settings)) {
+            state.set_message(ui_strings::get(ui_text_id::rules_applied));
+            return true;
+        }
+    } catch (...) {
     }
-    ImGui::EndDisabled();
+    state.set_message(ui_strings::get(ui_text_id::rules_rejected));
+    return false;
 }
 
 void overlay_window::refresh_config_list() {
@@ -720,6 +881,17 @@ void overlay_window::refresh_config_list() {
 }
 
 void overlay_window::refresh_automation_editor() noexcept {
+    refresh_automation_controls();
+    const auto settings = trainer_state::instance().get_automation();
+    if (!settings) {
+        return;
+    }
+    format_priorities(settings->spell_priorities, spell_priority_text_.data(), spell_priority_text_.size());
+    format_priorities(settings->jewelry_priorities, jewelry_priority_text_.data(), jewelry_priority_text_.size());
+    automation_editor_ready_ = true;
+}
+
+void overlay_window::refresh_automation_controls() noexcept {
     const auto settings = trainer_state::instance().get_automation();
     if (!settings) {
         return;
@@ -730,9 +902,6 @@ void overlay_window::refresh_automation_editor() noexcept {
     legendary_final_boss_ = settings->legendary_final_boss;
     choice_delay_ms_ = static_cast<int>(settings->choice_delay_ms);
     time_scale_ = settings->time_scale;
-    format_priorities(settings->spell_priorities, spell_priority_text_.data(), spell_priority_text_.size());
-    format_priorities(settings->jewelry_priorities, jewelry_priority_text_.data(), jewelry_priority_text_.size());
-    automation_editor_ready_ = true;
 }
 
 void overlay_window::reset_field_editors() noexcept {
@@ -790,22 +959,78 @@ void overlay_window::format_priorities(const std::vector<std::string>& prioritie
     destination[written] = '\0';
 }
 
+bool overlay_window::draw_wrapped_checkbox(const char* label, bool& value) {
+    const char* suffix = std::strstr(label, "###");
+    ImGui::BeginGroup();
+    bool changed = ImGui::Checkbox(suffix ? suffix : label, &value);
+    if (suffix) {
+        ImGui::SameLine();
+        ImGui::TextWrapped("%.*s", static_cast<int>(suffix - label), label);
+        if (ImGui::IsItemClicked()) {
+            value = !value;
+            changed = true;
+        }
+    }
+    ImGui::EndGroup();
+    return changed;
+}
+
+bool overlay_window::draw_icon_button(const char* id, bool apply_action, const char* tooltip) {
+    const float size = ImGui::GetFrameHeight();
+    const ImVec4 background = apply_action ? ImVec4(0.10f, 0.19f, 0.15f, 1.0f)
+                                      : ImVec4(0.19f, 0.105f, 0.115f, 1.0f);
+    ImGui::PushStyleColor(ImGuiCol_Button, background);
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, apply_action ? ImVec4(0.14f, 0.29f, 0.21f, 1.0f)
+                                                        : ImVec4(0.30f, 0.14f, 0.16f, 1.0f));
+    const bool clicked = ImGui::Button(id, ImVec2(size, size));
+    ImGui::PopStyleColor(2);
+    const ImVec2 origin = ImGui::GetItemRectMin();
+    const ImU32 color = ImGui::GetColorU32(apply_action ? ImVec4(0.32f, 0.88f, 0.56f, 1.0f)
+                                                 : ImVec4(0.91f, 0.36f, 0.40f, 1.0f));
+    ImDrawList* draw_list = ImGui::GetWindowDrawList();
+    if (apply_action) {
+        draw_list->AddLine(ImVec2(origin.x + size * 0.25f, origin.y + size * 0.51f),
+                           ImVec2(origin.x + size * 0.43f, origin.y + size * 0.69f), color, 2.0f);
+        draw_list->AddLine(ImVec2(origin.x + size * 0.43f, origin.y + size * 0.69f),
+                           ImVec2(origin.x + size * 0.77f, origin.y + size * 0.31f), color, 2.0f);
+    } else {
+        const ImVec2 center(std::floor(origin.x + size * 0.5f) + 0.5f,
+                            std::floor(origin.y + size * 0.5f) + 0.5f);
+        const float radius = size * 0.30f;
+        const float diagonal = radius * 0.70710678f;
+        draw_list->AddCircle(center, radius, color, 32, 1.5f);
+        draw_list->AddLine(ImVec2(center.x - diagonal, center.y - diagonal),
+                           ImVec2(center.x + diagonal, center.y + diagonal), color, 1.5f);
+    }
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+        ImGui::BeginTooltip();
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 30.0f);
+        ImGui::TextUnformatted(tooltip, std::strstr(tooltip, "##"));
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
+    return clicked;
+}
+
 void overlay_window::draw_fields(bool controls_ready, bool run_active) {
     trainer_state& state = trainer_state::instance();
     const auto count = std::min(trainer_state::field_count(), maximum_fields);
-    const float table_height = std::max(100.0f, ImGui::GetContentRegionAvail().y - 34.0f);
+    const float footer_height = ImGui::GetFrameHeight() + ImGui::GetStyle().ItemSpacing.y * 2.0f;
+    const float table_height = std::max(80.0f, ImGui::GetContentRegionAvail().y - footer_height);
     const ImGuiTableFlags table_flags = ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_RowBg
-        | ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Resizable;
-    if (!ImGui::BeginTable("fields", 6, table_flags, ImVec2(0.0f, table_height))) {
+        | ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_ScrollY;
+    if (!ImGui::BeginTable("fields", 5, table_flags, ImVec2(0.0f, table_height))) {
         return;
     }
     ImGui::TableSetupScrollFreeze(0, 1);
-    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_parameter), ImGuiTableColumnFlags_WidthStretch, 2.4f);
-    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_current), ImGuiTableColumnFlags_WidthStretch, 1.0f);
-    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_desired), ImGuiTableColumnFlags_WidthStretch, 1.6f);
-    ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, 95.0f);
-    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_freeze), ImGuiTableColumnFlags_WidthFixed, 48.0f);
-    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_start), ImGuiTableColumnFlags_WidthFixed, 48.0f);
+    const float content_width = ImGui::GetContentRegionAvail().x;
+    const float current_width = std::clamp(content_width * 0.105f, 48.0f, 62.0f);
+    const float desired_width = std::clamp(content_width * 0.15f, 68.0f, 90.0f);
+    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_parameter), ImGuiTableColumnFlags_WidthStretch);
+    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_current), ImGuiTableColumnFlags_WidthFixed, current_width);
+    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_desired), ImGuiTableColumnFlags_WidthFixed, desired_width);
+    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_freeze), ImGuiTableColumnFlags_WidthFixed, 36.0f);
+    ImGui::TableSetupColumn(ui_strings::get(ui_text_id::col_start), ImGuiTableColumnFlags_WidthFixed, 42.0f);
     ImGui::TableHeadersRow();
     for (std::size_t index = 0; index < count; ++index) {
         const field_descriptor& descriptor = trainer_state::field_at(index);
@@ -826,17 +1051,18 @@ void overlay_window::draw_fields(bool controls_ready, bool run_active) {
         ImGui::PushID(static_cast<int>(index));
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
-        ImGui::TextWrapped("%s", ui_strings::field_name(descriptor.key));
-        const char* unit = ui_strings::field_unit(descriptor.key);
-        if (unit[0]) {
-            ImGui::SameLine();
-            ImGui::TextDisabled("%s", unit);
-        }
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextUnformatted(ui_strings::field_name(descriptor.key));
         if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip(ui_strings::get(ui_text_id::range_format),
-                              descriptor.key, descriptor.minimum, descriptor.maximum);
+            ImGui::BeginTooltip();
+            ImGui::TextUnformatted(ui_strings::field_name(descriptor.key));
+            ImGui::TextUnformatted(ui_strings::field_unit(descriptor.key));
+            ImGui::Text(ui_strings::get(ui_text_id::range_format),
+                        descriptor.key, descriptor.minimum, descriptor.maximum);
+            ImGui::EndTooltip();
         }
         ImGui::TableSetColumnIndex(1);
+        ImGui::AlignTextToFramePadding();
         if (!run_active || !snapshot.available) {
             ImGui::TextDisabled(ui_strings::get(ui_text_id::unavailable));
         } else if (descriptor.kind == value_kind::boolean) {
@@ -851,28 +1077,25 @@ void overlay_window::draw_fields(bool controls_ready, bool run_active) {
         ImGui::SetNextItemWidth(-1.0f);
         if (descriptor.kind == value_kind::boolean) {
             bool desired = edited_values_[index] != 0.0;
-            if (ImGui::Checkbox("##desired", &desired)) {
+            if (draw_icon_button("##desired", !desired, ui_strings::field_unit(descriptor.key))) {
+                desired = !desired;
                 edited_values_[index] = desired ? 1.0 : 0.0;
                 dirty_values_[index] = true;
+                apply_field_edit(index, run_active);
             }
-        } else if (ImGui::InputDouble("##desired", &edited_values_[index], descriptor.step,
-                                      descriptor.step * 10.0,
-                                      descriptor.kind == value_kind::unsigned_integer ? "%.0f" : "%.3f")) {
-            dirty_values_[index] = true;
+        } else {
+            if (ImGui::InputDouble("##desired", &edited_values_[index], 0.0, 0.0,
+                                  descriptor.kind == value_kind::unsigned_integer ? "%.0f" : "%.3f")) {
+                dirty_values_[index] = true;
+            }
+            if (dirty_values_[index] && ImGui::IsItemDeactivatedAfterEdit()) {
+                apply_field_edit(index, run_active);
+            }
         }
         ImGui::TableSetColumnIndex(3);
-        if (ImGui::Button(snapshot.pending ? ui_strings::get(ui_text_id::pending) : ui_strings::get(ui_text_id::apply), ImVec2(-1.0f, 0.0f))) {
-            if (state.apply(index, edited_values_[index])) {
-                dirty_values_[index] = false;
-                state.set_message(run_active ? ui_strings::get(ui_text_id::value_sent)
-                                             : ui_strings::get(ui_text_id::value_prepared));
-            } else {
-                state.set_message(ui_strings::get(ui_text_id::value_rejected));
-            }
-        }
-        ImGui::TableSetColumnIndex(4);
         bool frozen = snapshot.frozen;
-        if (ImGui::Checkbox("##freeze", &frozen)) {
+        if (draw_icon_button("##freeze", !frozen, ui_strings::get(ui_text_id::hold_start_hint))) {
+            frozen = !frozen;
             const double freeze_value = frozen || !snapshot.configured
                 ? edited_values_[index] : snapshot.desired_value;
             if (state.freeze(index, frozen, freeze_value)) {
@@ -883,23 +1106,11 @@ void overlay_window::draw_fields(bool controls_ready, bool run_active) {
                 state.set_message(ui_strings::get(ui_text_id::freeze_rejected));
             }
         }
-        ImGui::TableSetColumnIndex(5);
+        ImGui::TableSetColumnIndex(4);
         bool apply_on_start = snapshot.apply_on_start;
-        if (ImGui::Checkbox("##start", &apply_on_start)) {
-            bool accepted = true;
-            if (apply_on_start && (!snapshot.configured || dirty_values_[index])) {
-                accepted = state.apply(index, edited_values_[index]);
-            }
-            if (accepted && state.set_apply_on_start(index, apply_on_start)) {
-                if (apply_on_start) {
-                    dirty_values_[index] = false;
-                }
-            } else {
-                state.set_message(ui_strings::get(ui_text_id::start_rejected));
-            }
-        }
-        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
-            ImGui::SetTooltip(ui_strings::get(ui_text_id::start_hint));
+        if (draw_icon_button("##start", !apply_on_start, ui_strings::get(ui_text_id::start_hint))) {
+            apply_on_start = !apply_on_start;
+            toggle_field_start(index, apply_on_start, run_active);
         }
         ImGui::EndDisabled();
         ImGui::PopID();

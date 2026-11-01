@@ -140,11 +140,54 @@ bool signature_tool::output_is_input(const std::filesystem::path& output,
     if (output.empty()) return false;
     const auto normalized = std::filesystem::absolute(output).lexically_normal();
     if (normalized == std::filesystem::absolute(executable).lexically_normal() ||
-        normalized == std::filesystem::absolute(profile).lexically_normal()) return true;
+        (!profile.empty() && normalized == std::filesystem::absolute(profile).lexically_normal())) return true;
     std::error_code error;
     if (std::filesystem::equivalent(output, executable, error) && !error) return true;
     error.clear();
-    return std::filesystem::equivalent(output, profile, error) && !error;
+    return !profile.empty() && std::filesystem::equivalent(output, profile, error) && !error;
+}
+
+std::string signature_tool::report_auto(const std::filesystem::path& executable,
+    std::string_view actual_hash, const native_addresses::candidate& candidate,
+    bool compatible, std::string_view error) {
+    std::string output = "{\n  \"mode\": \"auto\",\n  \"executable\": " + json_string(utf8_path(executable))
+        + ",\n  \"actual_sha256\": " + json_string(actual_hash)
+        + ",\n  \"offline_compatible\": " + (compatible ? "true" : "false")
+        + ",\n  \"live_validation_required\": true,\n  \"error\": " + json_string(error);
+    if (compatible) {
+        const auto layout = candidate.layout == layout_id::legacy ? "legacy"
+            : candidate.layout == layout_id::current ? "current" : "adaptive";
+        output += ",\n  \"layout\": " + json_string(layout)
+            + ",\n  \"object_field_abi\": " + json_string(candidate.setter_abi ==
+                native_addresses::object_field_abi::float_value ? "float" : "bits")
+            + ",\n  \"participant_stride\": " + json_string(hex(candidate.participant_stride))
+            + ",\n  \"verification_chunks\": " + std::to_string(candidate.verification.size())
+            + ",\n  \"symbols\": [";
+        for (std::size_t index = 0; index < candidate.symbols.size(); ++index) {
+            if (index != 0) output += ',';
+            output += "\n    {\"name\": " + json_string(native_addresses::symbol_name(static_cast<native_symbol>(index)))
+                + ", \"rva\": " + json_string(hex(candidate.symbols[index])) + '}';
+        }
+        output += "\n  ],\n  \"run_offsets\": [";
+        bool first = true;
+        for (const auto& item : candidate.run_offsets) {
+            if (!first) output += ',';
+            first = false;
+            output += "\n    {\"canonical\": " + json_string(hex(item.legacy_offset))
+                + ", \"resolved\": " + json_string(hex(item.resolved_offset)) + '}';
+        }
+        output += "\n  ],\n  \"member_offsets\": [";
+        first = true;
+        for (const auto& item : candidate.member_offsets) {
+            if (!first) output += ',';
+            first = false;
+            output += "\n    {\"canonical\": " + json_string(hex(item.legacy_offset))
+                + ", \"resolved\": " + json_string(hex(item.resolved_offset)) + '}';
+        }
+        output += "\n  ]";
+    }
+    output += "\n}\n";
+    return output;
 }
 
 bool signature_tool::write_report(const std::filesystem::path& output, std::string_view text) {
@@ -170,7 +213,13 @@ int signature_tool::run(int argument_count, wchar_t** arguments) noexcept {
         std::filesystem::path profile_path;
         std::filesystem::path output_path;
         bool output_seen = false;
+        bool auto_mode = false;
         for (int index = 1; index < argument_count; ++index) {
+            if (arguments[index] != nullptr && std::wstring_view(arguments[index]) == L"--auto") {
+                if (auto_mode || !profile_path.empty()) return fail("Use either --auto or --profile INI once.");
+                auto_mode = true;
+                continue;
+            }
             if (index + 1 >= argument_count || arguments[index] == nullptr || arguments[index + 1] == nullptr)
                 return fail("Usage: signature_scan.exe --exe PATH --profile INI [--output JSON]");
             const std::wstring_view option(arguments[index]);
@@ -179,21 +228,29 @@ int signature_tool::run(int argument_count, wchar_t** arguments) noexcept {
             const std::filesystem::path value(arguments[++index]);
             if (value.empty()) return fail("Signature scan paths must not be empty.");
             if (option == L"--exe" && executable.empty()) executable = value;
-            else if (option == L"--profile" && profile_path.empty()) profile_path = value;
+            else if (option == L"--profile" && profile_path.empty() && !auto_mode) profile_path = value;
             else if (option == L"--output" && !output_seen) { output_path = value; output_seen = true; }
             else return fail("Unknown or duplicate option. Usage: signature_scan.exe --exe PATH --profile INI [--output JSON]");
         }
-        if (executable.empty() || profile_path.empty())
-            return fail("Usage: signature_scan.exe --exe PATH --profile INI [--output JSON]");
+        if (executable.empty() || (!auto_mode && profile_path.empty()))
+            return fail("Usage: signature_scan.exe --exe PATH (--profile INI | --auto) [--output JSON]");
         if (output_is_input(output_path, executable, profile_path))
             return fail("Output cannot overwrite the executable or signature profile input.");
         signature_profile profile;
         std::string error;
-        if (!signature_profiles::load_file(profile_path, profile, error)) return fail(error.c_str());
+        if (!auto_mode && !signature_profiles::load_file(profile_path, profile, error)) return fail(error.c_str());
         pattern_scanner scanner;
         if (!scanner.load_file(executable)) return fail(scanner.error().data());
         const auto hash = signature_profiles::sha256(scanner.bytes());
         if (hash.empty()) return fail("Cannot calculate the offline image SHA-256 digest.");
+        if (auto_mode) {
+            native_addresses::candidate candidate;
+            const bool compatible = native_addresses::resolve_auto(scanner, candidate, error);
+            const auto json = report_auto(std::filesystem::absolute(executable).lexically_normal(),
+                hash, candidate, compatible, error);
+            if (!write_report(output_path, json)) return fail("Cannot write the complete UTF-8 signature report.");
+            return compatible ? 0 : 2;
+        }
         const auto results = scan(scanner, profile);
         const bool all_resolved = std::all_of(results.begin(), results.end(),
             [](const rule_result& result) { return result.resolved; });

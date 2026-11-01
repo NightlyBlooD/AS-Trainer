@@ -249,8 +249,9 @@ bool legendary_loot::initialize(std::uintptr_t module_base, enabled_getter is_en
     }
     if (is_enabled == nullptr || module_base == 0 ||
         module_base > UINTPTR_MAX - zone_descriptors_rva ||
-        !matching_code(module_base + boss_loot_rva, boss_prologue, sizeof(boss_prologue)) ||
-        !matching_code(module_base + grow_loot_rva, grow_prologue, sizeof(grow_prologue))) {
+        (native_addresses::uses_patterns() ? !native_addresses::verify_all()
+            : (!matching_code(module_base + boss_loot_rva, boss_prologue, sizeof(boss_prologue)) ||
+               !matching_code(module_base + grow_loot_rva, grow_prologue, sizeof(grow_prologue))))) {
         initialization_state_.store(3, std::memory_order_release);
         return false;
     }

@@ -67,6 +67,33 @@ private:
     static void test_current_layout(void* run_address, void* packet_buffer,
         std::size_t speed_field);
 
+    /** @brief Prove final-only snapshot publication preserves accelerated run behavior.
+     * @param run_address Owned legacy-layout writable run fixture.
+     * @return None; checks x5 snapshots, per-step freezes, new-run start commands,
+     * invalid-memory guards and bounded timing publication/invalidation using native stubs.
+     */
+    static void test_accelerated_publication(void* run_address);
+
+    /** @brief Verify native lifesteal float-return forwarding and owner-scoped overrides.
+     * @param run_address Adopted writable current-layout run fixture owned by this thread.
+     * @return None; checks disabled/foreign delegation, active-getter bypass, health math,
+     * native rebuild invalidation, freeze reapplication and reset without a game process.
+     */
+    static void test_current_lifesteal(void* run_address);
+
+    /** @brief Stand in for the native pure getter while recording its exact ABI inputs.
+     * @param run_address Opaque identity supplied in RCX; never dereferenced by this stub.
+     * @return An exactly representable fraction in XMM0; increments original-call evidence.
+     */
+    static float __fastcall native_lifesteal(void* run_address) noexcept;
+
+    /** @brief Observe lifesteal from inside a fake native stat recalculation.
+     * @param run_address Current fixture passed unchanged by the real recalculate hook.
+     * @return None; captures the getter result after pre-rebuild invalidation and before
+     * the hook reapplies any frozen override. Writes no fixture or trainer scalar fields.
+     */
+    static void __fastcall native_lifesteal_recalculate(void* run_address) noexcept;
+
     /** @brief Record the current-build float-typed native setter's exact argument bits.
      * @param map Opaque map identity forwarded by the adapter.
      * @param field_id Native uint16 field key; @param value Value passed in XMM2.
@@ -95,7 +122,9 @@ private:
     /** @brief Replace the native owner update while exercising the real tick hook.
      * @param run_address Owned phase-1 fixture whose simulation clock is advanced.
      * @param delta_seconds Exact interval supplied by game_runtime::tick_hook.
-     * @return None; records call count/total time and updates only fixture run+0xce0.
+     * @return None; records call count/total time and advances fixture run+0xce0.
+     * Optional regression recording copies visible/current damage before incrementing
+     * the owned scalar, allowing tests to observe snapshot and freeze boundaries.
      */
     static void __fastcall owner_frame(void* run_address, float delta_seconds) noexcept;
 
@@ -139,11 +168,17 @@ private:
     inline static float observed_world_speed_{};
     inline static std::size_t owner_calls_{};
     inline static double owner_total_seconds_{};
+    inline static bool record_owner_values_{};
+    inline static std::array<double, 16> owner_snapshots_{};
+    inline static std::array<float, 16> owner_values_{};
     inline static std::size_t float_setter_calls_{};
     inline static std::size_t bits_setter_calls_{};
     inline static void* observed_map_{};
     inline static std::uint16_t observed_field_id_{};
     inline static std::uint32_t observed_value_bits_{};
+    inline static std::size_t lifesteal_original_calls_{};
+    inline static void* lifesteal_observed_run_{};
+    inline static float lifesteal_recalculated_value_{};
 };
 
 } // namespace azs

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "signature_profile.hpp"
+#include "native_addresses.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -16,11 +17,13 @@ class signature_tool final {
 public:
     /** @brief Run the offline signature diagnostic command line without touching a game process.
      * @param argument_count Number of Windows wide command-line arguments including program name.
-     * @param arguments signature_scan.exe --exe PATH --profile INI [--output JSON], in any option order.
+     * @param arguments signature_scan.exe --exe PATH (--profile INI | --auto) [--output JSON].
      * @return Zero when every rule resolves, two when any rule fails, one for input/hash/output errors.
      * The actual and expected hashes are reported even when different; mismatch alone is not failure.
      * Output is UTF-8 JSON on stdout or at the explicit output path. Executable/profile input paths
      * cannot be reused as output, including existing filesystem aliases. No DLL or image is executed.
+     * --auto uses only embedded trusted catalogs and reports full offline layout/ABI compatibility;
+     * a successful report still requires live-image verification before hooks can be installed.
      */
     static int run(int argument_count, wchar_t** arguments) noexcept;
 
@@ -69,6 +72,17 @@ private:
     static std::string report(const std::filesystem::path& executable,
         const std::filesystem::path& profile_path, const signature_profile& profile,
         std::string_view actual_hash, std::span<const rule_result> results, bool all_resolved);
+
+    /** @brief Serialize the embedded automatic resolver's full offline compatibility result.
+     * @param executable Canonical PE path; @param actual_hash Digest of the scanned bytes.
+     * @param candidate Complete independent binding, read only when compatible is true.
+     * @param compatible Whether all required layout, native-target and ABI evidence passed.
+     * @param error Exact failed invariant, empty after success.
+     * @return UTF-8 JSON with resolved symbols/maps and explicit pending live verification.
+     */
+    static std::string report_auto(const std::filesystem::path& executable,
+        std::string_view actual_hash, const native_addresses::candidate& candidate,
+        bool compatible, std::string_view error);
 
     /** @brief Check whether an explicit output would overwrite either read-only input.
      * @param output Report destination; @param executable PE input; @param profile INI input.

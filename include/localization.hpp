@@ -2,6 +2,7 @@
 
 #include <array>
 #include <atomic>
+#include <cstddef>
 #include <cstdint>
 #include <cstdio>
 #include <filesystem>
@@ -11,7 +12,9 @@
 namespace azs {
 
 enum class client_language : std::uint32_t {
-    english, russian, german, french, spanish, ukrainian, chinese_simplified
+    english, russian, german, french, spanish, ukrainian, chinese_simplified,
+    polish, czech, portuguese_brazil, romanian, turkish, japanese, korean,
+    count
 };
 
 class localization_tests;
@@ -25,7 +28,7 @@ public:
     static void initialize() noexcept;
 
     /** @brief Return the supported client language cached by initialize/refresh.
-     * @return One of the seven supported overlay languages; defaults to English.
+     * @return One of the client's supported overlay languages; defaults to English.
      * Reading the cache never accesses files and remains English before initialization.
      */
     static client_language current_language() noexcept;
@@ -59,9 +62,9 @@ public:
 
 private:
     friend class localization_tests;
-    using catalog_row = std::array<const char*, 7>;
+    using catalog_row = std::array<const char*, static_cast<std::size_t>(client_language::count)>;
 
-    /** @brief Expose immutable complete seven-language rows for lookup and regression checks.
+    /** @brief Expose immutable complete rows for every client language and regression checks.
      * @return Static English-keyed catalog; all strings have process lifetime.
      */
     static std::span<const catalog_row> catalog() noexcept;

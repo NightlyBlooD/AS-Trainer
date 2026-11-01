@@ -20,6 +20,8 @@ struct ImFontGlyphRangesBuilder;
 
 namespace azs {
 
+class overlay_automation_tests;
+
 class overlay_window final {
 public:
     /** @brief Own the overlay message loop and its independent graphics resources.
@@ -30,14 +32,16 @@ public:
     static DWORD WINAPI thread_main(void* context) noexcept;
 
 private:
+    friend class overlay_automation_tests;
+
     /** @brief Initialize one private window, D3D11 device and ImGui context.
      * @return True when every resource required to render the overlay is ready.
      * Partial initialization remains owned by cleanup() on failure.
      */
     bool initialize() noexcept;
 
-    /** @brief Load shared Latin/Cyrillic glyphs and merge bounded Chinese catalog glyphs.
-     * @return True when the base atlas and a Chinese-capable fallback font are loaded.
+    /** @brief Load shared Latin/Cyrillic glyphs and merge exact multilingual catalog glyphs.
+     * @return True when the base atlas and a CJK-capable fallback font are loaded.
      * Font candidates are resolved beside this DLL and in the Windows Fonts directory.
      */
     bool load_fonts() noexcept;
@@ -134,11 +138,49 @@ private:
      */
     void draw_config_section();
 
-    /** @brief Draw unpublished party scope, automation, priority and time settings.
+    /** @brief Draw immediate party/automation/time controls and separate priority drafts.
      * @param controls_ready True when the supported hook bridge or preview is ready.
-     * @return None; settings change only after the user applies the complete rule draft.
+     * @return None; toggles, delay and speed publish immediately while priority text
+     * remains unpublished until the dedicated apply action validates both lists.
      */
     void draw_automation_section(bool controls_ready);
+
+    /** @brief Commit one edited field value for the current or next game-owned update.
+     * @param index Descriptor/editor index smaller than field_count() and maximum_fields.
+     * @param run_active True to report a queued live update; false to report preparation.
+     * @return True when the bounded value is queued and its dirty flag is cleared;
+     * false after rejection, preserving both the draft and previously accepted value.
+     */
+    bool apply_field_edit(std::size_t index, bool run_active) noexcept;
+
+    /** @brief Change a field's start rule, applying its editor value whenever enabled.
+     * @param index Descriptor/editor index smaller than field_count() and maximum_fields.
+     * @param enabled True to queue the edited value and enable application on each run;
+     * false to clear only the start flag without reapplying or discarding any draft.
+     * @param run_active True to report a queued live update; false to report preparation.
+     * @return True after the requested rule change; false after invalid input, keeping
+     * unaccepted editor text available for correction. Successful enabling clears dirty.
+     */
+    bool toggle_field_start(std::size_t index, bool enabled, bool run_active) noexcept;
+
+    /** @brief Publish only immediate controls while preserving accepted priority lists.
+     * @return True after a validated settings update; false after rejection/allocation
+     * failure, restoring immediate controls from accepted state without losing drafts.
+     * Choice delay is clamped to 50–5000 milliseconds before publication.
+     */
+    bool publish_automation_controls() noexcept;
+
+    /** @brief Validate and publish both priority drafts using the current live options.
+     * @return True when both ordered lists are accepted together; false without changing
+     * settings on invalid text or allocation failure. Draft buffers remain editable.
+     */
+    bool apply_automation_priorities() noexcept;
+
+    /** @brief Refresh accepted toggles, delay and speed without touching priority drafts.
+     * @return None; reads only the shared immutable settings snapshot and preserves
+     * unfinished spell/jewelry edits during immediate control changes.
+     */
+    void refresh_automation_controls() noexcept;
 
     /** @brief Replace the cached preset filename list with the config store's current inventory.
      * @return None; only the configured local preset directory is enumerated.
@@ -172,10 +214,30 @@ private:
     static void format_priorities(const std::vector<std::string>& priorities,
                                   char* destination, std::size_t capacity) noexcept;
 
-    /** @brief Draw current/desired values and Apply/Freeze/Start controls for every field.
+    /** @brief Draw a square action button with a green check or red prohibition icon.
+     * @param id Stable hidden ImGui identifier scoped by the caller.
+     * @param apply_action True draws a green check for applying/enabling; false draws
+     * a red prohibition icon for cancelling/disabling an already active setting.
+     * @param tooltip Localized explanation shown even when the button is disabled.
+     * @return True when the normal ImGui button is activated by mouse or keyboard.
+     * Icons use draw-list primitives and require no extra font glyphs or textures.
+     */
+    static bool draw_icon_button(const char* id, bool apply_action, const char* tooltip);
+
+    /** @brief Draw one keyboard-accessible checkbox with a clickable wrapping label.
+     * @param label Localized text with a stable ### identifier suffix.
+     * @param value Mutable toggle updated when its box or visible label is activated.
+     * @return True after a toggle; the grouped item supports tooltips over box and text.
+     * Wrapping keeps long translations inside the available overlay width.
+     */
+    static bool draw_wrapped_checkbox(const char* label, bool& value);
+
+    /** @brief Draw compact values with automatic edit submission and Freeze/Start actions.
      * @param controls_ready True when validated hooks or the offline preview permit configuration.
      * @param run_active True only while current game snapshots are fresh.
-     * @return None; absent live values display a dash while desired values remain editable.
+     * @return None; completed numeric edits and boolean changes queue their values,
+     * while Freeze/Start activation applies the edited value immediately.
+     * Absent live values display a dash while desired values remain editable.
      */
     void draw_fields(bool controls_ready, bool run_active);
 

@@ -2,7 +2,7 @@
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
-Un trainer C++20 / Dear ImGui pour Azeroth Survivors sous Windows x64 : 25 paramètres du personnage, préparation de la prochaine partie, profils INI, choix automatique des récompenses, ensemble légendaire de classe et simulation de 1 à 16×.
+Un trainer C++20 / Dear ImGui pour Azeroth Survivors sous Windows x64 : jusqu’à 26 paramètres du personnage, préparation de la prochaine partie, profils INI, choix automatique des récompenses, ensemble légendaire de classe et simulation de 1 à 16×.
 
 ## Télécharger et lancer
 
@@ -17,22 +17,23 @@ Avec plusieurs processus : `load_overlay.exe --pid 12345`. La DLL reste chargée
 
 ## Compatibilité et langue
 
-Les profils compatibles sont identifiés par le SHA-256 exact de `AzerothSurvivors.exe` :
+Versions prises en charge de `AzerothSurvivors.exe` et leur SHA-256 :
 
 | Version du jeu | SHA-256 |
 |---|---|
+| `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
 
-La DLL exige un hachage vérifié, une disposition des objets validée et la bonne convention d'appel native (ABI). Elle vérifie aussi les octets de code essentiels avant d'installer les hooks. Les autres versions sont refusées et l'EXE sur disque reste intact. Le profil actuel a été vérifié à partir de l'EXE et de jeux de données de test hors ligne. Les parties réelles complètes couvrant toutes les fonctions et les sessions coopératives réelles restent à confirmer.
+Les profils v0.131.0 et v0.132.0 sont conservés. Au démarrage, le catalogue adaptatif vérifie une fois 92 règles : cibles natives uniques, tous les décalages de champs nécessaires, taille des enregistrements des participants et preuves explicites de l’ABI. Un hachage inconnu peut être accepté si ce contrôle complet réussit. Les octets du code chargé sont aussi vérifiés avant l’installation des hooks. Les signatures absentes ou ambiguës et les ABI incompatibles sont refusées ; la compatibilité avec toutes les versions futures n’est pas garantie. L’EXE sur disque reste intact.
 
-L'interface suit le fichier `language.txt` du client, généralement `%APPDATA%\wenilla-rogue\language.txt`. Langues disponibles : anglais, russe, allemand, français, espagnol, ukrainien et chinois simplifié. Une valeur inconnue utilise l'anglais. Les changements de langue sont actualisés sans redémarrer le trainer.
+L'interface et les diagnostics suivent le fichier `language.txt` du client, généralement `%APPDATA%\wenilla-rogue\language.txt`. Les 14 langues du client sont disponibles : anglais (`en`), russe (`ru`), allemand (`de`), français (`fr`), espagnol (`es`), ukrainien (`uk`), chinois simplifié (`zh`), polonais (`pl`), tchèque (`cs`), portugais du Brésil (`pt`), roumain (`ro`), turc (`tr`), japonais (`ja`) et coréen (`ko`). Une valeur inconnue utilise l'anglais. Les changements de langue sont actualisés en une seconde sans redémarrer le trainer. La police fournie couvre aussi les traductions japonaises et coréennes.
 
 ## Valeurs et profils
 
 **Appliquer** programme une écriture unique d'une valeur absolue. Depuis un menu, cette action prépare la prochaine partie et active **Début**. **Bloquer** réapplique la valeur après les recalculs du jeu et active aussi Début. **Début** réutilise la valeur à chaque nouvelle partie ; sans cette option, le blocage du champ ne passe pas à la partie suivante. Les valeurs actuelles apparaissent lorsqu'un personnage actif est disponible.
 
-Les 25 champs couvrent dégâts, vitesse de course, recharge, rayon de ramassage, zone d'effet, chance, or, coût des coffres, relances, saut, santé actuelle/maximale, chance/dégâts critiques, gains d'expérience/d'or, réduction des dégâts, régénération, cibles supplémentaires, écho, soins par élimination, épines, cumuls de DoT, puissance des buffs et résurrections.
+Les 25 champs communs couvrent dégâts, vitesse de course, recharge, rayon de ramassage, zone d'effet, chance, or, coût des coffres, relances, saut, santé actuelle/maximale, chance/dégâts critiques, gains d'expérience/d'or, réduction des dégâts, régénération, cibles supplémentaires, écho, soins par élimination, puissance des buffs, cumuls de DoT, vitesse des ticks DoT et résurrections. Les v0.135.1 et v0.132.0 proposent le vol de vie, soit 26 champs ; la v0.131.0 en conserve 25.
 
 | Valeur | Signification |
 |---|---|
@@ -42,6 +43,7 @@ Les 25 champs couvrent dégâts, vitesse de course, recharge, rayon de ramassage
 | Chance | `0.2` = +20 % ; `100` = +10000 % |
 | Chance critique / écho / réduction | Fractions : `0.5` = 50 % |
 | Coffre / saut | `0` = coffre gratuit ; le saut est une autorisation |
+| Vol de vie | Fraction des dégâts réellement infligés : `0.25` = 25 % de soins ; plage du trainer 0–10, sans limite native démontrée |
 
 Les profils se trouvent dans `configs`, près de la DLL chargée. La sauvegarde retient les valeurs confirmées, Bloquer/Début et les règles appliquées, sans le texte non confirmé des éditeurs. Charger remplace les réglages ; un fichier invalide est rejeté entièrement. **`default.ini`** est chargé automatiquement au prochain démarrage de la DLL. Les exemples se chargent manuellement :
 
@@ -63,19 +65,22 @@ L'accélération utilise des sous-pas natifs de simulation. À 16×, 16 minutes 
 
 Dans votre salle, activez **Appliquer les caractéristiques à tout le groupe (hôte uniquement)** et appliquez les règles. Les mêmes valeurs et options Bloquer/Début s'appliquent aux personnages du groupe. Les amis conservent leurs classes, inventaires, équipements, sorts et progressions. Le contenu de l'hôte n'est pas copié ; ce bouton partage les valeurs numériques, pas le choix automatique ni les inventaires.
 
-Un trainer chargé uniquement chez un invité ne peut pas modifier la simulation d'un autre hôte. Le panneau affiche le personnage de l'hôte et les diagnostics du groupe. Les parties coop réelles avec des amis **ne sont pas encore vérifiées** ; les tests automatisés utilisent des objets de test et des fonctions natives simulées.
+Un trainer chargé uniquement chez un invité ne peut pas modifier la simulation d'un autre hôte. Le panneau affiche le personnage de l'hôte et les diagnostics du groupe.
 
 ## Analyse des signatures hors ligne
 
 Le ZIP contient `signature_scan.exe` et les profils du dossier `signatures` ; ils ne sont pas publiés comme fichiers de téléchargement distincts. Depuis le dossier de l'archive extraite, analysez un EXE sans lancer le jeu ni charger la DLL :
 
 ```powershell
-.\signature_scan.exe --exe "PATH/AzerothSurvivors.exe" --profile signatures/azeroth-survivors-0.132.0.ini --output scan.json
+.\signature_scan.exe --exe "PATH/AzerothSurvivors.exe" --auto --output compatibility.json
+.\signature_scan.exe --exe "PATH/AzerothSurvivors.exe" --profile signatures/azeroth-survivors-adaptive.ini --output scan.json
 ```
+
+`--auto` vérifie les mêmes contrats hors ligne intégrés à la DLL, sans installer de hooks. `--profile` analyse uniquement le profil indiqué et n’autorise pas son utilisation à l’exécution.
 
 Les profils utilisent des octets hexadécimaux au format IDA et les jokers `?` / `??` pour un octet entier. Chaque règle exige une correspondance unique. La résolution peut renvoyer la correspondance, une cible relative à RIP, le début de la fonction via `.pdata` ou un déplacement de champ signé. Le rapport JSON UTF-8 contient les hachages, l'état de recherche, la position dans le fichier, les RVA/VA et le déplacement de champ éventuel.
 
-Un hachage différent apparaît sous la forme `hash_matches: false` sans empêcher l'analyse hors ligne. Une RVA de code désigne une instruction ou une fonction, pas la valeur flottante d'un attribut ; un déplacement de champ est une position dans un objet, pas une adresse en mémoire active. Le scanner peut examiner d'autres versions, mais des signatures correspondantes ne valident pas à elles seules la disposition des objets ni l'ABI et ne rendent pas automatiquement compatibles les futures versions du jeu.
+Avec `--profile`, un hachage différent est signalé par `hash_matches: false` et ne bloque pas l’analyse diagnostique. Une RVA désigne une instruction ou une fonction, pas une valeur de paramètre ; un décalage de champ indique une position dans un objet, pas une adresse active. Quelques signatures concordantes ne prouvent ni la disposition complète ni l’ABI. `--auto` exige le contrat complet ; le code chargé est vérifié au démarrage de la DLL.
 
 ## Compilation et publication
 
@@ -88,7 +93,7 @@ ctest --test-dir build -C Release --output-on-failure
 cmake --install build --config Release --prefix dist
 ```
 
-GitHub Actions cible Windows 2022 x64 Release pour les push et pull requests. Les tags `vX.Y.Z` publient les fichiers après réussite de la compilation et des tests. Les parties réelles complètes avec toutes les fonctions restent à vérifier.
+GitHub Actions cible Windows 2022 x64 Release pour les push et pull requests. Les tags `vX.Y.Z` publient les fichiers après réussite de la compilation et des tests.
 
 ## Dépendances
 

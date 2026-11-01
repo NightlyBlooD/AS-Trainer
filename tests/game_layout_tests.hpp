@@ -36,6 +36,12 @@ private:
      */
     static void check_current_party();
 
+    /** @brief Exercise a complete discovered map with a nonuniform scalar relocation.
+     * @return None; verifies actual synthetic writes, descriptor refresh and atomic rejection
+     * of incomplete, colliding and inconsistent maps without touching a running game.
+     */
+    static void check_adaptive_layout();
+
     /** @brief Seed the verified current-layout scalar identity of one owned test object.
      * @param bytes Writable fixture base; @param guid Hero GUID; @param class_id Native class ID.
      * @return None; initializes health, level, phase and elapsed clock only.

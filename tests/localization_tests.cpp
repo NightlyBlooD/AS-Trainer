@@ -22,13 +22,13 @@ void localization_tests::check(bool condition, const char* description) {
 }
 
 void localization_tests::test_codes() {
-    constexpr std::array codes{"en", "ru", "de", "fr", "es", "uk", "zh"};
-    for (std::size_t index = 0; index < codes.size(); ++index) {
-        check(localization::parse_language(codes[index]) == static_cast<client_language>(index),
+    static_assert(native_codes_.size() == static_cast<std::size_t>(client_language::count));
+    for (std::size_t index = 0; index < native_codes_.size(); ++index) {
+        check(localization::parse_language(native_codes_[index]) == static_cast<client_language>(index),
             "each native short code maps to the intended supported language");
     }
     for (const auto* code : {"", "unknown", "RU", "enUS", "ruRU", "deDE", "frFR", "esES", "ukUA", "zhCN",
-                             "pl", "cs", "pt", "ro", "tr", "ja", "ko", "zh-TW"}) {
+                             "PL", "csCZ", "pt-BR", "roRO", "trTR", "jaJP", "koKR", "zh-TW"}) {
         check(localization::parse_language(code) == client_language::english,
             "unsupported native languages and unproven locale aliases fall back to English");
     }
@@ -68,7 +68,7 @@ void localization_tests::test_catalog() {
         for (std::size_t index = 0; index < row.size(); ++index) {
             check(row[index] != nullptr && *row[index] != '\0' &&
                   MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, row[index], -1, nullptr, 0) > 0,
-                "all seven catalog variants are complete valid UTF-8");
+                "all native language variants are complete valid UTF-8");
             check(format_signature(row[index]) == signature,
                 "all translations preserve ordered printf conversions, widths and integer length modifiers");
             localization::language_.store(static_cast<client_language>(index));
@@ -86,23 +86,25 @@ void localization_tests::test_catalog() {
         "unknown messages keep the exact caller pointer and null input is safe");
     localization::visit_translations(&visit_text);
     localization::visit_translations(nullptr);
-    check(visited_ == rows.size() * 7 && visited_chinese_,
+    check(visited_ == rows.size() * static_cast<std::size_t>(client_language::count) && visited_chinese_,
         "font glyph visitor receives every language variant including full Chinese diagnostics");
-    for (std::size_t index = 0; index < 7; ++index) {
+    for (std::size_t index = 0; index < static_cast<std::size_t>(client_language::count); ++index) {
         localization::language_.store(static_cast<client_language>(index));
         trainer_preset output;
         std::string error;
-        check(!config_store::parse("[trainer]\nversion=4\n", output, error) &&
+        check(!config_store::parse("[trainer]\nversion=5\n", output, error) &&
               error == std::string(localization::translate("Unknown, duplicate or invalid key/value at line ")) + "2",
             "preset parser translates the diagnostic prefix while preserving its dynamic line number");
     }
     localization::language_.store(client_language::russian);
     trainer_state::instance().set_message(localization::translate("Waiting for game verification..."));
     check(!config_store::load("../escape.ini"), "invalid config filename sets a static diagnostic without touching files");
-    localization::language_.store(client_language::french);
-    check(trainer_state::instance().get_message() == localization::translate("Waiting for game verification...") &&
-          config_store::get_message() == localization::translate("Choose a plain ASCII .ini filename inside configs."),
-        "stored static trainer and config statuses follow a subsequent client language switch");
+    for (std::size_t index = 0; index < static_cast<std::size_t>(client_language::count); ++index) {
+        localization::language_.store(static_cast<client_language>(index));
+        check(trainer_state::instance().get_message() == localization::translate("Waiting for game verification...") &&
+              config_store::get_message() == localization::translate("Choose a plain ASCII .ini filename inside configs."),
+            "stored static trainer and config statuses follow every subsequent client language switch");
+    }
     localization::language_.store(client_language::english);
 }
 
@@ -179,6 +181,20 @@ void localization_tests::test_files(const std::filesystem::path& root) {
     localization::refresh_at(8000);
     check(localization::current_language() == client_language::ukrainian,
         "removing the controlled override restores APPDATA language resolution");
+
+    std::uint64_t now_ms = 9000;
+    for (std::size_t index = 0; index < native_codes_.size(); ++index, now_ms += 1000) {
+        const auto previous_language = localization::current_language();
+        const auto expected_language = static_cast<client_language>(index);
+        check(write_file(app_language, std::string(" \t") + native_codes_[index] + "\r\n"),
+            "owned fixture persists each native language code with surrounding whitespace");
+        localization::refresh_at(now_ms - 1);
+        check(localization::current_language() == previous_language,
+            "each persisted language switch respects the shared polling deadline");
+        localization::refresh_at(now_ms);
+        check(localization::current_language() == expected_language,
+            "each native language switches from its persisted preference without restarting");
+    }
 
     SetEnvironmentVariableW(L"APPDATA", original_appdata.empty() ? nullptr : original_appdata.c_str());
     SetEnvironmentVariableW(L"WOW_ROGUE_SAVE", original_save.empty() ? nullptr : original_save.c_str());

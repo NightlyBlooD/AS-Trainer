@@ -3,10 +3,17 @@
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <array>
+#include <span>
 
 namespace azs {
 
-enum class layout_id : std::uint32_t { legacy, current };
+enum class layout_id : std::uint32_t { legacy, current, adaptive };
+
+struct layout_offset {
+    std::size_t legacy_offset;
+    std::size_t resolved_offset;
+};
 
 class game_layout final {
 public:
@@ -18,6 +25,41 @@ public:
      * Call before installing hooks; tests may switch only while all consumers are quiescent.
      */
     static bool select(layout_id id) noexcept;
+
+    /** @brief Validate and publish a complete independently discovered layout before hooks start.
+     * @param run_offsets Every required canonical run key and its resolved byte offset, in key order.
+     * @param member_offsets Every required participant key and its independently resolved offset.
+     * @param stride Native participant-record stride extracted from verified traversal instructions.
+     * @return True after atomic profile selection; false preserves the selected profile and generation.
+     * Maps must be complete, bounded, collision-free, aligned for typed fields and consistent with
+     * native Vec metadata. This method validates layout coherence; callers must also prove each
+     * mapping's semantic origin and the native ABI. Call only while layout consumers are quiescent.
+     */
+    static bool select_resolved(std::span<const layout_offset> run_offsets,
+        std::span<const layout_offset> member_offsets, std::size_t stride) noexcept;
+
+    /** @brief Check discovered layout coherence without publishing state or touching game memory.
+     * @param run_offsets Complete canonical-to-resolved run map; @param member_offsets Participant map.
+     * @param stride Proven native participant size.
+     * @return True only when select_resolved would accept these maps; false has no side effects.
+     */
+    static bool validate_resolved(std::span<const layout_offset> run_offsets,
+        std::span<const layout_offset> member_offsets, std::size_t stride) noexcept;
+
+    /** @brief Expose the complete canonical run-key set required by all trainer features.
+     * @return Sorted immutable keys, including the intrinsic object-tag offset zero.
+     */
+    static std::span<const std::size_t> required_run_offsets() noexcept;
+
+    /** @brief Expose the complete canonical participant-key set required by party traversal.
+     * @return Sorted immutable keys, including the intrinsic object-tag offset zero.
+     */
+    static std::span<const std::size_t> required_member_offsets() noexcept;
+
+    /** @brief Read the publication generation used to refresh thread-local descriptor tables.
+     * @return Monotonically advancing value after each successful quiescent profile selection.
+     */
+    static std::uint64_t generation() noexcept;
 
     /** @brief Read the identity of the currently selected immutable profile.
      * @return Legacy before explicit selection, otherwise the last accepted profile ID.
@@ -54,11 +96,22 @@ public:
     static std::size_t scalar_size() noexcept;
 
 private:
+    /** @brief Return the minimum byte span actually accessed through one canonical run key.
+     * @param legacy_offset A required run key from the verified consumer contract.
+     * @return One for byte flags, eight for pointers/counts/GUID, full known container spans,
+     * or four for scalar words. Used only during offline layout validation.
+     */
+    static std::size_t run_field_width(std::size_t legacy_offset) noexcept;
+
     struct profile {
         layout_id id;
         std::size_t stride;
         std::size_t host_span;
         std::size_t scalar_span;
+        const layout_offset* run_offsets{};
+        std::size_t run_count{};
+        const layout_offset* member_offsets{};
+        std::size_t member_count{};
     };
 
     /** @brief Binary-search a sorted, immutable table of individually proved field pairs.
@@ -72,6 +125,10 @@ private:
     static const profile legacy_profile_;
     static const profile current_profile_;
     static std::atomic<const profile*> active_;
+    static profile adaptive_profile_;
+    static std::array<layout_offset, 128> adaptive_run_offsets_;
+    static std::array<layout_offset, 16> adaptive_member_offsets_;
+    static std::atomic<std::uint64_t> generation_;
 };
 
 } // namespace azs

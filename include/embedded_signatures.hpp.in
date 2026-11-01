@@ -2,4 +2,5 @@
 
 namespace azs {
 inline constexpr char current_signature_profile[] = R"as_profile(@AS_SIGNATURE_PROFILE@)as_profile";
+inline constexpr char adaptive_signature_profile[] = R"as_profile(@AS_ADAPTIVE_SIGNATURE_PROFILE@)as_profile";
 }

@@ -27,6 +27,12 @@ private:
      */
     static void initialize_data();
 
+    /** @brief Apply queued commands and simulate a pure lifesteal getter on the host thread.
+     * @return None; publishes the current-layout synthetic scalar/computed snapshots.
+     * Uses only the owned test allocation and never calls any game function.
+     */
+    static void update_data();
+
     static inline std::byte* data_{};
     static inline std::uint64_t started_ms_{};
 };

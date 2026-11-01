@@ -174,7 +174,7 @@ std::string config_store::serialize(const trainer_preset& preset) {
     if (!validate_preset(preset, error)) {
         throw std::invalid_argument(error);
     }
-    std::string text = "[trainer]\nversion=3\n\n";
+    std::string text = "[trainer]\nversion=4\n\n";
     for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
         const auto& descriptor = trainer_state::field_at(index);
         if (descriptor.key == nullptr) {
@@ -232,7 +232,7 @@ bool config_store::parse(const std::string& text, trainer_preset& preset, std::s
         std::vector<unsigned char> field_masks;
         std::size_t current_field = 0;
         unsigned automation_mask = 0;
-        bool version_seen = false;
+        unsigned schema_version = 0;
         std::string_view input(text);
         if (input.starts_with("\xef\xbb\xbf")) {
             input.remove_prefix(3);
@@ -266,7 +266,7 @@ bool config_store::parse(const std::string& text, trainer_preset& preset, std::s
                     section = section_kind::automation;
                 } else if (name.starts_with("field.")) {
                     const auto key = name.substr(6);
-                    bool known = false;
+                    bool known = key == "thorns";
                     for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
                         const auto* descriptor_key = trainer_state::field_at(index).key;
                         if (descriptor_key != nullptr && key == descriptor_key) {
@@ -297,8 +297,8 @@ bool config_store::parse(const std::string& text, trainer_preset& preset, std::s
             const auto value = trim(line.substr(equals + 1));
             bool accepted = false;
             if (section == section_kind::trainer) {
-                if (key == "version" && !version_seen && value == "3") {
-                    version_seen = true;
+                if (key == "version" && schema_version == 0 && (value == "3" || value == "4")) {
+                    schema_version = value == "3" ? 3 : 4;
                     accepted = true;
                 }
             } else if (section == section_kind::field) {
@@ -345,14 +345,27 @@ bool config_store::parse(const std::string& text, trainer_preset& preset, std::s
                 return false;
             }
         }
-        if (!version_seen) {
-            error = localization::translate("Missing [trainer] version=3.");
+        if (schema_version == 0) {
+            error = localization::translate("Missing supported [trainer] version.");
             return false;
         }
         for (auto mask : field_masks) {
             if (mask != 7) {
                 error = localization::translate("Every field needs value, frozen and apply_on_start.");
                 return false;
+            }
+        }
+        if (schema_version == 3) {
+            for (auto& field : candidate.fields) {
+                if (field.key == "dot_haste" || field.key == "lifesteal") {
+                    error = localization::translate("Unknown or duplicate field key: ") + field.key;
+                    return false;
+                }
+                if (field.key == "thorns") {
+                    field.key = "buff_power";
+                } else if (field.key == "buff_power") {
+                    field.key = "dot_haste";
+                }
             }
         }
         if (!validate_preset(candidate, error)) {

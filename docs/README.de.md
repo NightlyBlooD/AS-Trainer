@@ -2,7 +2,7 @@
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
-Ein C++20-/Dear-ImGui-Trainer für Azeroth Survivors unter Windows x64. Er bietet 25 Charakterwerte, Einstellungen für den nächsten Durchlauf, INI-Profile, automatische Belohnungswahl, das legendäre Klassenset vom Endboss und 1–16× Simulationsgeschwindigkeit.
+Ein C++20-/Dear-ImGui-Trainer für Azeroth Survivors unter Windows x64. Er bietet bis zu 26 Charakterwerte, Einstellungen für den nächsten Durchlauf, INI-Profile, automatische Belohnungswahl, das legendäre Klassenset vom Endboss und 1–16× Simulationsgeschwindigkeit.
 
 ## Herunterladen und starten
 
@@ -17,22 +17,23 @@ Bei mehreren Spielprozessen: `load_overlay.exe --pid 12345`. Die DLL bleibt bis 
 
 ## Kompatibilität und Sprache
 
-Unterstützte EXE-Profile werden durch den exakten SHA-256 von `AzerothSurvivors.exe` bestimmt:
+Unterstützte Builds von `AzerothSurvivors.exe` mit ihrem SHA-256:
 
 | Spielversion | SHA-256 |
 |---|---|
+| `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
 
-Die DLL benötigt einen verifizierten EXE-Hash, ein geprüftes Objektlayout und die passende native Aufrufkonvention (ABI). Vor dem Einrichten der Hooks prüft sie wichtige Codebytes. Andere Builds werden abgelehnt; die EXE auf dem Datenträger bleibt unverändert. Das aktuelle Profil wurde anhand der EXE und mit Offline-Testobjekten geprüft. Vollständige Live-Durchläufe mit allen Funktionen sowie echte Koop-Sitzungen sind noch nicht bestätigt.
+Die Profile für v0.131.0 und v0.132.0 bleiben erhalten. Beim Start prüft der adaptive Katalog einmalig 92 Regeln: eindeutige native Ziele, sämtliche benötigten Feldoffsets, den Teilnehmer-Stride und ausdrückliche ABI-Nachweise. Auch ein unbekannter Hash kann diese vollständige Prüfung bestehen. Vor dem Einrichten der Hooks werden zusätzlich die geladenen Codebytes geprüft. Fehlende oder mehrdeutige Muster und inkompatible ABI-Nachweise führen zur Ablehnung; eine Unterstützung aller künftigen Versionen wird nicht zugesagt. Die EXE auf dem Datenträger bleibt unverändert.
 
-Die Oberfläche folgt der `language.txt` des Clients, normalerweise `%APPDATA%\wenilla-rogue\language.txt`. Englisch, Russisch, Deutsch, Französisch, Spanisch, Ukrainisch und vereinfachtes Chinesisch werden unterstützt. Unbekannte Werte verwenden Englisch. Sprachänderungen werden ohne Trainer-Neustart übernommen.
+Oberfläche und Diagnosemeldungen folgen der `language.txt` des Clients, normalerweise `%APPDATA%\wenilla-rogue\language.txt`. Alle 14 Clientsprachen werden unterstützt: Englisch (`en`), Russisch (`ru`), Deutsch (`de`), Französisch (`fr`), Spanisch (`es`), Ukrainisch (`uk`), vereinfachtes Chinesisch (`zh`), Polnisch (`pl`), Tschechisch (`cs`), brasilianisches Portugiesisch (`pt`), Rumänisch (`ro`), Türkisch (`tr`), Japanisch (`ja`) und Koreanisch (`ko`). Unbekannte Werte verwenden Englisch. Sprachänderungen werden innerhalb einer Sekunde ohne Trainer-Neustart übernommen. Die mitgelieferte Schrift deckt auch japanische und koreanische Übersetzungen ab.
 
 ## Werte und Profile
 
 **Anwenden** setzt einen absoluten Wert einmalig. Im Menü bereitet es den nächsten Durchlauf vor und aktiviert **Start**. **Fixieren** stellt den Wert nach Neuberechnungen des Spiels wieder her und aktiviert ebenfalls Start. **Start** übernimmt den eingestellten Wert in jeden neuen Durchlauf. Ohne Start wird die Fixierung dieses Feldes nicht in den nächsten Durchlauf übernommen. Aktuelle Werte erscheinen, sobald ein aktiver Charakter verfügbar ist.
 
-Die 25 Felder umfassen Schaden, Lauftempo, Abklingzeit, Sammelradius, Wirkungsbereich, Glück, Gold, Truhenkosten, Neuwürfe, Überspringen, aktuelle/maximale Gesundheit, kritische Trefferchance/-schaden, Erfahrungs-/Goldgewinn, Schadensminderung, Regeneration, zusätzliche Ziele, Echo, Heilung pro Tötung, Dornen, DoT-Stapel, Buff-Stärke und Wiederbelebungen.
+Die 25 gemeinsamen Felder umfassen Schaden, Lauftempo, Abklingzeit, Sammelradius, Wirkungsbereich, Glück, Gold, Truhenkosten, Neuwürfe, Überspringen, aktuelle/maximale Gesundheit, kritische Trefferchance/-schaden, Erfahrungs-/Goldgewinn, Schadensminderung, Regeneration, zusätzliche Ziele, Echo, Heilung pro Tötung, Buff-Stärke, DoT-Stapel, DoT-Ticktempo und Wiederbelebungen. V0.135.1 und v0.132.0 bieten zusätzlich Lebensraub und damit 26 Felder; v0.131.0 behält 25.
 
 | Wert | Bedeutung |
 |---|---|
@@ -42,6 +43,7 @@ Die 25 Felder umfassen Schaden, Lauftempo, Abklingzeit, Sammelradius, Wirkungsbe
 | Glück | `0.2` = +20 %; `100` = +10000 % |
 | Kritische Chance / Echo / Minderung | Anteil: `0.5` = 50 % |
 | Truhenkosten / Überspringen | `0` = kostenlose Truhe; Überspringen ist ein Berechtigungsflag |
+| Lebensraub | Anteil des tatsächlich verursachten Schadens: `0.25` = 25 % Heilung; Trainerbereich 0–10, kein nachgewiesenes natives Limit |
 
 Profile liegen in `configs` neben der geladenen DLL. Gespeichert werden bestätigte Werte, Fixieren/Start und angewendete Regeln, kein unbestätigter Eingabetext. Laden ersetzt die Einstellungen; ungültige Dateien werden vollständig abgelehnt. **`default.ini`** wird beim nächsten DLL-Start automatisch geladen. Die Beispiele werden manuell ausgewählt:
 
@@ -63,19 +65,22 @@ Die Beschleunigung nutzt native Simulationsschritte. Bei 16× entsprechen 16 akt
 
 Aktiviere im eigenen Raum **Werte auf die ganze Gruppe anwenden (nur Host)** und bestätige die Regeln. Dieselben Werte und Fixieren/Start-Regeln gelten dann für die Gruppencharaktere. Freunde behalten ihre Klassen, Inventare, Ausrüstung, Zauber und Fortschritte. Host-Inhalte werden nicht kopiert; der Schalter teilt Zahlenwerte, keine automatische Auswahl oder Inventare.
 
-Ein nur beim Gast geladener Trainer kann die Simulation eines fremden Hosts nicht ändern. Das Fenster zeigt den Host-Charakter und Gruppendiagnosen. Echte Koop-Sitzungen mit Freunden sind **noch nicht verifiziert**; automatisierte Tests verwenden Testobjekte und native Funktionsstubs.
+Ein nur beim Gast geladener Trainer kann die Simulation eines fremden Hosts nicht ändern. Das Fenster zeigt den Host-Charakter und Gruppendiagnosen.
 
 ## Offline-Signatursuche
 
 Das ZIP enthält `signature_scan.exe` und die Profile unter `signatures`; sie werden nicht als eigene Release-Dateien veröffentlicht. Aus dem entpackten Archivverzeichnis lässt sich eine EXE untersuchen, ohne das Spiel zu starten oder die DLL zu laden:
 
 ```powershell
-.\signature_scan.exe --exe "PATH/AzerothSurvivors.exe" --profile signatures/azeroth-survivors-0.132.0.ini --output scan.json
+.\signature_scan.exe --exe "PATH/AzerothSurvivors.exe" --auto --output compatibility.json
+.\signature_scan.exe --exe "PATH/AzerothSurvivors.exe" --profile signatures/azeroth-survivors-adaptive.ini --output scan.json
 ```
+
+`--auto` prüft dieselben eingebetteten Offline-Verträge wie die DLL, ohne Hooks einzurichten. `--profile` untersucht dagegen nur das angegebene Profil und erteilt keine Laufzeitfreigabe.
 
 Profile verwenden hexadezimale Bytes im IDA-Format mit `?` / `??` als Platzhalter für ein ganzes Byte. Jede Regel muss genau einen Treffer liefern. Die Auflösung unterstützt den Treffer selbst, ein RIP-relatives Ziel, den Funktionsanfang über `.pdata` und einen vorzeichenbehafteten Feldoffset. Der UTF-8-JSON-Bericht enthält Hashes, Trefferstatus, Dateioffset, RVA/VA und gegebenenfalls den Feldoffset.
 
-Ein abweichender Hash wird als `hash_matches: false` gemeldet und verhindert die Offline-Suche nicht. Eine Code-RVA bezeichnet eine Anweisung oder Funktion, keinen Fließkommawert einer Eigenschaft. Ein Feldoffset ist eine Position im Objekt, keine Live-Adresse. Der Scanner kann andere Builds untersuchen, doch passende Muster allein bestätigen weder Layout noch ABI und bieten keine automatische Unterstützung künftiger Spielversionen.
+Bei `--profile` wird ein abweichender Hash als `hash_matches: false` gemeldet und verhindert die diagnostische Suche nicht. Eine Code-RVA bezeichnet eine Anweisung oder Funktion, keinen Fließkommawert; ein Feldoffset ist eine Position im Objekt, keine Live-Adresse. Einzelne passende Muster bestätigen weder das vollständige Layout noch die ABI. `--auto` verlangt den vollständigen Vertrag; die Prüfung der geladenen Codebytes erfolgt erst beim Start der DLL.
 
 ## Bauen und veröffentlichen
 
@@ -88,7 +93,7 @@ ctest --test-dir build -C Release --output-on-failure
 cmake --install build --config Release --prefix dist
 ```
 
-GitHub Actions verwendet Windows 2022 x64 Release für Pushes und Pull Requests. Tags `vX.Y.Z` veröffentlichen Release-Dateien nach erfolgreichem Build und Tests. Vollständige Live-Durchläufe mit allen Funktionen sind noch nicht verifiziert.
+GitHub Actions verwendet Windows 2022 x64 Release für Pushes und Pull Requests. Tags `vX.Y.Z` veröffentlichen Release-Dateien nach erfolgreichem Build und Tests.
 
 ## Abhängigkeiten
 

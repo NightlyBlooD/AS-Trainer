@@ -10,11 +10,14 @@ enum class ui_text_id : std::size_t {
     graphics_failed,
     overlay_stopped,
     title,
+    tab_parameters,
+    tab_automation,
     run_active_format,
     next_run,
     not_ready,
     hotkeys,
     reset,
+    reset_short,
     reset_done,
     reset_hint,
     hide,
@@ -40,6 +43,7 @@ enum class ui_text_id : std::size_t {
     game_time,
     speed_16x,
     time_help,
+    performance_stats,
     priority_help,
     spell_priority_title,
     jewelry_priority_title,
@@ -83,6 +87,8 @@ enum class ui_text_id : std::size_t {
     unit_count,
     unit_health_per_kill,
     unit_dot_limit,
+    unit_dot_haste,
+    unit_lifesteal,
     field_damage,
     field_run_speed,
     field_cooldown,
@@ -106,8 +112,10 @@ enum class ui_text_id : std::size_t {
     field_kill_heal,
     field_thorns,
     field_dot_stacks,
+    field_dot_haste,
     field_buff_power,
     field_lives,
+    field_lifesteal,
     count
 };
 
@@ -120,7 +128,7 @@ public:
     static const char* get(ui_text_id id) noexcept;
 
     /** @brief Read a translation for an explicit language without changing global state.
-     * @param id Catalog entry; @param language One of the seven supported languages.
+     * @param id Catalog entry; @param language Any supported client language; invalid values select English.
      * @return Immutable UTF-8 text; invalid language values fall back to English.
      */
     static const char* get(ui_text_id id, client_language language) noexcept;
@@ -169,7 +177,7 @@ private:
      */
     static const field_entry* find_field(const char* key) noexcept;
 
-    static const field_entry field_entries_[25];
+    static const field_entry field_entries_[26];
 };
 
 } // namespace azs

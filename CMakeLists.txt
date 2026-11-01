@@ -11,6 +11,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 configure_file(include/build_version.hpp.in generated/build_version.hpp @ONLY)
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-0.132.0.ini" AS_SIGNATURE_PROFILE)
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive.ini" AS_ADAPTIVE_SIGNATURE_PROFILE)
+string(REPLACE "\n" "\n)as_profile\"\nR\"as_profile(" AS_ADAPTIVE_SIGNATURE_PROFILE "${AS_ADAPTIVE_SIGNATURE_PROFILE}")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-0.132.0.ini"
+    "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive.ini")
 configure_file(include/embedded_signatures.hpp.in generated/embedded_signatures.hpp @ONLY)
 
 if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/imgui.cpp" OR
@@ -133,6 +138,12 @@ if(BUILD_TESTING)
     target_compile_options(signature_profile_tests PRIVATE /W4 /permissive- /utf-8 /EHsc)
     add_test(NAME strict_signature_profiles COMMAND signature_profile_tests)
 
+    add_executable(native_addresses_tests tests/native_addresses_tests.cpp)
+    target_include_directories(native_addresses_tests PRIVATE tests)
+    target_link_libraries(native_addresses_tests PRIVATE trainer_scanning)
+    target_compile_options(native_addresses_tests PRIVATE /W4 /permissive- /utf-8 /EHsc)
+    add_test(NAME adaptive_native_bindings COMMAND native_addresses_tests)
+
     add_executable(game_layout_tests tests/game_layout_tests.cpp src/party_runtime.cpp)
     target_include_directories(game_layout_tests PRIVATE tests)
     target_link_libraries(game_layout_tests PRIVATE trainer_bridge)
@@ -149,6 +160,12 @@ if(BUILD_TESTING)
     add_executable(overlay_preview WIN32 tests/overlay_preview.cpp src/overlay_window.cpp src/ui_strings.cpp)
     target_link_libraries(overlay_preview PRIVATE trainer_bridge imgui user32 gdi32)
     target_compile_options(overlay_preview PRIVATE /W4 /permissive- /utf-8 /EHsc)
+
+    add_executable(overlay_automation_tests tests/overlay_automation_tests.cpp src/overlay_window.cpp src/ui_strings.cpp)
+    target_include_directories(overlay_automation_tests PRIVATE tests)
+    target_link_libraries(overlay_automation_tests PRIVATE trainer_bridge imgui user32 gdi32)
+    target_compile_options(overlay_automation_tests PRIVATE /W4 /permissive- /utf-8 /EHsc)
+    add_test(NAME immediate_overlay_automation COMMAND overlay_automation_tests)
 endif()
 
 install(TARGETS azs_overlay load_overlay signature_scan RUNTIME DESTINATION .)

@@ -43,19 +43,20 @@ private:
      */
     static std::vector<std::string> format_arguments(const char* text);
 
-    /** @brief Check seven complete catalogs, identical format types and stable widget suffixes.
+    /** @brief Check all native-language catalogs, format argument types and stable widget suffixes.
      * @return None; invalid enum/language fallback behavior is checked as well.
      */
     static void check_catalog();
 
-    /** @brief Check names and unit explanations for all 25 immutable field descriptors.
-     * @return None; unknown and null key fallbacks must not expose Russian metadata.
+    /** @brief Check names and units for 25 legacy and 26 current field descriptors.
+     * @return None; verifies current-only lifesteal labels and units in all native
+     * languages, restores the legacy layout and checks unknown/null key fallbacks.
      */
     static void check_fields();
 
     /** @brief Build a headless atlas from the production base/CJK fonts and exact text ranges.
-     * @return None; every scalar from seven UI and core diagnostic catalogs is checked.
-     * Bundled Chinese font is resolved relative to the CTest source working directory.
+     * @return None; every scalar from all UI and core diagnostic catalogs is checked.
+     * Bundled CJK font is resolved relative to the CTest source working directory.
      */
     static void check_fonts();
 

@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <exception>
 #include <string_view>
+#include <vector>
 
 namespace azs {
 
@@ -17,6 +18,7 @@ int game_layout_tests::run() noexcept {
         check_profiles();
         check_current_scalars();
         check_current_party();
+        check_adaptive_layout();
     } catch (const std::exception& exception) {
         std::fprintf(stderr, "Layout test exception: %s\n", exception.what());
         ++failures_;
@@ -42,6 +44,11 @@ void game_layout_tests::check_profiles() {
           "legacy retains identity offsets");
     check(game_layout::participant_stride() == 0xa38 && game_layout::run_size() == 0xdac
               && game_layout::scalar_size() == 0xda4, "legacy validation spans and stride are unchanged");
+    check(std::string_view(trainer_state::field_at(21).key) == "buff_power"
+              && trainer_state::field_at(21).offset == 0x508
+              && std::string_view(trainer_state::field_at(23).key) == "dot_haste"
+              && trainer_state::field_at(23).offset == 0x510,
+          "legacy corrected stat names retain their existing physical descriptor indices and offsets");
     check(game_layout::select(layout_id::current), "verified current layout can be selected before hooks");
     check(game_layout::run_offset(0x83c) == 0x8bc && game_layout::run_offset(0xd0c) == 0xe2c,
           "boss-roll index and offer generation use individually proved nonuniform mappings");
@@ -63,10 +70,21 @@ void game_layout_tests::check_profiles() {
     constexpr std::size_t expected[] = {0x4d4, 0x4e4, 0x4d8, 0x4e8, 0x4f8, 0x4fc,
         0x54c, 0xe60, 0x5a4, 0x2d2, 0x540, 0x4d0, 0x4dc, 0x4e0, 0x4ec, 0x4f0,
         0x4f4, 0x500, 0x504, 0x508, 0x50c, 0x510, 0x514, 0x518, 0x5a0};
-    check(trainer_state::field_count() == std::size(expected), "all 25 fields have explicit current descriptors");
+    check(trainer_state::field_count() == std::size(expected) + 1,
+          "current profile retains all 25 scalar indices and appends one computed descriptor");
     for (std::size_t index = 0; index < std::size(expected); ++index) {
         check(trainer_state::field_at(index).offset == expected[index], "immutable field descriptor uses its new offset");
     }
+    check(std::string_view(trainer_state::field_at(20).key) == "kill_heal"
+              && std::string_view(trainer_state::field_at(21).key) == "buff_power"
+              && std::string_view(trainer_state::field_at(23).key) == "dot_haste"
+              && trainer_state::field_at(23).minimum == 0 && trainer_state::field_at(23).maximum == 1
+              && trainer_state::field_at(23).step == 0.05,
+          "current heal/buff/DoT descriptors match verified native meanings and the effective DoT cap");
+    const auto& computed = trainer_state::field_at(25);
+    check(std::string_view(computed.key) == "lifesteal" && computed.access == field_access::native_getter
+              && computed.offset == game_layout::invalid_offset && computed.minimum == 0 && computed.maximum == 10,
+          "current lifesteal has a native getter path and trainer bounds rather than a fabricated scalar offset");
 }
 
 void game_layout_tests::seed_run(unsigned char* bytes, std::uint64_t guid, std::uint8_t class_id) noexcept {
@@ -80,6 +98,65 @@ void game_layout_tests::seed_run(unsigned char* bytes, std::uint64_t guid, std::
     store(bytes, 0xe00, 10.0f);
 }
 
+void game_layout_tests::check_adaptive_layout() {
+    auto& state = trainer_state::instance();
+    state.set_hooks_ready(false);
+    game_layout::select(layout_id::current);
+    std::vector<layout_offset> runs, members;
+    for (const auto key : game_layout::required_run_offsets())
+        runs.push_back({key, game_layout::run_offset(key)});
+    for (const auto key : game_layout::required_member_offsets())
+        members.push_back({key, game_layout::member_offset(key)});
+    for (auto& item : runs) if (item.legacy_offset == 0x4cc) item.resolved_offset = 0x520;
+    const auto before_validation = game_layout::generation();
+    check(game_layout::validate_resolved(runs, members, 0xad0)
+              && game_layout::current_id() == layout_id::current
+              && game_layout::generation() == before_validation,
+          "offline layout validation does not publish a candidate or refresh descriptors");
+    check(game_layout::select_resolved(runs, members, 0xad0)
+              && game_layout::current_id() == layout_id::adaptive
+              && trainer_state::field_at(0).offset == 0x520
+              && trainer_state::field_at(5).offset == 0x4fc,
+          "complete discovered layout uses individual offsets instead of a global delta");
+    check(state.import_preset({}), "discovered-layout fixture starts with empty settings");
+    alignas(8) std::array<unsigned char, 0x1000> bytes{};
+    seed_run(bytes.data(), 301, 11);
+    store(bytes.data(), 0x4d4, 123.0f);
+    store(bytes.data(), 0x520, 1.0f);
+    state.set_hooks_ready(true);
+    check(state.process_run(bytes.data(), true), "discovered-layout fixture is adopted before editing its fields");
+    check(state.apply(0, 42) && state.process_run(bytes.data(), true)
+              && read<float>(bytes.data(), 0x520) == 42
+              && read<float>(bytes.data(), 0x4d4) == 123,
+          "discovered scalar commands write only the resolved field and preserve the old location");
+    state.set_hooks_ready(false);
+    state.reset_all();
+    const auto accepted_generation = game_layout::generation();
+    auto malformed = runs;
+    malformed.pop_back();
+    check(!game_layout::select_resolved(malformed, members, 0xad0),
+          "missing required run key refuses an otherwise plausible layout");
+    malformed = runs;
+    for (auto& item : malformed) if (item.legacy_offset == 0x4cc) item.resolved_offset = 0x4fc;
+    check(!game_layout::select_resolved(malformed, members, 0xad0),
+          "colliding resolved scalar offsets are rejected");
+    for (auto& item : malformed) if (item.legacy_offset == 0x4cc) item.resolved_offset = 0x4bc;
+    check(!game_layout::select_resolved(malformed, members, 0xad0),
+          "a scalar overlapping only the upper half of the GUID is rejected");
+    malformed = runs;
+    for (auto& item : malformed) if (item.legacy_offset == 0x680) item.resolved_offset += 0x100;
+    check(!game_layout::select_resolved(malformed, members, 0xad0),
+          "inconsistent native packet Vec fields are rejected");
+    check(!game_layout::select_resolved(runs, members, 0x100)
+              && !game_layout::select(layout_id::adaptive)
+              && game_layout::generation() == accepted_generation
+              && trainer_state::field_at(0).offset == 0x520,
+          "all failed selections preserve the prior published map and descriptor generation");
+    game_layout::select(layout_id::current);
+    check(trainer_state::field_at(0).offset == 0x4d4,
+          "returning to a known layout refreshes descriptors without stale adaptive offsets");
+}
+
 void game_layout_tests::check_current_scalars() {
     auto& state = trainer_state::instance();
     check(state.import_preset({}), "fresh current scalar settings accepted");
@@ -87,6 +164,8 @@ void game_layout_tests::check_current_scalars() {
     alignas(8) std::array<unsigned char, 0x1000> bytes{};
     seed_run(bytes.data(), 101, 11);
     store(bytes.data(), 0x4cc, 123.0f);
+    check(!state.apply(23, -0.01) && !state.apply(23, 1.01),
+          "current DoT speed rejects values outside its effective zero-to-one range");
     std::array<double, 25> desired{};
     for (std::size_t index = 0; index < desired.size(); ++index) {
         const auto& field = trainer_state::field_at(index);
@@ -104,6 +183,12 @@ void game_layout_tests::check_current_scalars() {
     }
     check(read<float>(bytes.data(), 0x4cc) == 123.0f, "old damage location is not used by the current profile");
     check(state.get_runtime().level == 10, "current level identity is published from new metadata");
+    const auto before_computed = bytes;
+    float computed_value{};
+    check(state.apply(25, 0.25) && state.process_run(bytes.data(), true)
+              && state.try_lifesteal_override(bytes.data(), computed_value) && computed_value == 0.25f
+              && bytes == before_computed,
+          "computed command uses its latch without touching any byte of the run fixture");
 
     alignas(8) std::array<unsigned char, 0x1000> legacy_only{};
     store(legacy_only.data(), 0x354, std::uint8_t{11});
@@ -178,6 +263,9 @@ void __fastcall game_layout_tests::swap_player(void* run_address, void* particip
     ++swap_calls_;
     for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
         const auto& field = trainer_state::field_at(index);
+        if (field.access != field_access::scalar) {
+            continue;
+        }
         const auto member_offset = std::string_view(field.key) == "chest_cost" ? std::size_t{0xabc} : field.offset;
         swap_bytes(run, member, field.offset, member_offset, field.kind == value_kind::boolean ? 1 : 4);
     }

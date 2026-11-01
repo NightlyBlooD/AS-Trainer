@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <cstddef>
 #include <filesystem>
 #include <string>
@@ -22,7 +23,7 @@ private:
      */
     static void check(bool condition, const char* description);
 
-    /** @brief Verify the seven supported short codes and reject unproven WoW locale aliases.
+    /** @brief Verify every native short code and reject unsupported regional or case aliases.
      * @return None; does not read environment variables or touch the filesystem.
      */
     static void test_codes();
@@ -32,7 +33,7 @@ private:
      */
     static void test_catalog();
 
-    /** @brief Exercise APPDATA, save-path override, file changes and one-second polling.
+    /** @brief Exercise every persisted native code, APPDATA, save overrides and polling deadlines.
      * @param root Unique owned fixture directory inside the test working directory.
      * @return None; restores the two environment variables before returning.
      */
@@ -62,6 +63,9 @@ private:
      */
     static std::wstring environment_value(const wchar_t* name);
 
+    inline static constexpr std::array native_codes_{
+        "en", "ru", "de", "fr", "es", "uk", "zh", "pl", "cs", "pt", "ro", "tr", "ja", "ko"
+    };
     inline static int failures_{};
     inline static std::size_t visited_{};
     inline static bool visited_chinese_{};

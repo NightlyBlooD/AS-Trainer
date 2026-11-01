@@ -39,22 +39,16 @@ constexpr field_descriptor field_definitions[] = {
     {"Дополнительные цели", "количество", 0x4fc, value_kind::unsigned_integer, 0, 100, 1, "targets"},
     {"Повторное заклинание", "доля: 1 = 100%", 0x500, value_kind::real, 0, 10, 0.1, "echo"},
     {"Лечение за убийство", "здоровья за врага", 0x504, value_kind::real, 0, 100000, 10, "kill_heal"},
-    {"Отражение урона", "доля: 1 = 100%", 0x508, value_kind::real, 0, 100, 0.1, "thorns"},
+    {"Сила баффов", "доля: 1 = +100%", 0x508, value_kind::real, 0, 100, 0.1, "buff_power"},
     {"Дополнительные стаки DoT", "игра учитывает не более 3", 0x50c, value_kind::unsigned_integer, 0, 3, 1, "dot_stacks"},
-    {"Сила баффов", "доля: 1 = +100%", 0x510, value_kind::real, 0, 100, 0.1, "buff_power"},
+    {"Скорость тиков ПУ", "доля бонуса: 0 = обычно, 1 = +100%; предел 1", 0x510, value_kind::real, 0, 1, 0.05, "dot_haste"},
     {"Возрождения", "количество", 0x598, value_kind::unsigned_integer, 0, 1000, 1, "lives"},
 };
 static_assert(std::size(field_definitions) <= 64);
 
-constexpr auto current_field_definitions = [] {
-    auto fields = std::to_array(field_definitions);
-    constexpr std::size_t offsets[] = {0x4d4, 0x4e4, 0x4d8, 0x4e8, 0x4f8, 0x4fc, 0x54c, 0xe60, 0x5a4, 0x2d2, 0x540, 0x4d0, 0x4dc, 0x4e0, 0x4ec, 0x4f0, 0x4f4, 0x500, 0x504, 0x508, 0x50c, 0x510, 0x514, 0x518, 0x5a0};
-    static_assert(std::size(offsets) == fields.size());
-    for (std::size_t index = 0; index < fields.size(); ++index) {
-        fields[index].offset = offsets[index];
-    }
-    return fields;
-}();
+constexpr field_descriptor lifesteal_definition{"Вампиризм",
+    "доля урона: 0.25 = 25%; диапазон тренера 0–10", game_layout::invalid_offset,
+    value_kind::real, 0, 10, 0.05, "lifesteal", field_access::native_getter};
 
 
 std::mutex message_mutex;
@@ -69,13 +63,23 @@ trainer_state& trainer_state::instance() noexcept {
 }
 
 std::size_t trainer_state::field_count() noexcept {
-    return std::size(field_definitions);
+    return std::size(field_definitions) + (game_layout::current_id() != layout_id::legacy ? 1 : 0);
 }
 
 const field_descriptor& trainer_state::field_at(std::size_t index) noexcept {
     const auto safe_index = index < field_count() ? index : 0;
-    return game_layout::current_id() == layout_id::current
-        ? current_field_definitions[safe_index] : field_definitions[safe_index];
+    thread_local std::array<field_descriptor, std::size(field_definitions) + 1> descriptors{};
+    thread_local std::uint64_t descriptor_generation = UINT64_MAX;
+    const auto generation = game_layout::generation();
+    if (descriptor_generation != generation) {
+        for (std::size_t field_index = 0; field_index < std::size(field_definitions); ++field_index) {
+            descriptors[field_index] = field_definitions[field_index];
+            descriptors[field_index].offset = game_layout::run_offset(field_definitions[field_index].offset);
+        }
+        descriptors.back() = lifesteal_definition;
+        descriptor_generation = generation;
+    }
+    return descriptors[safe_index];
 }
 
 field_snapshot trainer_state::get_field(std::size_t index) const noexcept {
@@ -141,12 +145,14 @@ void trainer_state::reset_all() noexcept {
 }
 
 void trainer_state::reset_locked() noexcept {
-    for (std::size_t index = 0; index < field_count(); ++index) {
+    for (std::size_t index = 0; index < fields_.size(); ++index) {
         fields_[index].frozen.store(false);
         fields_[index].apply_on_start.store(false);
         fields_[index].active_for_run.store(false);
         fields_[index].applied_id.store(fields_[index].command_id.load());
     }
+    lifesteal_party_enabled_.store(false);
+    clear_lifesteal_locked();
 }
 
 bool trainer_state::set_apply_on_start(std::size_t index, bool enabled) noexcept {
@@ -196,7 +202,15 @@ bool trainer_state::set_automation(const automation_settings& settings) noexcept
     try {
         const auto next = std::make_shared<const automation_settings>(settings);
         std::lock_guard lock(controls_mutex_);
+        const bool party_was_enabled = lifesteal_party_enabled_.load();
         automation_.store(next);
+        lifesteal_party_enabled_.store(settings.apply_to_party);
+        if (settings.apply_to_party && !party_was_enabled) {
+            lifesteal_party_generation_.fetch_add(1);
+        }
+        if (!settings.apply_to_party) {
+            clear_lifesteal_members_locked();
+        }
         return true;
     } catch (...) {
         return false;
@@ -241,7 +255,7 @@ bool trainer_state::import_preset(const trainer_preset& preset) noexcept {
         const auto next_automation = std::make_shared<const automation_settings>(preset.automation);
         std::lock_guard lock(controls_mutex_);
         reset_locked();
-        for (std::size_t index = 0; index < field_count(); ++index) {
+        for (std::size_t index = 0; index < fields_.size(); ++index) {
             fields_[index].configured.store(false);
         }
         for (std::size_t entry = 0; entry < preset.fields.size(); ++entry) {
@@ -255,6 +269,10 @@ bool trainer_state::import_preset(const trainer_preset& preset) noexcept {
             field.command_id.fetch_add(1);
         }
         automation_.store(next_automation);
+        lifesteal_party_enabled_.store(preset.automation.apply_to_party);
+        if (preset.automation.apply_to_party) {
+            lifesteal_party_generation_.fetch_add(1);
+        }
         return true;
     } catch (...) {
         return false;
@@ -264,9 +282,16 @@ bool trainer_state::import_preset(const trainer_preset& preset) noexcept {
 runtime_snapshot trainer_state::get_runtime() const noexcept {
     const auto timestamp = last_update_ms_.load();
     const auto ready = hooks_ready_.load();
-    return {ready, ready && timestamp != 0 && GetTickCount64() - timestamp < 5000,
+    const auto now_ms = GetTickCount64();
+    const auto performance_timestamp = performance_update_ms_.load();
+    const bool performance_fresh = ready && performance_timestamp != 0 &&
+        now_ms - performance_timestamp < 3000;
+    return {ready, ready && timestamp != 0 && now_ms - timestamp < 5000,
             run_address_.load(), level_.load(), timestamp,
-            party_host_.load(), party_members_.load(), party_writes_.load()};
+            party_host_.load(), party_members_.load(), party_writes_.load(),
+            performance_fresh ? owner_chain_ms_.load() : 0.0,
+            performance_fresh ? bridge_ms_.load() : 0.0,
+            performance_fresh ? simulation_steps_.load() : 0.0};
 }
 
 void trainer_state::set_party_status(bool hosting, std::uint32_t member_count,
@@ -274,6 +299,19 @@ void trainer_state::set_party_status(bool hosting, std::uint32_t member_count,
     party_host_.store(hosting);
     party_members_.store(member_count);
     party_writes_.store(writes);
+}
+
+void trainer_state::set_frame_performance(double owner_chain_ms, double bridge_ms,
+    double simulation_steps) noexcept {
+    if (!std::isfinite(owner_chain_ms) || owner_chain_ms < 0 ||
+        !std::isfinite(bridge_ms) || bridge_ms < 0 ||
+        !std::isfinite(simulation_steps) || simulation_steps < 1 || simulation_steps > 16) {
+        return;
+    }
+    owner_chain_ms_.store(owner_chain_ms);
+    bridge_ms_.store(bridge_ms);
+    simulation_steps_.store(simulation_steps);
+    performance_update_ms_.store(GetTickCount64());
 }
 
 void trainer_state::set_message(const char* message) noexcept {
@@ -294,6 +332,7 @@ void trainer_state::set_hooks_ready(bool ready) noexcept {
     hooks_ready_.store(ready);
     if (!ready) {
         reset_all();
+        performance_update_ms_.store(0);
     }
 }
 
@@ -337,6 +376,20 @@ bool trainer_state::valid_run(void* run_address) noexcept {
 
 bool trainer_state::read_field(void* run_address, std::size_t index, double& value) noexcept {
     const auto& descriptor = field_at(index);
+    if (descriptor.access == field_access::native_getter) {
+        float overridden{};
+        if (try_lifesteal_override(run_address, overridden)) {
+            value = overridden;
+            return true;
+        }
+        std::uint64_t guid{};
+        if (!lifesteal_context(run_address, guid) || guid != host_guid_.load()
+            || !observed_lifesteal_ready_.load()) {
+            return false;
+        }
+        value = observed_lifesteal_.load();
+        return std::isfinite(value);
+    }
     const auto* address = static_cast<const std::byte*>(run_address) + descriptor.offset;
     __try {
         if (descriptor.kind == value_kind::real) {
@@ -354,6 +407,9 @@ bool trainer_state::read_field(void* run_address, std::size_t index, double& val
 
 bool trainer_state::write_field(void* run_address, std::size_t index, double value) noexcept {
     const auto& descriptor = field_at(index);
+    if (descriptor.access == field_access::native_getter) {
+        return write_lifesteal(run_address, value, nullptr);
+    }
     auto* address = static_cast<std::byte*>(run_address) + descriptor.offset;
     __try {
         if (descriptor.kind == value_kind::real) {
@@ -396,7 +452,132 @@ bool trainer_state::read_phase(void* run_address, std::uint8_t& phase) noexcept 
     }
 }
 
-bool trainer_state::process_run(void* run_address, bool publish, speed_update* speed_result) noexcept {
+bool trainer_state::read_guid(void* run_address, std::uint64_t& guid) noexcept {
+    __try {
+        guid = *reinterpret_cast<const std::uint64_t*>(static_cast<const std::byte*>(run_address)
+            + game_layout::run_offset(0x4b0));
+        return true;
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        return false;
+    }
+}
+
+bool trainer_state::lifesteal_context(void* run_address, std::uint64_t& guid) const noexcept {
+    if (!hooks_ready_.load() || game_layout::current_id() == layout_id::legacy
+        || run_address == nullptr || reinterpret_cast<std::uintptr_t>(run_address) != run_address_.load()
+        || GetCurrentThreadId() != owner_thread_.load()) {
+        return false;
+    }
+    std::uint8_t phase{};
+    float elapsed{};
+    return read_guid(run_address, guid) && guid != 0
+        && read_phase(run_address, phase) && phase >= 1 && phase <= 3
+        && read_clock(run_address, elapsed) && elapsed + 0.0001f >= last_game_time_.load();
+}
+
+bool trainer_state::try_lifesteal_override(void* run_address, float& value) noexcept {
+    std::uint64_t guid{};
+    if (!lifesteal_context(run_address, guid)) {
+        return false;
+    }
+    if (guid == host_guid_.load()) {
+        if (!lifesteal_active_.load()) {
+            return false;
+        }
+        value = lifesteal_value_.load();
+        return true;
+    }
+    if (lifesteal_party_enabled_.load()) {
+        for (const auto& member : lifesteal_members_) {
+            if (member.guid.load() == guid && member.active.load()) {
+                value = member.value.load();
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void trainer_state::observe_lifesteal(void* run_address, float native_value) noexcept {
+    std::uint64_t guid{};
+    if (std::isfinite(native_value) && lifesteal_context(run_address, guid) && guid == host_guid_.load()) {
+        observed_lifesteal_.store(native_value);
+        observed_lifesteal_ready_.store(true);
+    }
+}
+
+void trainer_state::invalidate_lifesteal(void* run_address) noexcept {
+    std::uint64_t guid{};
+    if (!lifesteal_context(run_address, guid)) {
+        return;
+    }
+    if (guid == host_guid_.load()) {
+        lifesteal_active_.store(false);
+        observed_lifesteal_ready_.store(false);
+    } else {
+        for (auto& member : lifesteal_members_) {
+            if (member.guid.load() == guid) {
+                member.active.store(false);
+                return;
+            }
+        }
+    }
+}
+
+bool trainer_state::write_lifesteal(void* run_address, double value, const member_commands* commands) noexcept {
+    std::uint64_t guid{};
+    if (!lifesteal_context(run_address, guid)) {
+        return false;
+    }
+    if (commands == nullptr) {
+        if (guid != host_guid_.load()) {
+            return false;
+        }
+        lifesteal_value_.store(static_cast<float>(value));
+        lifesteal_active_.store(true);
+        return true;
+    }
+    if (!lifesteal_party_enabled_.load() || guid == host_guid_.load()) {
+        return false;
+    }
+    const auto command_owner = reinterpret_cast<std::uintptr_t>(commands);
+    lifesteal_member* selected = nullptr;
+    for (auto& member : lifesteal_members_) {
+        if (member.guid.load() == guid || member.command_owner == command_owner) {
+            selected = &member;
+            break;
+        }
+        if (selected == nullptr && member.command_owner == 0) {
+            selected = &member;
+        }
+    }
+    if (selected == nullptr) {
+        return false;
+    }
+    selected->active.store(false);
+    selected->guid.store(guid);
+    selected->command_owner = command_owner;
+    selected->value.store(static_cast<float>(value));
+    selected->active.store(true);
+    return true;
+}
+
+void trainer_state::clear_lifesteal_members_locked() noexcept {
+    for (auto& member : lifesteal_members_) {
+        member.active.store(false);
+        member.guid.store(0);
+        member.command_owner = 0;
+    }
+}
+
+void trainer_state::clear_lifesteal_locked() noexcept {
+    lifesteal_active_.store(false);
+    observed_lifesteal_ready_.store(false);
+    clear_lifesteal_members_locked();
+}
+
+bool trainer_state::process_run(void* run_address, bool publish, speed_update* speed_result,
+    bool publish_fields) noexcept {
     if (speed_result) {
         *speed_result = {};
     }
@@ -416,11 +597,19 @@ bool trainer_state::process_run(void* run_address, bool publish, speed_update* s
     if (!read_clock(run_address, elapsed)) {
         return false;
     }
-    if (run_address_.load() != address || elapsed + 0.0001f < last_game_time_.load()) {
+    std::uint64_t guid{};
+    const bool current_layout = game_layout::current_id() != layout_id::legacy;
+    const bool guid_ready = current_layout && read_guid(run_address, guid);
+    if (run_address_.load() != address || elapsed + 0.0001f < last_game_time_.load()
+        || (current_layout && guid_ready && guid != host_guid_.load())) {
         if (!publish) {
             return false;
         }
+        clear_lifesteal_locked();
+        host_guid_.store(guid_ready ? guid : 0);
+        owner_thread_.store(GetCurrentThreadId());
         run_address_.store(address);
+        last_game_time_.store(elapsed);
         last_update_ms_.store(0);
         for (std::size_t index = 0; index < field_count(); ++index) {
             auto& field = fields_[index];
@@ -435,6 +624,7 @@ bool trainer_state::process_run(void* run_address, bool publish, speed_update* s
             }
         }
     }
+    owner_thread_.store(GetCurrentThreadId());
     for (std::size_t index = 0; index < field_count(); ++index) {
         auto& control = fields_[index];
         const auto command = control.command_id.load();
@@ -458,7 +648,7 @@ bool trainer_state::process_run(void* run_address, bool publish, speed_update* s
                 control.available.store(false);
             }
         }
-        if (publish) {
+        if (publish && publish_fields) {
             double current = 0;
             const auto read_ok = read_field(run_address, index, current);
             if (read_ok) {
@@ -495,13 +685,16 @@ bool trainer_state::process_member(void* run_address, member_commands& commands,
     if (!read_phase(run_address, phase) || phase < 1 || phase > 3) {
         return false;
     }
+    const auto party_generation = lifesteal_party_generation_.load();
     for (std::size_t index = 0; index < field_count(); ++index) {
         const auto& control = fields_[index];
         if (!control.configured.load() || !control.active_for_run.load()) {
             continue;
         }
         const auto command = control.command_id.load();
-        if (commands.applied_ids[index] == command && !control.frozen.load()) {
+        const bool computed = field_at(index).access == field_access::native_getter;
+        if (commands.applied_ids[index] == command && !control.frozen.load()
+            && (!computed || commands.lifesteal_generation == party_generation)) {
             continue;
         }
         const auto is_speed = field_at(index).offset == game_layout::run_offset(0x4dc);
@@ -516,8 +709,13 @@ bool trainer_state::process_member(void* run_address, member_commands& commands,
         if (is_speed && !read_field(run_address, index, previous)) {
             continue;
         }
-        if (write_field(run_address, index, desired)) {
+        const bool written = computed
+            ? write_lifesteal(run_address, desired, &commands) : write_field(run_address, index, desired);
+        if (written) {
             commands.applied_ids[index] = command;
+            if (computed) {
+                commands.lifesteal_generation = party_generation;
+            }
             if (is_speed && speed_result) {
                 *speed_result = {true, static_cast<float>(previous), static_cast<float>(desired), command};
             }

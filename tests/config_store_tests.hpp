@@ -33,6 +33,13 @@ private:
      */
     static void reject(const std::string& text, const char* description);
 
+    /** @brief Verify schema 3 field correction and canonical schema 4 round trips.
+     * @return None; checks order-independent headers, preserved values/flags, unchanged
+     * canonical buff semantics and atomic rejection of ambiguous or out-of-range inputs.
+     * Parsing never rewrites old source documents or changes the global trainer state.
+     */
+    static void check_schema_migration();
+
     inline static int failures_{};
 };
 

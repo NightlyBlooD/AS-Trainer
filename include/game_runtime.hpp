@@ -11,8 +11,8 @@ class speed_sync_tests;
 
 class game_runtime final {
 public:
-    /** @brief Validate the supported executable and install both owning-thread hooks.
-     * @return True when the exact file hash, live code signatures and hook installation
+    /** @brief Validate the supported executable and install its required native hooks.
+     * @return True when executable identity, complete native/layout proof, live signatures and hook installation
      * succeed; false with a trainer_state diagnostic. Calls are idempotent after success.
      * Initialization must run outside DllMain. Installed hooks and this DLL remain resident.
      */
@@ -29,6 +29,7 @@ private:
 
     using tick_function = void(__fastcall*)(void*, float);
     using recalculate_function = void(__fastcall*)(void*);
+    using lifesteal_function = float(__fastcall*)(void*);
     using speed_packet_function = void*(__fastcall*)(void*, std::uint64_t, std::uint32_t, float);
     using packet_grow_function = void(__fastcall*)(void*);
 
@@ -92,10 +93,25 @@ private:
     /** @brief Apply synchronized trainer commands and maintain speed propagation.
      * @param run_address Candidate current run provided by a verified native hook.
      * @param publish True to publish the final game-thread snapshot and heartbeat.
+     * @param publish_fields False to defer numeric UI snapshots while retaining run
+     * adoption, clock tracking, heartbeat and every pending/frozen scalar write.
      * @return True for a current validated run, including an isolated speed rollback;
      * false when disabled or validation fails and native/data writes are skipped.
      */
-    static bool process_run(void* run_address, bool publish) noexcept;
+    static bool process_run(void* run_address, bool publish, bool publish_fields = true) noexcept;
+
+    /** @brief Accumulate one bounded frame sample and publish mean timings once a second.
+     * @param started_ticks QueryPerformanceCounter timestamp before bridge work.
+     * @param finished_ticks Timestamp after all substeps and bridge work.
+     * @param owner_ticks Sum of intervals spent inside native owner trampolines.
+     * @param steps Actual native owner calls during this frame; zero discards the
+     * partial sampling window after disabled features or an invalid timer reading.
+     * @return None; uses thread-local counters, cached timer frequency and atomic output.
+     * Native intervals include nested hooks. Remaining time includes trainer-side native
+     * helpers; the two wall-time boundaries are not exclusive CPU/GPU profiling results.
+     */
+    static void record_frame_performance(std::int64_t started_ticks, std::int64_t finished_ticks,
+        std::int64_t owner_ticks, std::uint32_t steps) noexcept;
 
     /** @brief Synchronize a friend's speed through the same guarded native packet path.
      * @param run_address Full run temporarily containing the selected participant.
@@ -137,6 +153,16 @@ private:
      */
     static void __fastcall recalculate_hook(void* run_address) noexcept;
 
+    /** @brief Replace the verified current-build lifesteal getter only for an active override.
+     * @param run_address RCX: the exact native run/member context supplied by the game.
+     * @return XMM0 float fraction of dealt damage restored as health; zero disables healing.
+     * Active admitted overrides bypass the original pure summation getter. Otherwise the
+     * original executes exactly once, and only its observed value is offered to the state
+     * bridge. Disabled features always delegate unchanged. No scalar game field is written;
+     * the game's own damage handler retains health clamping and object-field updates.
+     */
+    static float __fastcall lifesteal_hook(void* run_address) noexcept;
+
     /** @brief Publish a precise MinHook installation failure without throwing.
      * @param operation Static name of the failed initialization/install operation.
      * @param status Numeric MH_STATUS value returned by the failed operation.
@@ -148,6 +174,7 @@ private:
     inline static std::atomic<bool> features_enabled_{};
     inline static std::atomic<tick_function> original_tick_{};
     inline static std::atomic<recalculate_function> original_recalculate_{};
+    inline static std::atomic<lifesteal_function> original_lifesteal_{};
     inline static speed_packet_function create_speed_packet_{};
     inline static packet_grow_function grow_packets_{};
     inline static std::uintptr_t module_base_{};

@@ -1,6 +1,7 @@
 #include "ui_strings_tests.hpp"
 #include "ui_strings.hpp"
 #include "trainer_state.hpp"
+#include "game_layout.hpp"
 #include "localization.hpp"
 #include "imgui.h"
 
@@ -172,13 +173,13 @@ std::vector<std::string> ui_strings_tests::format_arguments(const char* text) {
 
 void ui_strings_tests::check_catalog() {
     const auto count = static_cast<std::size_t>(ui_text_id::count);
-    check(count == 102, "all 102 UI entries are included");
+    check(count == 110, "all 110 UI entries are included");
     for (std::size_t index = 0; index < count; ++index) {
         const auto id = static_cast<ui_text_id>(index);
         const char* english = ui_strings::get(id, client_language::english);
         const auto english_arguments = format_arguments(english);
         const char* english_suffix = std::strstr(english, "###");
-        for (std::uint32_t language_index = 0; language_index < 7; ++language_index) {
+        for (std::uint32_t language_index = 0; language_index < static_cast<std::uint32_t>(client_language::count); ++language_index) {
             const char* translated = ui_strings::get(id, static_cast<client_language>(language_index));
             check(translated && translated[0], "every UI translation is nonempty");
             check(valid_utf8(translated), "every UI translation is strict UTF-8");
@@ -200,21 +201,40 @@ void ui_strings_tests::check_catalog() {
 }
 
 void ui_strings_tests::check_fields() {
-    check(trainer_state::field_count() == 25, "all 25 native fields are covered");
-    for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
-        const char* key = trainer_state::field_at(index).key;
-        for (std::uint32_t language_index = 0; language_index < 7; ++language_index) {
-            const auto language = static_cast<client_language>(language_index);
-            const char* name = ui_strings::field_name(key, language);
-            const char* unit = ui_strings::field_unit(key, language);
-            check(name && name[0] && std::strcmp(name, key) != 0 && valid_utf8(name),
-                  "every field name resolves to a valid translation");
-            check(unit && unit[0] && valid_utf8(unit), "every field unit resolves to a valid translation");
+    check(game_layout::current_id() == layout_id::legacy && trainer_state::field_count() == 25,
+          "default legacy layout retains its 25 supported fields");
+    for (const auto layout : {layout_id::legacy, layout_id::current}) {
+        check(game_layout::select(layout), "verified field layout can be selected without hooks");
+        const bool current_layout = layout == layout_id::current;
+        check(trainer_state::field_count() == (current_layout ? 26u : 25u),
+              "only the current executable exposes the verified lifesteal field");
+        bool found_lifesteal = false;
+        for (std::size_t index = 0; index < trainer_state::field_count(); ++index) {
+            const char* key = trainer_state::field_at(index).key;
+            found_lifesteal |= std::strcmp(key, "lifesteal") == 0;
+            for (std::uint32_t language_index = 0; language_index < static_cast<std::uint32_t>(client_language::count); ++language_index) {
+                const auto language = static_cast<client_language>(language_index);
+                const char* name = ui_strings::field_name(key, language);
+                const char* unit = ui_strings::field_unit(key, language);
+                check(name && name[0] && std::strcmp(name, key) != 0 && valid_utf8(name),
+                      "every supported field name resolves to a valid translation");
+                check(unit && unit[0] && valid_utf8(unit),
+                      "every supported field unit resolves to a valid translation");
+            }
         }
+        check(found_lifesteal == current_layout, "legacy has no guessed lifesteal offset or descriptor");
     }
+    check(game_layout::select(layout_id::legacy), "field catalog checks restore the legacy layout");
     const char* unknown = "unknown_field_key";
-    for (std::uint32_t language_index = 0; language_index < 7; ++language_index) {
+    for (std::uint32_t language_index = 0; language_index < static_cast<std::uint32_t>(client_language::count); ++language_index) {
         const auto language = static_cast<client_language>(language_index);
+        check(std::strcmp(ui_strings::field_name("lifesteal", language),
+                          ui_strings::get(ui_text_id::field_lifesteal, language)) == 0,
+              "lifesteal key resolves to the intended localized label");
+        const char* lifesteal_unit = ui_strings::field_unit("lifesteal", language);
+        check(std::strcmp(lifesteal_unit, ui_strings::get(ui_text_id::unit_lifesteal, language)) == 0
+                  && std::strstr(lifesteal_unit, "0.25") && std::strstr(lifesteal_unit, "0–10"),
+              "lifesteal units explain damage healing fractions and the editor range in every language");
         check(ui_strings::field_name(unknown, language) == unknown,
               "unknown names retain the stable key without metadata fallback");
         check(!ui_strings::field_unit(unknown, language)[0], "unknown units are empty");
@@ -264,7 +284,7 @@ void ui_strings_tests::check_fonts() {
     ImFontGlyphRangesBuilder builder;
     builder.AddRanges(io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
     for (std::size_t index = 0; index < static_cast<std::size_t>(ui_text_id::count); ++index) {
-        for (std::uint32_t language_index = 0; language_index < 7; ++language_index) {
+        for (std::uint32_t language_index = 0; language_index < static_cast<std::uint32_t>(client_language::count); ++language_index) {
             builder.AddText(ui_strings::get(static_cast<ui_text_id>(index),
                                             static_cast<client_language>(language_index)));
         }
@@ -292,7 +312,7 @@ void ui_strings_tests::check_fonts() {
         return;
     }
     for (std::size_t index = 0; index < static_cast<std::size_t>(ui_text_id::count); ++index) {
-        for (std::uint32_t language_index = 0; language_index < 7; ++language_index) {
+        for (std::uint32_t language_index = 0; language_index < static_cast<std::uint32_t>(client_language::count); ++language_index) {
             check_glyphs(ui_strings::get(static_cast<ui_text_id>(index),
                                          static_cast<client_language>(language_index)), "UI");
         }

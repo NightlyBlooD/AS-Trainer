@@ -12,6 +12,7 @@
 namespace azs {
 
 enum class value_kind { real, unsigned_integer, boolean };
+enum class field_access { scalar, native_getter };
 
 struct field_descriptor {
     const char* name;
@@ -22,6 +23,7 @@ struct field_descriptor {
     double maximum;
     double step;
     const char* key;
+    field_access access{field_access::scalar};
 };
 
 struct field_snapshot {
@@ -66,6 +68,18 @@ struct runtime_snapshot {
     bool party_host{};
     std::uint32_t party_members{};
     std::uint64_t party_writes{};
+    /** @brief Mean milliseconds per intercepted frame inside native owner calls,
+     * including any hooks/helpers nested in those calls; zero until a fresh sample exists.
+     */
+    double owner_chain_ms{};
+    /** @brief Mean milliseconds per intercepted frame outside native owner calls,
+     * including trainer work and its native helpers; not an exclusive CPU profile.
+     */
+    double bridge_ms{};
+    /** @brief Mean number of actual native owner calls per intercepted frame,
+     * measured over the latest one-second sample; zero for unavailable/stale samples.
+     */
+    double simulation_steps{};
 };
 
 struct speed_update {
@@ -78,6 +92,7 @@ struct speed_update {
 struct member_commands {
     std::array<std::uint64_t, 64> applied_ids{};
     std::uint64_t rejected_speed_command{};
+    std::uint64_t lifesteal_generation{};
 };
 
 class trainer_state final {
@@ -94,7 +109,10 @@ public:
 
     /** @brief Describe a field without dereferencing any game memory.
      * @param index Field index smaller than field_count().
-     * @return Immutable name, units, storage kind, offset and accepted value bounds.
+     * @return Name, units, storage kind, resolved offset and accepted value bounds.
+     * The returned reference belongs to this thread and remains valid until that thread
+     * observes a new quiescent layout publication. Descriptor tables refresh once per
+     * generation without allocating or searching offset maps on the gameplay hot path.
      */
     static const field_descriptor& field_at(std::size_t index) noexcept;
 
@@ -165,6 +183,17 @@ public:
      */
     void set_party_status(bool hosting, std::uint32_t member_count, std::uint64_t writes) noexcept;
 
+    /** @brief Publish one bounded aggregate of game-thread frame timing measurements.
+     * @param owner_chain_ms Mean elapsed milliseconds inside native owner trampolines.
+     * @param bridge_ms Mean elapsed milliseconds outside those calls, including helpers.
+     * @param simulation_steps Mean actual native owner calls per intercepted frame.
+     * @return None; copies finite nonnegative samples with atomic stores and no locks.
+     * Nested hooks belong to owner_chain_ms. These boundary timings do not measure GPU
+     * time or exclusive CPU costs; snapshots expire after three seconds without updates.
+     */
+    void set_frame_performance(double owner_chain_ms, double bridge_ms,
+        double simulation_steps) noexcept;
+
     /** @brief Store a human-readable diagnostic without exposing game data to the UI.
      * @param message UTF-8 diagnostic describing initialization or validation status.
      * @return None; messages are copied under an internal lock.
@@ -186,9 +215,13 @@ public:
      * @param run_address Candidate run pointer supplied by a verified hook.
      * @param publish True to refresh the UI snapshot and heartbeat after applying.
      * @param speed_result Optional output describing an actual speed write this pass.
+     * @param publish_fields False to keep lifecycle/heartbeat publication while deferring
+     * field-value reads and UI stores until the final accelerated substep; ignored when
+     * publish is false. Memory/phase/clock validation and pending/frozen writes still run.
      * @return True for a validated live run, false without writing invalid memory.
      */
-    bool process_run(void* run_address, bool publish, speed_update* speed_result = nullptr) noexcept;
+    bool process_run(void* run_address, bool publish, speed_update* speed_result = nullptr,
+        bool publish_fields = true) noexcept;
 
     /** @brief Roll back one rejected speed write and release only its matching command.
      * @param run_address The same game-owned object that received the speed write.
@@ -202,6 +235,8 @@ public:
      * @param commands Per-member, per-run acknowledgements owned and keyed by the runtime.
      * Only successful writes consume that member's command generation; the caller resets
      * these acknowledgements when its member identity or run epoch changes.
+     * Computed commands also acknowledge the current party-enable generation so a
+     * rapid off/on toggle rearms them even when no native update observed the off state.
      * @param speed_result Optional output describing a speed write requiring native sync.
      * @return True for an enabled bridge and valid member in phase 1, 2 or 3; false
      * without consuming commands when memory, identity or phase validation fails.
@@ -221,6 +256,30 @@ public:
      */
     bool reject_member_speed_update(void* run_address, const speed_update& update) noexcept;
 
+    /** @brief Resolve a latched lifesteal override for the admitted native owner context.
+     * @param run_address Exact current run supplied by the verified native getter.
+     * @param value Output fraction of dealt damage to heal, changed only on success.
+     * @return True for an active host latch or an enabled party member's matching GUID;
+     * false for another thread/run/epoch/player, unsupported layout or inactive latch.
+     * Uses bounded atomic reads and guarded identity reads without locks or allocation.
+     */
+    bool try_lifesteal_override(void* run_address, float& value) noexcept;
+
+    /** @brief Cache one genuine native lifesteal result for later host UI publication.
+     * @param run_address Exact admitted owner run still containing its host player.
+     * @param native_value Finite fraction returned by the original native getter.
+     * @return None; member observations and foreign contexts never replace the host cache.
+     * Numeric UI snapshots consume this cache only during ordinary final-step publication.
+     */
+    void observe_lifesteal(void* run_address, float native_value) noexcept;
+
+    /** @brief Release the matching player's computed latch before native stat rebuilding.
+     * @param run_address Admitted run currently containing the host or a known party member.
+     * @return None; a subsequent owner update reapplies frozen commands, while acknowledged
+     * one-shot values remain released. Does not acquire the controls mutex or call native code.
+     */
+    void invalidate_lifesteal(void* run_address) noexcept;
+
 private:
     struct field_control {
         std::atomic<double> current_value{};
@@ -233,6 +292,41 @@ private:
         std::atomic<bool> apply_on_start{};
         std::atomic<bool> active_for_run{};
     };
+
+    struct lifesteal_member {
+        std::atomic<std::uint64_t> guid{};
+        std::atomic<float> value{};
+        std::atomic<bool> active{};
+        std::uintptr_t command_owner{};
+    };
+
+    /** @brief Check the exact admitted run, thread, phase, GUID and nonreversed run clock.
+     * @param run_address Candidate getter/command context.
+     * @param guid Output current host-or-member GUID on success.
+     * @return True for a current-layout owner context; false without exposing invalid memory.
+     * Guarded fixed-field reads replace page queries on this frequently called native path.
+     */
+    bool lifesteal_context(void* run_address, std::uint64_t& guid) const noexcept;
+
+    /** @brief Activate one computed command without writing a fictitious run-data offset.
+     * @param run_address Validated owner context containing the target player.
+     * @param value Previously validated lifesteal fraction in the trainer's 0–10 range.
+     * @param commands Null for the host, or the owning member's acknowledgement record.
+     * @return True when the host latch or a bounded member slot is published; false when
+     * ownership/party admission fails or all slots belong to other command records.
+     * Called with controls_mutex_ held; no native getter is called under that mutex.
+     */
+    bool write_lifesteal(void* run_address, double value, const member_commands* commands) noexcept;
+
+    /** @brief Release every bounded party latch while the controls mutex is held.
+     * @return None; clears GUIDs and command-record ownership as well as active values.
+     */
+    void clear_lifesteal_members_locked() noexcept;
+
+    /** @brief Clear host observations and every computed latch under the controls mutex.
+     * @return None; used on reset, preset replacement and authoritative run adoption.
+     */
+    void clear_lifesteal_locked() noexcept;
 
     /** @brief Validate one requested number before it can reach game memory.
      * @param index Descriptor index; @param value Proposed finite number.
@@ -252,19 +346,19 @@ private:
      */
     static bool valid_run(void* run_address) noexcept;
 
-    /** @brief Read a verified scalar while containing an unexpected access exception.
+    /** @brief Read a verified scalar or the host's cached computed getter result.
      * @param run_address Validated run base; @param index Descriptor index.
      * @param value Output decoded value, unchanged on failure.
      * @return True on a finite readable scalar; false on invalid access/value.
      */
-    static bool read_field(void* run_address, std::size_t index, double& value) noexcept;
+    bool read_field(void* run_address, std::size_t index, double& value) noexcept;
 
-    /** @brief Write only the descriptor's numeric data bytes, never executable pages.
+    /** @brief Write scalar data bytes or activate a computed host command without a data write.
      * @param run_address Validated run base; @param index Descriptor index.
      * @param value Previously validated desired value.
      * @return True on success; false if memory access fails.
      */
-    static bool write_field(void* run_address, std::size_t index, double value) noexcept;
+    bool write_field(void* run_address, std::size_t index, double value) noexcept;
 
     /** @brief Read the level without allowing access exceptions to escape the bridge.
      * @param run_address Validated game-owned run; @param level Output current level.
@@ -284,6 +378,12 @@ private:
      */
     static bool read_phase(void* run_address, std::uint8_t& phase) noexcept;
 
+    /** @brief Read the current player's verified GUID without page queries or allocation.
+     * @param run_address Owner-provided run context; @param guid Output player identity.
+     * @return True after a guarded read, false on an unexpected access failure.
+     */
+    static bool read_guid(void* run_address, std::uint64_t& guid) noexcept;
+
     /** @brief Cancel commands while the caller already owns controls_mutex_.
      * @return None; never acquires the mutex recursively.
      */
@@ -296,9 +396,22 @@ private:
     std::atomic<std::uint32_t> level_{};
     std::atomic<std::uint64_t> last_update_ms_{};
     std::atomic<float> last_game_time_{};
+    std::atomic<std::uint64_t> host_guid_{};
+    std::atomic<std::uint32_t> owner_thread_{};
+    std::atomic<float> lifesteal_value_{};
+    std::atomic<bool> lifesteal_active_{};
+    std::atomic<float> observed_lifesteal_{};
+    std::atomic<bool> observed_lifesteal_ready_{};
+    std::atomic<bool> lifesteal_party_enabled_{};
+    std::atomic<std::uint64_t> lifesteal_party_generation_{};
+    std::array<lifesteal_member, 8> lifesteal_members_{};
     std::atomic<bool> party_host_{};
     std::atomic<std::uint32_t> party_members_{};
     std::atomic<std::uint64_t> party_writes_{};
+    std::atomic<double> owner_chain_ms_{};
+    std::atomic<double> bridge_ms_{};
+    std::atomic<double> simulation_steps_{};
+    std::atomic<std::uint64_t> performance_update_ms_{};
     std::atomic<std::shared_ptr<const automation_settings>> automation_{
         std::make_shared<const automation_settings>()};
 };
