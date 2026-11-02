@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.1
+# AS-Trainer 1.1.2
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,7 +6,7 @@ Un trainer C++20 / Dear ImGui para Azeroth Survivors en Windows x64. Permite mod
 
 ## Descargar e iniciar
 
-Descarga **`AS-Trainer-1.1.1-windows-x64.zip`** desde [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extrae todo el archivo. Mantén juntos `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, la documentación y las licencias. La DLL, el cargador y `SHA256SUMS.txt` también se ofrecen por separado.
+Descarga **`AS-Trainer-1.1.2-windows-x64.zip`** desde [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extrae todo el archivo. Mantén juntos `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, la documentación y las licencias. La DLL, el cargador y `SHA256SUMS.txt` también se ofrecen por separado.
 
 1. Inicia la versión compatible del juego en modo ventana o sin bordes.
 2. Ejecuta `load_overlay.cmd` o `load_overlay.exe` con los mismos permisos que el juego.
@@ -21,12 +21,13 @@ Versiones compatibles de `AzerothSurvivors.exe` y su SHA-256:
 
 | Versión del juego | SHA-256 |
 |---|---|
+| `v0.139.0 (f79c5e2b4)` | `0e8e314df4d78ab211b1bef5c48d78d713ed64260894af342f998d298d74d274` |
 | `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
 
-Se conservan los perfiles de v0.131.0 y v0.132.0. Al iniciar, el catálogo adaptativo comprueba una vez 92 reglas: destinos nativos únicos, todos los desplazamientos de campos necesarios, el tamaño del registro de cada participante y pruebas explícitas de ABI. Un hash desconocido puede admitirse si supera la comprobación completa. Antes de instalar los hooks también se verifican los bytes del código cargado. Las firmas ausentes o ambiguas y las ABI incompatibles se rechazan; no se garantiza compatibilidad con todas las versiones futuras. El EXE en disco no se modifica.
+Las compilaciones conocidas conservan sus perfiles. Para otros hashes se realiza una búsqueda adaptativa una vez al iniciar: todas las firmas de funciones necesarias, los desplazamientos individuales de campos de partida y participantes, el tamaño de cada registro de participante y las convenciones de llamada deben coincidir con un certificado de familia integrado completo. Las familias de compilador v0.139.0 y v0.135/0.136 se comprueban por separado; las coincidencias parciales no se combinan. Antes de instalar los hooks, la DLL verifica la imagen cargada y los bytes exactos de su código. La falta de datos o las coincidencias ambiguas impiden la inicialización. Los cambios compatibles de direcciones y disposición pueden detectarse automáticamente; otros cambios de compilador o de lógica del juego pueden requerir un catálogo nuevo. El EXE en disco no se modifica.
 
 La interfaz y los diagnósticos siguen el `language.txt` del cliente, normalmente `%APPDATA%\wenilla-rogue\language.txt`. Admite los 14 idiomas del cliente: inglés (`en`), ruso (`ru`), alemán (`de`), francés (`fr`), español (`es`), ucraniano (`uk`), chino simplificado (`zh`), polaco (`pl`), checo (`cs`), portugués de Brasil (`pt`), rumano (`ro`), turco (`tr`), japonés (`ja`) y coreano (`ko`). Los valores desconocidos usan inglés. Los cambios de idioma se actualizan en un segundo sin reiniciar el trainer. La fuente incluida también cubre las traducciones japonesas y coreanas.
 

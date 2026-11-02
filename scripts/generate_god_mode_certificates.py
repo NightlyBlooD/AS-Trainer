@@ -711,6 +711,241 @@ class certificate_generator:
   }
 }''')
 
+    # v0.139.0 audit: NPC stride is 0x208; HP/GUID/source fields and God-input gates remain unchanged.
+    lea_roles["v139"] = json.loads(r'''{
+  "damage": {
+    "1468": {
+      "kind": "inactive_skill",
+      "width": 0,
+      "reason": "Before cap continuation, the entire lookup is skipped when spell_id==0; dispatcher variants are never entered in God TLS scope.",
+      "gate": "spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section."
+    },
+    "3146": {
+      "kind": "inactive_skill",
+      "width": 0,
+      "reason": "Before cap continuation, the entire lookup is skipped when spell_id==0; dispatcher variants are never entered in God TLS scope.",
+      "gate": "spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section."
+    },
+    "8311": {
+      "kind": "rip_data",
+      "width": 8,
+      "reason": "Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats)."
+    },
+    "12210": {
+      "kind": "literal",
+      "width": 2,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12231": {
+      "kind": "serializer_literal",
+      "width": 4,
+      "reason": "Serializer type key has explicit native length4."
+    },
+    "12275": {
+      "kind": "literal",
+      "width": 2,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12315": {
+      "kind": "literal",
+      "width": 4,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12336": {
+      "kind": "literal",
+      "width": 4,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12383": {
+      "kind": "literal",
+      "width": 1,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12429": {
+      "kind": "literal",
+      "width": 1,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12476": {
+      "kind": "literal",
+      "width": 1,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12525": {
+      "kind": "literal",
+      "width": 1,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12565": {
+      "kind": "literal",
+      "width": 6,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12586": {
+      "kind": "literal",
+      "width": 5,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12634": {
+      "kind": "literal",
+      "width": 1,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12681": {
+      "kind": "literal",
+      "width": 2,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12728": {
+      "kind": "literal",
+      "width": 2,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12775": {
+      "kind": "literal",
+      "width": 1,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "12958": {
+      "kind": "rust_stat_descriptor",
+      "width": 88,
+      "reason": "Five &str views followed by the immutable stat-kind qword; native heal/reward telemetry can use this on God damage."
+    },
+    "13303": {
+      "kind": "rip_data",
+      "width": 8,
+      "reason": "Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats)."
+    },
+    "13344": {
+      "kind": "literal",
+      "width": 94,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "13924": {
+      "kind": "literal",
+      "width": 13,
+      "reason": "Literal is paired with an exact immediate length in the audited native body."
+    },
+    "14310": {
+      "kind": "rust_location",
+      "width": 24,
+      "reason": "Rust panic Location is &path,len,line32,column32; pointer relocation must be verified separately."
+    },
+    "15404": {
+      "kind": "rip_jump_table",
+      "width": 16,
+      "reason": "All signed table entries resolve to the same audited owning function offsets."
+    },
+    "17002": {
+      "kind": "rip_address",
+      "width": 28,
+      "reason": "Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats).",
+      "gate": "spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section."
+    },
+    "18063": {
+      "kind": "rip_address",
+      "width": 28,
+      "reason": "Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats).",
+      "gate": "spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section."
+    },
+    "20013": {
+      "kind": "rip_address",
+      "width": 28,
+      "reason": "Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats).",
+      "gate": "spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section."
+    },
+    "22630": {
+      "kind": "code",
+      "width": 0,
+      "reason": "Formatting callback for no-ability panic branch; no normal spell_id==0 lookup reaches it."
+    },
+    "22644": {
+      "kind": "diagnostic_literal",
+      "width": 16,
+      "reason": "Panic text formatting header and no-ability literal; tail only."
+    },
+    "22651": {
+      "kind": "rust_location",
+      "width": 24,
+      "reason": "Rust panic Location is &path,len,line32,column32; pointer relocation must be verified separately."
+    }
+  },
+  "dispatcher": {
+    "813": {
+      "kind": "rip_jump_table",
+      "width": 172,
+      "reason": "All signed table entries resolve to the same audited owning function offsets.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "2282": {
+      "kind": "rip_jump_table",
+      "width": 28,
+      "reason": "All signed table entries resolve to the same audited owning function offsets.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "2611": {
+      "kind": "rip_jump_table",
+      "width": 20,
+      "reason": "All signed table entries resolve to the same audited owning function offsets.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "6364": {
+      "kind": "literal",
+      "width": 10,
+      "reason": "Literal is paired with an exact immediate length in the audited native body.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "6556": {
+      "kind": "rip_jump_table",
+      "width": 28,
+      "reason": "All signed table entries resolve to the same audited owning function offsets.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "6663": {
+      "kind": "rip_jump_table",
+      "width": 28,
+      "reason": "All signed table entries resolve to the same audited owning function offsets.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "7896": {
+      "kind": "rip_jump_table",
+      "width": 28,
+      "reason": "All signed table entries resolve to the same audited owning function offsets.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "8858": {
+      "kind": "rust_stat_descriptor",
+      "width": 88,
+      "reason": "Five &str views followed by the immutable stat-kind qword; native heal/reward telemetry can use this on God damage.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "8883": {
+      "kind": "rust_stat_descriptor",
+      "width": 88,
+      "reason": "Five &str views followed by the immutable stat-kind qword; native heal/reward telemetry can use this on God damage.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "11742": {
+      "kind": "rust_stat_descriptor",
+      "width": 88,
+      "reason": "Five &str views followed by the immutable stat-kind qword; native heal/reward telemetry can use this on God damage.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "11767": {
+      "kind": "rust_stat_descriptor",
+      "width": 88,
+      "reason": "Five &str views followed by the immutable stat-kind qword; native heal/reward telemetry can use this on God damage.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    },
+    "13973": {
+      "kind": "rust_location",
+      "width": 24,
+      "reason": "Rust panic Location is &path,len,line32,column32; pointer relocation must be verified separately.",
+      "gate": "Entire native dispatcher returns immediately while current-thread God TLS scope is active."
+    }
+  }
+}''')
+
     def __init__(self, path):
         """@brief Load one audited AMD64 PE without executing or modifying it.
         @param path Existing sample executable. @return Initialized read-only generator.
@@ -928,7 +1163,7 @@ class certificate_generator:
         @param reference Decoded LEA metadata. @param function_name Damage/dispatcher/helper role.
         @param function_rva Certified containing entry. @return None; rejects unclassified dependencies.
         """
-        roles = self.lea_roles.get("v135" if self.family_name == "modern" else "v132", {})
+        roles = self.lea_roles.get("v135" if self.family_name == "modern" else self.family_name, {})
         role = roles.get(function_name, {}).get(str(reference["operand_offset"]))
         if role is None:
             raise ValueError(f"unclassified {function_name} LEA {reference['operand_offset']} in {function_rva:x}")
@@ -1003,18 +1238,22 @@ class certificate_generator:
 
     @staticmethod
     def main():
-        """@brief Generate two independently audited machine-code-family certificates.
+        """@brief Generate the supplied independently audited machine-code-family certificates.
         @return None; writes the requested checked-in header, without changing any executable.
         """
         parser = argparse.ArgumentParser(description=__doc__)
         parser.add_argument("--v132", type=Path, required=True)
         parser.add_argument("--v135", type=Path, required=True)
+        parser.add_argument("--v139", type=Path, help="Independently audited v0.139.0 executable")
         parser.add_argument("--output", type=Path, required=True)
         arguments = parser.parse_args()
         profiles = [
             ("v132", arguments.v132, 0x5ce6440, 0x5d2c0e0, 0x5cdbd50, 0x5b8, 0x1f8, 0x1b6, 0xec3, 0x388),
             ("modern", arguments.v135, 0x5cdfeb0, 0x5d23360, 0x5cd6600, 0x640, 0x200, 0x236, 0xf4b, 0x408),
         ]
+        if arguments.v139 is not None:
+            profiles.append(("v139", arguments.v139, 0x5ee6190, 0x5f2dab0, 0x5edbaa0,
+                             0x640, 0x208, 0x236, 0xf4b, 0x408))
         output = ["// Generated by scripts/generate_god_mode_certificates.py from independently audited samples.",
                   "// Included only inside god_mode_bindings::resolve_file; not an executable-hash allowlist.",
                   "// Whole-function fingerprints preserve layout, ABI, immediates and internal control flow."]

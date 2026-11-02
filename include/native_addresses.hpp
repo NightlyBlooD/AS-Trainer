@@ -62,13 +62,14 @@ public:
     static bool resolve_file(const pattern_scanner& scanner, const signature_profile& profile,
         candidate& result, std::string& error) noexcept;
 
-    /** @brief Select the embedded exact-build or adaptive catalog and produce its offline proof.
+    /** @brief Select a complete embedded exact-build or adaptive-family offline certificate.
      * @param scanner Validated immutable offline PE image.
      * @param result Complete candidate, unchanged after any failure.
      * @param error Output failure reason or an empty string after success.
      * @return True for the exact legacy/current builds or one fully certified adaptive binding.
      * Hashes identify files and preserve existing exact-build behavior; an unknown hash can pass
-     * only the embedded adaptive catalog's complete layout/ABI proof. External profiles do not
+     * only one embedded family's complete layout/ABI proof. Failed families never contribute
+     * partial symbols or offsets to another family. External profiles do not
      * become runtime admission authorities through this automatic path.
      */
     static bool resolve_auto(const pattern_scanner& scanner, candidate& result,

@@ -53,10 +53,11 @@ private:
     }
 
     /** @brief Prepare a supported native profile and four enemies in an owned solo run.
-     * @param modern True for v0.135.1 enemy records, false for v0.132.0 records.
+     * @param modern True for modern enemy records, false for v0.132.0 records.
+     * @param modern_stride Audited modern NPC width: 0x200 before v0.139.0, 0x208 in v0.139.0.
      * @return None; resets counters, source context, native fault/relocation injection and gates.
      */
-    static void prepare(bool modern = true);
+    static void prepare(bool modern = true, std::size_t modern_stride = 0x200);
 
     /** @brief Emulate native mitigation, special-enemy cap, character credit and death state.
      * @param run_address Owned admitted run; @param guid Target enemy identity.
@@ -82,7 +83,7 @@ private:
     static void test_gates();
 
     /** @brief Verify complete-container lethal damage, exact credit and one-shot dead skipping.
-     * @return None; repeats the contract against both independently supported native profiles.
+     * @return None; repeats the contract against all three independently supported NPC widths.
      */
     static void test_damage();
 

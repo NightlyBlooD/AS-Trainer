@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.1
+# AS-Trainer 1.1.2
 
 [English](README.md) · [Русский](docs/README.ru.md) · [Deutsch](docs/README.de.md) · [Français](docs/README.fr.md) · [Español](docs/README.es.md) · [Українська](docs/README.uk.md) · [简体中文](docs/README.zh-CN.md)
 
@@ -6,7 +6,7 @@ A C++20 / Dear ImGui trainer for Azeroth Survivors on Windows x64. Edit 26 chara
 
 ## Download and launch
 
-Download **`AS-Trainer-1.1.1-windows-x64.zip`** from [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extract the entire archive: keep `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, documentation and license notices together. The release also provides the DLL, loader and `SHA256SUMS.txt` separately.
+Download **`AS-Trainer-1.1.2-windows-x64.zip`** from [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases). Extract the entire archive: keep `azs_overlay.dll`, `load_overlay.exe`, `load_overlay.cmd`, `signature_scan.exe`, `configs`, `signatures`, `fonts`, documentation and license notices together. The release also provides the DLL, loader and `SHA256SUMS.txt` separately.
 
 1. Start the supported game in windowed or borderless mode.
 2. Run `load_overlay.cmd` or `load_overlay.exe` with the same privileges as the game.
@@ -21,12 +21,13 @@ Supported executables and their SHA-256 identities:
 
 | Game version | SHA-256 |
 |---|---|
+| `v0.139.0 (f79c5e2b4)` | `0e8e314df4d78ab211b1bef5c48d78d713ed64260894af342f998d298d74d274` |
 | `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
 
-Known builds retain their profiles. Other hashes use a one-time adaptive scan: all required function signatures, individual run/member offsets, participant stride and calling conventions must pass a complete embedded certificate. The DLL then checks the loaded image and its exact code bytes before installing hooks. Missing or ambiguous evidence refuses initialization. Compatible address/layout changes can be discovered automatically; arbitrary compiler or game-logic changes may still require a new catalog. The EXE on disk is unchanged.
+Known builds retain their profiles. Other hashes use a one-time adaptive scan: all required function signatures, individual run/member offsets, participant stride and calling conventions must pass one complete embedded family certificate. The v0.139.0 and v0.135/0.136 compiler families are checked independently; partial matches are never combined. The DLL then checks the loaded image and its exact code bytes before installing hooks. Missing or ambiguous evidence refuses initialization. Compatible address/layout changes can be discovered automatically; arbitrary compiler or game-logic changes may still require a new catalog. The EXE on disk is unchanged.
 
 The interface and diagnostics follow the client's `language.txt`, normally `%APPDATA%\wenilla-rogue\language.txt`. All 14 client languages are supported: English (`en`), Russian (`ru`), German (`de`), French (`fr`), Spanish (`es`), Ukrainian (`uk`), Simplified Chinese (`zh`), Polish (`pl`), Czech (`cs`), Brazilian Portuguese (`pt`), Romanian (`ro`), Turkish (`tr`), Japanese (`ja`) and Korean (`ko`). Unknown values fall back to English. Language changes refresh within one second while the panel is running, without restarting the trainer. The bundled font covers the translated interface and diagnostics, including Japanese and Korean.
 
@@ -72,7 +73,7 @@ Party scope, spell/jewelry auto-choice, God mode, legendary loot, delay and game
 
 **God mode** deals lethal damage equal to each enemy's remaining health when it appears, at any distance, without casting spells. Damage is credited to your character. The mode works only in single player and is blocked in network games, including locally hosted rooms. It can be enabled before starting a run and is saved in presets as `god_mode`.
 
-God mode discovers its native damage and spell-event functions once at startup using certified signatures. It accepts new executable hashes and relocated addresses when the complete normalized functions, linked helpers, constants and core layout still match the verified contracts. The current contracts cover v0.132.0, v0.135.1 and v0.136.0. Changes to enemy layout, calling conventions or damage logic require a new compatibility proof; an incomplete proof disables only God mode.
+God mode discovers its native damage and spell-event functions once at startup using certified signatures. It accepts new executable hashes and relocated addresses when the complete normalized functions, linked helpers, constants and core layout still match the verified contracts. The current contracts cover v0.132.0, v0.135.1, v0.136.0 and v0.139.0. Changes to enemy layout, calling conventions or damage logic require a new compatibility proof; an incomplete proof disables only God mode.
 
 The final-boss option awards the **current class's** legendary armor/weapon set from the Ahn'Qiraj/Naxxramas table after the final boss of **any zone**: 9 items for most classes, 10 for Rogue and Shaman. Items enter the equipment collection through the normal loot handler. This is separate from run jewelry and spell rarity.
 

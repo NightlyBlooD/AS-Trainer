@@ -12,10 +12,13 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 configure_file(include/build_version.hpp.in generated/build_version.hpp @ONLY)
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-0.132.0.ini" AS_SIGNATURE_PROFILE)
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive.ini" AS_ADAPTIVE_SIGNATURE_PROFILE)
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive-135.ini" AS_PREVIOUS_ADAPTIVE_SIGNATURE_PROFILE)
 string(REPLACE "\n" "\n)as_profile\"\nR\"as_profile(" AS_ADAPTIVE_SIGNATURE_PROFILE "${AS_ADAPTIVE_SIGNATURE_PROFILE}")
+string(REPLACE "\n" "\n)as_profile\"\nR\"as_profile(" AS_PREVIOUS_ADAPTIVE_SIGNATURE_PROFILE "${AS_PREVIOUS_ADAPTIVE_SIGNATURE_PROFILE}")
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-0.132.0.ini"
-    "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive.ini")
+    "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive.ini"
+    "${CMAKE_CURRENT_SOURCE_DIR}/signatures/azeroth-survivors-adaptive-135.ini")
 configure_file(include/embedded_signatures.hpp.in generated/embedded_signatures.hpp @ONLY)
 
 if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/imgui.cpp" OR

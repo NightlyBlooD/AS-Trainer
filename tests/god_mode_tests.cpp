@@ -27,7 +27,7 @@ void god_mode_tests::check(bool condition, const char* description) {
     }
 }
 
-void god_mode_tests::prepare(bool modern) {
+void god_mode_tests::prepare(bool modern, std::size_t modern_stride) {
     if (old_buffer_protected_) {
         DWORD previous{};
         VirtualProtect(enemies_, 0x4000, PAGE_READWRITE, &previous);
@@ -37,7 +37,7 @@ void god_mode_tests::prepare(bool modern) {
     std::memset(enemies_, 0, 0x4000);
     std::memset(relocated_, 0, 0x4000);
     game_layout::select(layout_id::current);
-    god_mode::profile_ = modern ? god_mode::native_profile{0x640, 0x200, 0x236}
+    god_mode::profile_ = modern ? god_mode::native_profile{0x640, modern_stride, 0x236}
         : god_mode::native_profile{0x5b8, 0x1f8, 0x1b6};
     god_mode::damage_ = native_damage;
     const auto offset = god_mode::profile_.enemies_offset;
@@ -157,8 +157,8 @@ void god_mode_tests::test_damage() {
     finish_run_ = true;
     check(god_mode::process_run(run_) && call_count_ == 1 && credited_damage_ == 120,
         "a native victory transition stops further damage without reporting a feature failure");
-    for (const bool modern : {true, false}) {
-        prepare(modern);
+    for (const std::size_t stride : {0x1f8u, 0x200u, 0x208u}) {
+        prepare(stride != 0x1f8, stride);
         check(god_mode::process_run(run_) && call_count_ == 2 && credited_damage_ == 520,
             "all distant living enemies die and exactly their original HP is credited");
         check(read_value<float>(enemies_ + god_mode::profile_.enemy_stride, 0x17c) == 400,
@@ -184,7 +184,7 @@ void god_mode_tests::test_damage() {
 }
 
 void god_mode_tests::test_restoration() {
-    prepare();
+    prepare(true, 0x208);
     relocate_ = true;
     check(god_mode::process_run(run_) && call_count_ == 2 && credited_damage_ == 520,
         "native Vec relocation is revalidated before further enemy access");
@@ -196,13 +196,13 @@ void god_mode_tests::test_restoration() {
         read_value<std::size_t>(run_, game_layout::run_offset(0x380)) == 7 &&
         !god_mode_events::set_active(false),
         "all native source context bytes and dispatcher scope are restored after success");
-    prepare();
+    prepare(true, 0x208);
     write_value<std::uint32_t>(enemies_, 0xb0, 1);
     relocate_ = true;
     check(god_mode::process_run(run_) && call_count_ == 1 && credited_damage_ == 400 &&
         read_value<float>(relocated_ + god_mode::profile_.enemy_stride, 0x17c) == 400,
         "a capped target relocated during its own damage call restores maximum HP through its GUID");
-    prepare();
+    prepare(true, 0x208);
     write_value<std::uint32_t>(enemies_, 0xb0, 1);
     throw_native_ = true;
     check(!god_mode::process_run(run_) && call_count_ == 1,

@@ -1,4 +1,4 @@
-# AS-Trainer 1.1.1
+# AS-Trainer 1.1.2
 
 [English](../README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Українська](README.uk.md) · [简体中文](README.zh-CN.md)
 
@@ -6,7 +6,7 @@
 
 ## 下载与启动
 
-从 [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) 下载 **`AS-Trainer-1.1.1-windows-x64.zip`**。请完整解压，保留同目录下的 `azs_overlay.dll`、`load_overlay.exe`、`load_overlay.cmd`、`signature_scan.exe`、`configs`、`signatures`、`fonts`、文档和许可证。发布页面也单独提供 DLL、加载器和 `SHA256SUMS.txt`。
+从 [GitHub Releases](https://github.com/NightlyBlooD/AS-Trainer/releases) 下载 **`AS-Trainer-1.1.2-windows-x64.zip`**。请完整解压，保留同目录下的 `azs_overlay.dll`、`load_overlay.exe`、`load_overlay.cmd`、`signature_scan.exe`、`configs`、`signatures`、`fonts`、文档和许可证。发布页面也单独提供 DLL、加载器和 `SHA256SUMS.txt`。
 
 1. 以窗口或无边框窗口模式启动受支持的游戏版本。
 2. 以与游戏相同的权限运行 `load_overlay.cmd` 或 `load_overlay.exe`。
@@ -21,12 +21,13 @@
 
 | 游戏版本 | SHA-256 |
 |---|---|
+| `v0.139.0 (f79c5e2b4)` | `0e8e314df4d78ab211b1bef5c48d78d713ed64260894af342f998d298d74d274` |
 | `v0.136.0` | `eb744751b4e17ec1397b0cdc85a22af63b6af63c1da1d9c2861762c3c4d8947c` |
 | `v0.135.1 (90898d5e3)` | `71e5f1767279db4bd428d1cd9c5d50d37759b72295386a69f9e3f6e70bc59249` |
 | `v0.132.0 (04e2a2d1c)` | `e60b03aae379c9c3c4c728bba1b3dbaeac161007e34a8c09fc61c061f9cceb9c` |
 | `v0.131.0 (e7d9dd47)` | `5dd6819d836748ccf809ab76fe6509c9ee793e087939b5d036c430d835a14e63` |
 
-保留 v0.131.0 和 v0.132.0 的兼容配置。启动时，自适应目录一次性检查 92 条规则，确认唯一的原生地址、全部必要字段偏移、队员记录大小和明确的 ABI 证据。未知哈希只有通过完整验证才可获准；安装钩子前还会检查已加载的代码字节。缺失或歧义签名、ABI 不兼容均会在安装钩子前被拒绝，不保证支持所有未来版本。磁盘上的 EXE 不会改变。
+已知构建保留各自的兼容配置。对于其他哈希，启动时会执行一次自适应扫描：所有必要的函数签名、游戏局与队员的独立字段偏移、队员记录大小和调用约定都必须符合一个完整的内置系列证书。v0.139.0 与 v0.135/0.136 编译器系列分别检查，不会组合不同系列的部分匹配。安装钩子前，DLL 还会检查已加载的映像及其精确代码字节。缺失或存在歧义的信息会阻止初始化。兼容的地址和数据布局变化可以自动发现；其他编译器或游戏逻辑变化可能需要新的目录。磁盘上的 EXE 不会改变。
 
 界面和诊断消息的语言跟随客户端的 `language.txt`，通常位于 `%APPDATA%\wenilla-rogue\language.txt`。支持客户端的全部 14 种语言：英语（`en`）、俄语（`ru`）、德语（`de`）、法语（`fr`）、西班牙语（`es`）、乌克兰语（`uk`）、简体中文（`zh`）、波兰语（`pl`）、捷克语（`cs`）、巴西葡萄牙语（`pt`）、罗马尼亚语（`ro`）、土耳其语（`tr`）、日语（`ja`）和韩语（`ko`）。未知值回退到英语。语言变更会在一秒内刷新，无需重启修改器。附带字体也覆盖日语和韩语译文。
 

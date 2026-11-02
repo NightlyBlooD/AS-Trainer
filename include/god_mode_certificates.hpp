@@ -2104,7 +2104,1078 @@ static constexpr function_certificate modern_dispatcher{
     "23f5e735a5a516919da51f6d1cf5bd3d52d96f00c1420d697b88d224e1f9444d", modern_dispatcher_references
 };
 
+static constexpr relocation_rule v139_helper_0_references[] = {
+    // specific native/import callee
+    {60, 64, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 28 49 89 D3 48 89 CE 48 8B 5C 24 70 4C 8B 54 24 78 4C 89 D0 49 F7 E1 48 89 C7 0F 90 C0 48 B9 00 00 00 00 00 00 00 80 48 29 D9 48 39 CF 0F 97 C1 08 C1 41 BE 01 00 00 00 74 09 B8 08 00 00 00 31 FF EB 55 4D 85 DB 74 1C 4D 0F AF D3 4C 89 C1 4C 89 D2 49 89 D8 49 89 F9 E8 ?? ?? ?? ?? 48 85 C0", true, true, "", "", nullptr},
+    // specific native/import callee
+    {101, 105, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_helper_0{
+    "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 08 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B",
+    107,
+    "2836e7326f7614dad48b2d3203aad60b38b716f32e35d40fbf9b3a197f4d6842", v139_helper_0_references
+};
+
+static constexpr relocation_rule v139_helper_1_references[] = {
+    // specific native/import callee
+    {60, 64, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 28 49 89 D3 48 89 CE 48 8B 5C 24 70 4C 8B 54 24 78 4C 89 D0 49 F7 E1 48 89 C7 0F 90 C0 48 B9 00 00 00 00 00 00 00 80 48 29 D9 48 39 CF 0F 97 C1 08 C1 41 BE 01 00 00 00 74 09 B8 08 00 00 00 31 FF EB 55 4D 85 DB 74 1C 4D 0F AF D3 4C 89 C1 4C 89 D2 49 89 D8 49 89 F9 E8 ?? ?? ?? ?? 48 85 C0", true, true, "", "", nullptr},
+    // specific native/import callee
+    {101, 105, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_helper_1{
+    "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 28 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B",
+    107,
+    "23ce90b5898ed26472958283e8102a1832620c967595c8ec1d7699236481f73f", v139_helper_1_references
+};
+
+static constexpr relocation_rule v139_helper_2_references[] = {
+    // specific native/import callee
+    {60, 64, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 28 49 89 D3 48 89 CE 48 8B 5C 24 70 4C 8B 54 24 78 4C 89 D0 49 F7 E1 48 89 C7 0F 90 C0 48 B9 00 00 00 00 00 00 00 80 48 29 D9 48 39 CF 0F 97 C1 08 C1 41 BE 01 00 00 00 74 09 B8 08 00 00 00 31 FF EB 55 4D 85 DB 74 1C 4D 0F AF D3 4C 89 C1 4C 89 D2 49 89 D8 49 89 F9 E8 ?? ?? ?? ?? 48 85 C0", true, true, "", "", nullptr},
+    // specific native/import callee
+    {101, 105, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_helper_2{
+    "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 18 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B",
+    107,
+    "c224910bafb449881b8b719a53dc9200f60f69728f1cba4d675e7666f24f0a52", v139_helper_2_references
+};
+
+static constexpr relocation_rule v139_helper_3_references[] = {
+    // scalar constant
+    {26, 30, reference_kind::rip_import, 0, {}, "", false, false, "kernel32.dll!GetProcessHeap", "", nullptr},
+    // scalar constant
+    {47, 51, reference_kind::rip_import, 0, {}, "", false, false, "kernel32.dll!HeapFree", "", nullptr},
+};
+static constexpr function_certificate v139_helper_3{
+    "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??",
+    51,
+    "1dfeb320e890b35138eab29b0e95762e64c5a01c6b8f3b2d921dce4771d0b265", v139_helper_3_references
+};
+
+static constexpr relocation_rule v139_helper_4_references[] = {
+    // specific native/import callee
+    {60, 64, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 28 49 89 D3 48 89 CE 48 8B 5C 24 70 4C 8B 54 24 78 4C 89 D0 49 F7 E1 48 89 C7 0F 90 C0 48 B9 00 00 00 00 00 00 00 80 48 29 D9 48 39 CF 0F 97 C1 08 C1 41 BE 01 00 00 00 74 09 B8 08 00 00 00 31 FF EB 55 4D 85 DB 74 1C 4D 0F AF D3 4C 89 C1 4C 89 D2 49 89 D8 49 89 F9 E8 ?? ?? ?? ?? 48 85 C0", true, true, "", "", nullptr},
+    // specific native/import callee
+    {101, 105, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_helper_4{
+    "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B",
+    107,
+    "4de5e5e2dbd36e6dca7d31b8d01c8d364735f131ecf8d5e97dccdd9c839fc3f1", v139_helper_4_references
+};
+
+static constexpr relocation_rule v139_helper_5_references[] = {
+    // complete wrapper
+    {40, 44, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+};
+static constexpr function_certificate v139_helper_5{
+    "55 56 57 48 83 EC 30 48 8D 6C 24 30 48 C7 45 F8 FE FF FF FF 48 89 55 F0 48 89 CE 48 8B 79 10 48 3B 39 75 09 48 89 F1 E8 ?? ?? ?? ?? 90 48 8B 46 08 48 89 F9 48 C1 E1 05 48 8B 55 F0 0F 10 02 0F 10 4A 10 0F 11 4C 08 10 0F 11 04 08 48 FF C7 48 89 7E 10 48 83 C4 30 5F 5E 5D C3",
+    91,
+    "68f203d62284155d7760cf902a9533e8d8d1e089612560420b9b23ca804c79eb", v139_helper_5_references
+};
+
+static constexpr relocation_rule v139_helper_7_references[] = {
+    // specific native/import callee
+    {20, 24, reference_kind::relative_call, 0, {}, "55 48 83 EC 30 48 8D 6C 24 30 48 89 4D F0 48 89 55 F8 48 8D 4D F0 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_helper_7{
+    "55 48 83 EC 20 48 8D 6C 24 20 48 89 C8 48 89 D1 48 89 C2 E8 ?? ?? ?? ?? 0F 0B",
+    26,
+    "bdd3ee6a6b40cacd54ee026bb1dfb42ae4df99a1176767a451f759f2aacc139c", v139_helper_7_references
+};
+
+static constexpr relocation_rule v139_helper_6_references[] = {
+    // complete wrapper
+    {20, 24, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 89 C8 48 89 D1 48 89 C2 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_7},
+};
+static constexpr function_certificate v139_helper_6{
+    "55 48 83 EC 20 48 8D 6C 24 20 48 89 C8 48 89 D1 48 89 C2 E8 ?? ?? ?? ?? 0F 0B",
+    26,
+    "bdd3ee6a6b40cacd54ee026bb1dfb42ae4df99a1176767a451f759f2aacc139c", v139_helper_6_references
+};
+
+static constexpr relocation_rule v139_helper_8_references[] = {
+    // specific native/import callee
+    {60, 64, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 28 49 89 D3 48 89 CE 48 8B 5C 24 70 4C 8B 54 24 78 4C 89 D0 49 F7 E1 48 89 C7 0F 90 C0 48 B9 00 00 00 00 00 00 00 80 48 29 D9 48 39 CF 0F 97 C1 08 C1 41 BE 01 00 00 00 74 09 B8 08 00 00 00 31 FF EB 55 4D 85 DB 74 1C 4D 0F AF D3 4C 89 C1 4C 89 D2 49 89 D8 49 89 F9 E8 ?? ?? ?? ?? 48 85 C0", true, true, "", "", nullptr},
+    // specific native/import callee
+    {101, 105, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_helper_8{
+    "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 04 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B",
+    107,
+    "bd01f402a49e81953144e8a26817f6510957a67963964598d5ef811b98e7afa6", v139_helper_8_references
+};
+
+static constexpr relocation_rule v139_damage_references[] = {
+    // scalar constant
+    {189, 193, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {324, 328, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {337, 341, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {373, 377, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {463, 467, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {515, 519, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {540, 544, reference_kind::rip_data, 4, {0x9a, 0x99, 0x99, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {596, 600, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {611, 615, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {628, 632, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {730, 734, reference_kind::rip_data, 4, {0x9a, 0x99, 0x99, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {793, 797, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {805, 809, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {822, 826, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {936, 940, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {953, 957, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {1202, 1206, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {1214, 1218, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {1231, 1235, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section.
+    {1468, 1472, reference_kind::rip_inactive, 16, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {1635, 1639, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {1779, 1783, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // scalar constant
+    {1932, 1936, reference_kind::rip_data, 4, {0xcd, 0xcc, 0xcc, 0x3d}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {1975, 1979, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {2053, 2057, reference_kind::rip_data, 4, {0x00, 0x00, 0xc0, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {2070, 2074, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3e}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {2245, 2249, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // scalar constant
+    {2295, 2299, reference_kind::rip_data, 4, {0x00, 0x00, 0xa0, 0x40}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {2426, 2430, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {2510, 2514, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {2875, 2879, reference_kind::relative_call, 0, {}, "56 48 81 EC 90 00 00 00 48 83 39 00 74 73 48 8B 41 20 48 89 44 24 50 0F 10 01 0F 10 49 10 0F 29 4C 24 40 0F 29 44 24 30 48 83 7C 24 38 00 74 6A 48 8B 41 18 48 89 44 24 70 0F 10 41 08 0F 29 44 24 60 44 8B 44 24 50 48 8D 44 24 54 48 89 44 24 28 48 8D 44 24 30 48 89 44 24 20 48 8D 4C 24 78 48 8D 54 24 60 0F 57 DB E8 ?? ?? ?? ?? 48 8B 74 24 30 48 8B 44 24 78 48 8B 8C 24 88 00 00 00 EB 63 48 8B 41 08 48 8B 49 18 48 8D 04 C8", true, true, "", "", nullptr},
+    // specific native/import callee
+    {2915, 2919, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!ceilf", "", nullptr},
+    // scalar constant
+    {2936, 2940, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // complete wrapper
+    {3068, 3072, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 08 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_0},
+    // spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section.
+    {3146, 3150, reference_kind::rip_inactive, 16, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {3364, 3368, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 0C 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3493, 3497, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3519, 3523, reference_kind::relative_call, 0, {}, "C3", true, false, "", "", nullptr},
+    // specific native/import callee
+    {3538, 3542, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 20 48 8D 6C 24 20 48 83 FA 11 73 11 31 D2 49 89 C8 48 83 C4 20 5F 5E 5D E9 3D 78 01 00 48 89 D6 48 01 D1 31 FF 31 D2 49 89 C8 E8 ?? ?? ?? ?? 48 85 C0 74 18 48 8D 4E FF 48 89 C2 48 21 C1 48 29 CE 48 01 F0 48 89 54 32 F8 48 89 C7 48 89 F8 48 83 C4 20 5F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3609, 3613, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // complete wrapper
+    {3644, 3648, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 28 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_1},
+    // complete wrapper
+    {3759, 3763, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 18 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_2},
+    // specific native/import callee
+    {3845, 3849, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 0F B6 82 36 02 00 00 3C 02 75 4E 4C 8B B2 08 02 00 00 4D 85 F6 74 62 49 83 7E 18 00 74 5B 49 8B 3E 49 8B 5E 08 48 89 F9 48 89 DA E8 ?? ?? ?? ?? 48 85 C0 48 0F 44 C7 48 0F 44 D3 4D 8B 46 10 49 8B 4E 18 48 C7 06 FF FF FF FF 48 89 46 08", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3870, 3874, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 53 48 83 EC 40 0F 29 7C 24 30 66 0F 29 74 24 20 48 89 CE 31 C9 80 BA 01 02 00 00 02 B8 08 00 00 00 0F 84 CA 00 00 00 80 BA 36 02 00 00 02 0F 85 BD 00 00 00 66 0F 28 F2 48 8B 9A D8 01 00 00 48 8B BA E0 01 00 00 4C 8B B2 E8 01 00 00 4C 8B BA F0 01 00 00 F3 0F 10 BA F8 01 00 00 E8 ?? ?? ?? ?? 4D 85 F6 74 66 0F 57 C0 0F 2E F8 76 5E B9 30 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 9D 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3919, 3923, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC D8 00 00 00 48 8D AC 24 80 00 00 00 0F 29 75 40 48 C7 45 38 FE FF FF FF 4C 89 CE 66 0F 28 F2 49 89 D6 48 8B 85 C0 00 00 00 48 89 45 F0 48 8B 02 48 89 45 10 48 8B 42 08 48 89 45 08 48 8B 42 18 48 89 45 28 48 8B 42 20 48 89 45 F8 0F B6 42 28 88 45 18 4C 8B 61 08 48 89 4D 00 48 8B 41 10 48 89 45 20 48 85 C0", true, true, "", "", nullptr},
+    // complete wrapper
+    {3958, 3962, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {3979, 3983, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 04 00 00 48 8D AC 24 80 00 00 00 48 C7 85 E0 03 00 00 FE FF FF FF 44 89 C7 48 89 CE 44 0F B6 A2 36 02 00 00 41 83 FC 01 41 0F 94 C5 41 83 FC 03 74 41 41 83 FC 02 75 54 48 8D 8D C0 01 00 00 41 89 F8 E8 ?? ?? ?? ?? 48 83 BD C0 01 00 00 FF 0F 84 B4 00 00 00 48 8D 8D C8 02 00 00 48 8D 95 C0 01 00 00 41 B8 08 01 00 00 E8 ?? ?? ?? ?? E9 27 02 00 00 83 7A 20 01 0F 85 81 03 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4000, 4004, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {4076, 4080, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 81 EC 20 01 00 00 48 8D AC 24 80 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 48 89 CE 48 8B BA 10 02 00 00 4C 8B 82 38 05 00 00 48 85 FF 0F 84 97 02 00 00 4C 39 C7 0F 84 8E 02 00 00 48 8B 82 D0 00 00 00 48 8B 8A D8 00 00 00 48 C1 E1 07 45 31 C9 49 89 C2 0F 1F 44 00 00 4C 39 C9 74 41 49 83 E9 80 49 39 7A 20 4D 8D 92 80 00 00 00 75 EA 4A 8B 5C 08 98 48 81 C2 38 02 00 00 4C 8D 75 A0 4C 89 F1 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4110, 4114, reference_kind::relative_call, 0, {}, "55 56 57 53 48 83 EC 78 48 8D 6C 24 70 48 C7 45 00 FE FF FF FF 4C 89 C6 48 89 D3 48 89 CF 89 75 E0 48 8D 45 E0 48 89 45 C8 48 8D 05 ?? ?? ?? ?? 48 89 45 D0 48 8D 15 ?? ?? ?? ?? 48 8D 4D B0 4C 8D 45 C8 E8 ?? ?? ?? ?? 90 48 8D 4D C8 48 89 DA E8 ?? ?? ?? ?? 90 48 8B 45 D8 48 89 45 F0 0F 10 45 C8 0F 29 45 E0 0F B6 83 A4 01 00 00 04 FE 3C 09 77 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {4175, 4179, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {4256, 4260, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {4292, 4296, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {4562, 4566, reference_kind::relative_call, 0, {}, "C3", true, false, "", "", nullptr},
+    // specific native/import callee
+    {4577, 4581, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 20 48 8D 6C 24 20 48 83 FA 11 73 11 31 D2 49 89 C8 48 83 C4 20 5F 5E 5D E9 3D 78 01 00 48 89 D6 48 01 D1 31 FF 31 D2 49 89 C8 E8 ?? ?? ?? ?? 48 85 C0 74 18 48 8D 4E FF 48 89 C2 48 21 C1 48 29 CE 48 01 F0 48 89 54 32 F8 48 89 C7 48 89 F8 48 83 C4 20 5F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4618, 4622, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC 58 01 00 00 48 8D AC 24 80 00 00 00 48 C7 85 D0 00 00 00 FE FF FF FF 4C 89 CB 4D 89 C6 48 89 D7 48 89 CE 48 8D 4D A0 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 48 8B 07 48 8B 08 4C 8B 78 08 48 B8 06 00 00 00 00 00 00 80 48 89 45 18 4C 89 75 20 48 89 5D 28 48 8D 05 ?? ?? ?? ?? 48 89 45 48 48 C7 45 50 07 00 00 00 48 8D 05 ?? ?? ?? ?? 48 89 45 58 48 C7 45 60 05 00 00 00 48 89 4D 68 4C 89 7D 70", true, true, "", "", nullptr},
+    // scalar constant
+    {4632, 4636, reference_kind::rip_data, 8, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {4651, 4655, reference_kind::rip_data, 8, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {4686, 4690, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {4720, 4724, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC 58 01 00 00 48 8D AC 24 80 00 00 00 48 C7 85 D0 00 00 00 FE FF FF FF 4C 89 CB 4D 89 C6 48 89 D7 48 89 CE 48 8D 4D A0 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 48 8B 07 48 8B 08 4C 8B 78 08 48 B8 06 00 00 00 00 00 00 80 48 89 45 18 4C 89 75 20 48 89 5D 28 48 8D 05 ?? ?? ?? ?? 48 89 45 48 48 C7 45 50 07 00 00 00 48 8D 05 ?? ?? ?? ?? 48 89 45 58 48 C7 45 60 05 00 00 00 48 89 4D 68 4C 89 7D 70", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4761, 4765, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {4782, 4786, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {4843, 4847, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 38 0F 29 74 24 20 89 D0 F6 D0 4D 85 C9 41 0F 95 C3 4C 8B 11 44 84 D8 0F 84 00 01 00 00 49 83 FA FF 74 13 83 79 18 00 75 0D 48 8B 41 08 48 8B 79 10 E9 8F 00 00 00 F3 0F 10 B4 24 90 00 00 00 48 8B 71 38 49 83 FA FF 74 3B 8B 79 30 FF C7 4D 85 D2 74 36 48 8B 41 08 49 C1 E2 04", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4875, 4879, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {4899, 4903, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 48 C7 85 E0 00 00 00 FE FF FF FF 4C 8B 6A 10 4C 89 E8 48 C1 E0 08 4A 8D 34 E8 48 B8 1F 7C F0 C1 07 1F 7C 00 49 39 C5 76 10 45 31 FF 4C 89 F9 48 89 F2 E8 ?? ?? ?? ?? 0F 0B 48 8B 5A 08 48 85 F6 48 89 8D C8 00 00 00 4C 89 AD D0 00 00 00 74 22 E8 ?? ?? ?? ?? 41 BF 08 00 00 00 BA 08 00 00 00 48 89 F1", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4919, 4923, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC C8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 40 FE FF FF FF 48 89 D7 48 89 CE 48 8D 4D B8 E8 ?? ?? ?? ?? 4C 8B B7 88 00 00 00 48 8B 9F 90 00 00 00 48 83 7F 18 FF 48 89 5D D0 74 57 48 8D 57 18 48 8D 4D 18 E8 ?? ?? ?? ?? 90 48 8B 45 18 48 89 45 08 48 8B 45 20 48 89 45 F8 48 8B 45 28 48 89 45 D8 48 8B 47 60 48 B9 00 00 00 00 00 00 00 80", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4980, 4984, reference_kind::relative_call, 0, {}, "C3", true, false, "", "", nullptr},
+    // specific native/import callee
+    {4995, 4999, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 20 48 8D 6C 24 20 48 83 FA 11 73 11 31 D2 49 89 C8 48 83 C4 20 5F 5E 5D E9 3D 78 01 00 48 89 D6 48 01 D1 31 FF 31 D2 49 89 C8 E8 ?? ?? ?? ?? 48 85 C0 74 18 48 8D 4E FF 48 89 C2 48 21 C1 48 29 CE 48 01 F0 48 89 54 32 F8 48 89 C7 48 89 F8 48 83 C4 20 5F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5036, 5040, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC 58 01 00 00 48 8D AC 24 80 00 00 00 48 C7 85 D0 00 00 00 FE FF FF FF 4C 89 CB 4D 89 C6 48 89 D7 48 89 CE 48 8D 4D A0 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 48 8B 07 48 8B 08 4C 8B 78 08 48 B8 06 00 00 00 00 00 00 80 48 89 45 18 4C 89 75 20 48 89 5D 28 48 8D 05 ?? ?? ?? ?? 48 89 45 48 48 C7 45 50 07 00 00 00 48 8D 05 ?? ?? ?? ?? 48 89 45 58 48 C7 45 60 05 00 00 00 48 89 4D 68 4C 89 7D 70", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5065, 5069, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {5290, 5294, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {5332, 5336, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 38 0F 29 74 24 20 89 D0 F6 D0 4D 85 C9 41 0F 95 C3 4C 8B 11 44 84 D8 0F 84 00 01 00 00 49 83 FA FF 74 13 83 79 18 00 75 0D 48 8B 41 08 48 8B 79 10 E9 8F 00 00 00 F3 0F 10 B4 24 90 00 00 00 48 8B 71 38 49 83 FA FF 74 3B 8B 79 30 FF C7 4D 85 D2 74 36 48 8B 41 08 49 C1 E2 04", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5363, 5367, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {5391, 5395, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 48 C7 85 E0 00 00 00 FE FF FF FF 4C 8B 6A 10 4C 89 E8 48 C1 E0 08 4A 8D 34 E8 48 B8 1F 7C F0 C1 07 1F 7C 00 49 39 C5 76 10 45 31 FF 4C 89 F9 48 89 F2 E8 ?? ?? ?? ?? 0F 0B 48 8B 5A 08 48 85 F6 48 89 8D C8 00 00 00 4C 89 AD D0 00 00 00 74 22 E8 ?? ?? ?? ?? 41 BF 08 00 00 00 BA 08 00 00 00 48 89 F1", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5408, 5412, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC C8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 40 FE FF FF FF 48 89 D7 48 89 CE 48 8D 4D B8 E8 ?? ?? ?? ?? 4C 8B B7 88 00 00 00 48 8B 9F 90 00 00 00 48 83 7F 18 FF 48 89 5D D0 74 57 48 8D 57 18 48 8D 4D 18 E8 ?? ?? ?? ?? 90 48 8B 45 18 48 89 45 08 48 8B 45 20 48 89 45 F8 48 8B 45 28 48 89 45 D8 48 8B 47 60 48 B9 00 00 00 00 00 00 00 80", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5471, 5475, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 83 EC 20 48 8D 6C 24 20 48 89 CF 48 8B 72 10 48 85 F6 74 2E 4C 8B 72 08 E8 ?? ?? ?? ?? BA 01 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 48 85 C0 74 31 48 89 C3 48 89 C1 4C 89 F2 49 89 F0 E8 ?? ?? ?? ?? EB 05 BB 01 00 00 00 48 89 37 48 89 5F 08 48 89 77 10 48 89 F8 48 83 C4 20 5B 5F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5531, 5535, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {5583, 5587, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {5728, 5732, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 08 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 95 70 01 00 00 44 0F 29 8D 60 01 00 00 66 44 0F 29 85 50 01 00 00 0F 29 BD 40 01 00 00 0F 29 B5 30 01 00 00 48 C7 85 28 01 00 00 FE FF FF FF 48 89 D7 48 89 CE F3 0F 7E BA E0 02 00 00 66 48 0F 7E F8 48 B9 FF FF FF FF FF FF FF 7F 48 21 C1 48 8D 51 FF 49 BA FF FF FF FF FF FF 0F 00 4C 39 D2 0F 92 C2 48 85 C0 0F 98 C0 20 C2 48 85 C9 0F 94 C3 49 BA 00 00 00 00 00 00 F0 7F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5890, 5894, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 78 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 0F 83 83 00 00 00 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // complete wrapper
+    {5921, 5925, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {5953, 5957, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {5965, 5969, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 60 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 73 47 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {6050, 6054, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 78 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 0F 83 83 00 00 00 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // complete wrapper
+    {6097, 6101, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {6109, 6113, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 78 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 0F 83 83 00 00 00 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // complete wrapper
+    {6161, 6165, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {6185, 6189, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 83 EC 20 48 8D 6C 24 20 48 89 CF 48 8B 72 10 48 85 F6 74 2E 4C 8B 72 08 E8 ?? ?? ?? ?? BA 01 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 48 85 C0 74 31 48 89 C3 48 89 C1 4C 89 F2 49 89 F0 E8 ?? ?? ?? ?? EB 05 BB 01 00 00 00 48 89 37 48 89 5F 08 48 89 77 10 48 89 F8 48 83 C4 20 5B 5F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {6235, 6239, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {6282, 6286, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // specific native/import callee
+    {6415, 6419, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 08 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 95 70 01 00 00 44 0F 29 8D 60 01 00 00 66 44 0F 29 85 50 01 00 00 0F 29 BD 40 01 00 00 0F 29 B5 30 01 00 00 48 C7 85 28 01 00 00 FE FF FF FF 48 89 D7 48 89 CE F3 0F 7E BA E0 02 00 00 66 48 0F 7E F8 48 B9 FF FF FF FF FF FF FF 7F 48 21 C1 48 8D 51 FF 49 BA FF FF FF FF FF FF 0F 00 4C 39 D2 0F 92 C2 48 85 C0 0F 98 C0 20 C2 48 85 C9 0F 94 C3 49 BA 00 00 00 00 00 00 F0 7F", true, true, "", "", nullptr},
+    // complete wrapper
+    {6444, 6448, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {6456, 6460, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 60 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 73 47 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {6546, 6550, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 78 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 0F 83 83 00 00 00 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // complete wrapper
+    {6593, 6597, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {6762, 6766, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {6835, 6839, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {6881, 6885, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {6908, 6912, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 0F B6 82 36 02 00 00 3C 02 75 4E 4C 8B B2 08 02 00 00 4D 85 F6 74 62 49 83 7E 18 00 74 5B 49 8B 3E 49 8B 5E 08 48 89 F9 48 89 DA E8 ?? ?? ?? ?? 48 85 C0 48 0F 44 C7 48 0F 44 D3 4D 8B 46 10 49 8B 4E 18 48 C7 06 FF FF FF FF 48 89 46 08", true, true, "", "", nullptr},
+    // specific native/import callee
+    {6933, 6937, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 53 48 83 EC 40 0F 29 7C 24 30 66 0F 29 74 24 20 48 89 CE 31 C9 80 BA 01 02 00 00 02 B8 08 00 00 00 0F 84 CA 00 00 00 80 BA 36 02 00 00 02 0F 85 BD 00 00 00 66 0F 28 F2 48 8B 9A D8 01 00 00 48 8B BA E0 01 00 00 4C 8B B2 E8 01 00 00 4C 8B BA F0 01 00 00 F3 0F 10 BA F8 01 00 00 E8 ?? ?? ?? ?? 4D 85 F6 74 66 0F 57 C0 0F 2E F8 76 5E B9 30 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 9D 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {6982, 6986, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC D8 00 00 00 48 8D AC 24 80 00 00 00 0F 29 75 40 48 C7 45 38 FE FF FF FF 4C 89 CE 66 0F 28 F2 49 89 D6 48 8B 85 C0 00 00 00 48 89 45 F0 48 8B 02 48 89 45 10 48 8B 42 08 48 89 45 08 48 8B 42 18 48 89 45 28 48 8B 42 20 48 89 45 F8 0F B6 42 28 88 45 18 4C 8B 61 08 48 89 4D 00 48 8B 41 10 48 89 45 20 48 85 C0", true, true, "", "", nullptr},
+    // complete wrapper
+    {7021, 7025, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // scalar constant
+    {7131, 7135, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {7180, 7184, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 81 EC 80 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 F8 FE FF FF FF 44 89 CF 4C 89 C3 49 89 D6 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 C0 03 00 00 66 C7 45 E8 50 02 48 C7 45 D0 20 00 00 00 48 89 45 D8 48 C7 45 E0 00 00 00 00 48 8D 55 D0 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 D0 0F 10 4D E0 0F 29 4D C0 0F 29 45 B0 48 8D 55 B0 48 89 D9", true, true, "", "", nullptr},
+    // complete wrapper
+    {7208, 7212, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {7302, 7306, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC 98 00 00 00 48 8D AC 24 80 00 00 00 66 0F 7F 7D 00 66 0F 7F 75 F0 48 C7 45 E8 FE FF FF FF 4D 89 C6 4D 85 C0 79 0F 31 DB 48 89 D9 4C 89 F2 E8 ?? ?? ?? ?? 0F 0B 48 89 CE 4C 89 75 D8 74 3D 48 89 D7 E8 ?? ?? ?? ?? BB 01 00 00 00 BA 01 00 00 00 4C 89 F1 E8 ?? ?? ?? ?? 48 85 C0 74 CB 49 89 C7 48 89 C1 48 89 FA 4D 89 F0 E8 ?? ?? ?? ?? 49 83 FE 08 73 15 31 C0 E9 1D 01 00 00 B8 01 00 00 00 48 89 45 E0 E9 65 02 00 00 49 83 FE 20 73 07 31 C0 E9 99 00 00 00 48 B8 E0 FF FF FF FF FF FF 7F 4C 21 F0 31 C9 66 0F 6F 05 ?? ?? ?? ?? 66 0F 6F 0D ?? ?? ?? ?? 66 0F 6F 15 ?? ?? ?? ?? 0F 1F 84 00 00 00 00 00 F3 41 0F 6F 1C 0F F3 41 0F 6F 64 0F 10 66 0F 6F EB 66 0F FC E8 66 0F 6F F4 66 0F FC F0 66 0F 6F FD 66 0F DA F9 66 0F 74 FD 66 0F DB FA 66 0F 6F EE 66 0F DA E9 66 0F 74 EE 66 0F DB EA 66 0F EB FB 66 0F EB EC F3 41 0F 7F 3C 0F F3 41 0F 7F 6C 0F 10 48 83 C1 20 48 39 C8 75 A5 49 39 C6 0F 84 8E 00 00 00 41 F6 C6 18 74 69 48 89 C1 48 B8 F8 FF FF FF FF FF FF 7F 4C 21 F0 66 0F 6F 05 ?? ?? ?? ?? 66 0F 6F 0D ?? ?? ?? ?? 66 0F 6F 15 ?? ?? ?? ?? 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 F3 41 0F 7E 1C 0F 66 0F 6F E3 66 0F FC E0 66 0F 6F EC 66 0F DE E9 66 0F 74 EC 66 0F DF EA 66 0F EB EB 66 41 0F D6 2C 0F 48 83 C1 08 48 39 C8 75 CF EB 1A 41 0F B6 0C 07 8D 51 BF 80 FA 1A 0F 92 C2 C0 E2 05 08 CA 41 88 14 07 48 FF C0 49 39 C6 75 E1 E8 ?? ?? ?? ?? BA 01 00 00 00 4C 89 F1 E8 ?? ?? ?? ?? 48 85 C0 0F 84 9A 01 00 00 49 83 FE 08 4C 89 7D E0 73 07 31 C9 E9 E3 00 00 00 49 83 FE 20 73 07 31 C9 E9 85 00 00 00 48 B9 E0 FF FF FF FF FF FF 7F 4C 21 F1 31 D2 66 0F 6F 05 ?? ?? ?? ?? 66 0F 6F 0D ?? ?? ?? ?? 66 0F 1F 44 00 00 F3 41 0F 6F 14 17 F3 41 0F 6F 5C 17 10 66 0F 6F E2 66 0F 74 E0 66 0F 6F EB 66 0F 74 E8 66 0F 6F F4 66 0F DF F2 66 0F DB E1 66 0F EB E6 66 0F 6F D5 66 0F DF D3 66 0F DB E9 66 0F EB EA F3 0F 7F 24 10 F3 0F 7F 6C 10 10 48 83 C2 20 48 39 D1 75 AF 49 39 CE 0F 84 7F 00 00 00 41 F6 C6 18 74 51 48 89 CA 48 B9 F8 FF FF FF FF FF FF 7F 4C 21 F1 66 0F 6F 05 ?? ?? ?? ?? 66 0F 6F 0D ?? ?? ?? ?? F3 41 0F 7E 14 17 66 0F 6F DA 66 0F 74 D8 66 0F 6F E3 66 0F DF E2 66 0F DB D9 66 0F EB DC 66 0F D6 1C 10 48 83 C2 08 48 39 D1 75 D4 49 39 CE 74 28 BA 5F 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7329, 7333, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 04 00 00 48 8D AC 24 80 00 00 00 48 C7 85 E0 03 00 00 FE FF FF FF 44 89 C7 48 89 CE 44 0F B6 A2 36 02 00 00 41 83 FC 01 41 0F 94 C5 41 83 FC 03 74 41 41 83 FC 02 75 54 48 8D 8D C0 01 00 00 41 89 F8 E8 ?? ?? ?? ?? 48 83 BD C0 01 00 00 FF 0F 84 B4 00 00 00 48 8D 8D C8 02 00 00 48 8D 95 C0 01 00 00 41 B8 08 01 00 00 E8 ?? ?? ?? ?? E9 27 02 00 00 83 7A 20 01 0F 85 81 03 00 00", true, true, "", "", nullptr},
+    // complete wrapper
+    {7435, 7439, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {7471, 7475, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {7507, 7511, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {7543, 7547, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {7634, 7638, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE 48 8B 11 48 85 D2 74 0F 48 8B 4E 08 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 78 48 B8 00 00 00 00 00 00 00 80 48 31 D0 48 85 D2 B9 07 00 00 00 48 0F 48 C8 48 83 F9 07 0F 83 83 00 00 00 48 8B 56 18 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 20 41 B8 01 00 00 00 E8 ?? ?? ?? ?? 48 8B 56 30 48 83 FA FF 74 14 48 85 D2 74 0F 48 8B 4E 38 41 B8 01 00 00 00", true, true, "", "", nullptr},
+    // complete wrapper
+    {7681, 7685, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {7704, 7708, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 0F B6 82 36 02 00 00 3C 02 75 4E 4C 8B B2 08 02 00 00 4D 85 F6 74 62 49 83 7E 18 00 74 5B 49 8B 3E 49 8B 5E 08 48 89 F9 48 89 DA E8 ?? ?? ?? ?? 48 85 C0 48 0F 44 C7 48 0F 44 D3 4D 8B 46 10 49 8B 4E 18 48 C7 06 FF FF FF FF 48 89 46 08", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7867, 7871, reference_kind::relative_call, 0, {}, "41 57 41 56 41 54 56 57 53 48 83 EC 28 4C 89 CB 4D 89 C7 48 89 CE 4C 8B 21 48 8B 79 10 4C 89 E0 48 29 F8 49 39 C0 0F 87 9C 00 00 00 4D 85 FF 74 0F 48 8B 4E 08 48 01 F9 4D 89 F8 E8 ?? ?? ?? ?? 4C 8B B4 24 80 00 00 00 4C 01 FF 48 89 7E 10 4C 39 E7 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 C6 04 38 00 48 FF C7", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7951, 7955, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8009, 8013, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 40 48 8D 6C 24 40 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 09 BF 08 00 00 00 48 0F 43 F8 4C 8B 41 08 48 8D 4D E8 49 89 F9 E8 ?? ?? ?? ?? 83 7D E8 01 74 13 48 8B 45 F0 48 89 46 08 48 89 3E 48 83 C4 40 5F 5E 5D C3 48 8B 4D F0 48 8B 55 F8 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8044, 8048, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 28 48 89 D6 48 89 CF 48 8B 5A 10 48 3B 1A 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 C6 04 18 00 4C 8D 73 01 4C 89 76 10 40 84 FF 74 28 48 8B 46 08 80 0C 18 01 4C 8B 76 10 4C 3B 36 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 42 88 3C 30 49 FF C6 4C 89 76 10 89 FD", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8068, 8072, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 68 48 8D 6C 24 60 48 C7 45 00 FE FF FF FF 48 89 D6 4C 8B 29 4C 8B 79 08 4D 85 ED 41 0F 95 C4 4C 8B 71 10 4C 89 F7 49 0F 44 FD 48 85 FF 0F 84 AC 00 00 00 4D 85 ED 0F 84 74 06 00 00 4C 89 E8 4D 85 FF 0F 84 87 00 00 00 4C 89 F9 48 83 E1 07 0F 84 B2 05 00 00 31 D2 4C 89 E8 0F 1F 80 00 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8152, 8156, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 49 89 D7 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 CC 00 00 00 41 8B 4F 18 89 08 48 C7 45 D8 20 00 00 00 48 89 45 E0 66 C7 45 F0 A9 00 C6 40 04 00 48 C7 45 E8 05 00 00 00 49 8B 7F 08 49 8B 5F 10 48 8B 45 D8 48 83 C0 FB 48 39 C3 77 61 41 BE 05 00 00 00 48 85 DB", true, true, "", "", nullptr},
+    // complete wrapper
+    {8195, 8199, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {8251, 8255, reference_kind::relative_call, 0, {}, "48 8B 41 60 48 85 C0 74 7F F3 0F 10 89 88 0E 00 00 48 8B 51 58 4C 8B 81 18 0A 00 00 4C 8B 89 20 0A 00 00 48 83 C2 0C F3 0F 10 05 ?? ?? ?? ?? EB 18 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 48 83 C2 10 48 FF C8 74 47 F3 0F 10 12 0F 2E D1 76 EE 4C 8B 52 F4 4D 39 CA 73 E5 49 C1 E2 06 43 80 3C 10 0F 75 DA 4D 01 C2 41 80 7A 01 0E 75 D0 44 8B 5A FC 0F 57 D2 F3 49 0F 2A D3 F3 41 0F 59 52 04 F3 0F 58 C2 EB B8", true, false, "", "", nullptr},
+    // Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats).
+    {8311, 8315, reference_kind::rip_data, 8, {0x00, 0x00, 0x80, 0x3f, 0x00, 0x00, 0x00, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {8415, 8419, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 08 0E 00 00 48 8D AC 24 80 00 00 00 66 0F 7F BD 70 0D 00 00 0F 29 B5 60 0D 00 00 48 C7 85 58 0D 00 00 FE FF FF FF 0F 57 C0 0F 2E C1 0F 83 66 01 00 00 0F 28 F1 48 89 CE 44 89 85 A4 0C 00 00 4C 8B B5 F0 0D 00 00 4C 89 8D F8 0C 00 00 49 8B 01 48 89 85 98 0C 00 00 48 8D 99 38 02 00 00 4C 8B 81 38 05 00 00 C6 85 53 0D 00 00 01 48 8D 4D B8 48 89 DA E8 ?? ?? ?? ?? 90 48 8D 8D B0 08 00 00 48 8D 55 B8", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8448, 8452, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!ceilf", "", nullptr},
+    // scalar constant
+    {8467, 8471, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {8674, 8678, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8683, 8687, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!ceilf", "", nullptr},
+    // scalar constant
+    {8706, 8710, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {8898, 8902, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9018, 9022, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 53 48 83 EC 20 48 8B 5A 10 48 6B F3 38 48 B8 49 92 24 49 92 24 49 02 48 39 C3 76 0F 31 FF 48 89 F9 48 89 F2 E8 ?? ?? ?? ?? 0F 0B 48 85 F6 0F 84 9B 00 00 00 49 89 CF 4C 8B 72 08 E8 ?? ?? ?? ?? BF 08 00 00 00 BA 08 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 48 85 C0 74 C7 48 85 DB 4C 89 F9 74 75 31 D2 49 89 D8", true, true, "", "", nullptr},
+    // scalar constant
+    {9265, 9269, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // complete wrapper
+    {9532, 9536, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {9604, 9608, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 83 EC 60 48 8D 6C 24 60 48 C7 45 F8 FE FF FF FF 48 83 79 18 FF 74 46 48 8B 79 30 48 8D 47 40 48 89 45 C8 48 8D 05 ?? ?? ?? ?? 48 89 45 D0 48 8D 15 ?? ?? ?? ?? 48 8D 4D D8 4C 8D 45 C8 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 55 E8 48 8B 37 48 8B 5F 08 48 89 4D F0 E8 ?? ?? ?? ?? 90 EB 4D 48 8B B9 00 01 00 00 48 85 FF 74 7E 48 8D 47 20 48 89 45 C8", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9686, 9690, reference_kind::relative_call, 0, {}, "56 57 53 48 83 EC 50 0F 29 7C 24 40 0F 29 74 24 30 4C 89 C7 48 89 D3 48 89 CE F2 41 0F 10 30 F3 0F 16 FE 48 89 D1 0F 28 CE 0F 28 D7 E8 ?? ?? ?? ?? A8 01 75 32 48 83 7B 58 FF 74 26 48 83 C3 58 48 8D 4C 24 20 48 89 DA 0F 28 D6 0F 28 DF E8 ?? ?? ?? ?? 83 7C 24 20 01 75 08 F3 0F 10 44 24 2C EB 05 F3 0F 10 47 08 0F 13 36 F3 0F 11 46 08", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9726, 9730, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 81 EC 80 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 F8 FE FF FF FF 44 89 CF 4C 89 C3 49 89 D6 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 F2 00 00 00 66 C7 45 F0 DD 00 48 C7 45 D8 20 00 00 00 48 89 45 E0 48 C7 45 E8 00 00 00 00 48 8D 55 D8 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 D8 0F 10 4D E8 0F 29 4D C0 0F 29 45 B0 48 8D 4D D8 48 8D 55 B0", true, true, "", "", nullptr},
+    // complete wrapper
+    {9755, 9759, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {9889, 9893, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9909, 9913, reference_kind::relative_call, 0, {}, "56 57 53 48 83 EC 70 89 D7 48 89 CE 48 8B 01 48 85 C0 74 63 48 8B 56 08 44 0F B7 48 36 45 89 CA 45 01 D2 48 C7 C1 FF FF FF FF 66 0F 1F 44 00 00 4D 85 D2 74 2B 66 3B 7C 48 3A 41 0F 97 C3 41 80 DB 00 48 FF C1 49 83 C2 FE 41 80 FB 01 74 E1 45 0F B6 CB 45 85 C9 74 18 EB 09 66 0F 1F 44 00 00 4C 89 C9 48 83 EA 01 72 10", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9989, 9993, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 40 48 8D 6C 24 40 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 09 BF 08 00 00 00 48 0F 43 F8 4C 8B 41 08 48 8D 4D E8 49 89 F9 E8 ?? ?? ?? ?? 83 7D E8 01 74 13 48 8B 45 F0 48 89 46 08 48 89 3E 48 83 C4 40 5F 5E 5D C3 48 8B 4D F0 48 8B 55 F8 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10033, 10037, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 28 48 89 D6 48 89 CF 48 8B 5A 10 48 3B 1A 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 C6 04 18 00 4C 8D 73 01 4C 89 76 10 40 84 FF 74 28 48 8B 46 08 80 0C 18 01 4C 8B 76 10 4C 3B 36 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 42 88 3C 30 49 FF C6 4C 89 76 10 89 FD", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10060, 10064, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 68 48 8D 6C 24 60 48 C7 45 00 FE FF FF FF 48 89 D6 4C 8B 29 4C 8B 79 08 4D 85 ED 41 0F 95 C4 4C 8B 71 10 4C 89 F7 49 0F 44 FD 48 85 FF 0F 84 AC 00 00 00 4D 85 ED 0F 84 74 06 00 00 4C 89 E8 4D 85 FF 0F 84 87 00 00 00 4C 89 F9 48 83 E1 07 0F 84 B2 05 00 00 31 D2 4C 89 E8 0F 1F 80 00 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10159, 10163, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 49 89 D7 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 CC 00 00 00 41 8B 4F 18 89 08 48 C7 45 D8 20 00 00 00 48 89 45 E0 66 C7 45 F0 A9 00 C6 40 04 00 48 C7 45 E8 05 00 00 00 49 8B 7F 08 49 8B 5F 10 48 8B 45 D8 48 83 C0 FB 48 39 C3 77 61 41 BE 05 00 00 00 48 85 DB", true, true, "", "", nullptr},
+    // complete wrapper
+    {10188, 10192, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // scalar constant
+    {10453, 10457, reference_kind::rip_data, 4, {0x00, 0x00, 0x10, 0x43}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {10466, 10470, reference_kind::rip_data, 16, {0x00, 0x00, 0x80, 0x3f, 0x00, 0x00, 0x80, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {10475, 10479, reference_kind::rip_data, 4, {0x66, 0x66, 0x86, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {10580, 10584, reference_kind::relative_call, 0, {}, "48 89 C8 F3 0F 10 8A B0 01 00 00 0F 57 C0 0F 2E C1 73 5E F3 0F 5C 92 AC 01 00 00 F3 0F 5E D1 F3 0F 5F C2 F3 0F 10 0D ?? ?? ?? ?? F3 0F 5D C8 F3 0F 10 82 9C 01 00 00 F3 0F 10 92 A8 01 00 00 F3 0F 5C D0 F3 0F 59 D1 F3 0F 58 D0 F2 0F 10 82 94 01 00 00 F2 0F 10 9A A0 01 00 00 0F 5C D8 F3 0F 12 C9 0F 59 CB 0F 58 C8 0F 13 08 F3 0F 11 50 08 C3", true, false, "", "", nullptr},
+    // scalar constant
+    {10641, 10645, reference_kind::rip_data, 16, {0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {10661, 10665, reference_kind::rip_data, 16, {0xcd, 0xcc, 0x4c, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, "", false, false, "", "", nullptr},
+    // complete wrapper
+    {10768, 10772, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 18 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_2},
+    // scalar constant
+    {10891, 10895, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {10987, 10991, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!ceilf", "", nullptr},
+    // specific native/import callee
+    {11060, 11064, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11070, 11074, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!ceilf", "", nullptr},
+    // specific native/import callee
+    {11277, 11281, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11458, 11462, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 68 44 89 C3 48 89 D7 48 89 CE 48 83 7A 08 00 74 49 48 8D 47 08 48 8B 48 10 48 89 4C 24 40 0F 10 00 0F 29 44 24 30 44 0F B7 47 20 48 8D 47 22 48 89 44 24 28 48 89 7C 24 20 48 8D 4C 24 50 48 8D 54 24 30 41 89 D9 E8 ?? ?? ?? ?? 4C 8B 37 48 8B 44 24 50 0F 10 44 24 58 EB 42 4C 8B 37 E8 ?? ?? ?? ?? B9 50 00 00 00 BA 08 00 00 00 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11531, 11535, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 40 48 8D 6C 24 40 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 09 BF 08 00 00 00 48 0F 43 F8 4C 8B 41 08 48 8D 4D E8 49 89 F9 E8 ?? ?? ?? ?? 83 7D E8 01 74 13 48 8B 45 F0 48 89 46 08 48 89 3E 48 83 C4 40 5F 5E 5D C3 48 8B 4D F0 48 8B 55 F8 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11575, 11579, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 28 48 89 D6 48 89 CF 48 8B 5A 10 48 3B 1A 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 C6 04 18 00 4C 8D 73 01 4C 89 76 10 40 84 FF 74 28 48 8B 46 08 80 0C 18 01 4C 8B 76 10 4C 3B 36 75 08 48 89 F1 E8 ?? ?? ?? ?? 48 8B 46 08 42 88 3C 30 49 FF C6 4C 89 76 10 89 FD", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11602, 11606, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 68 48 8D 6C 24 60 48 C7 45 00 FE FF FF FF 48 89 D6 4C 8B 29 4C 8B 79 08 4D 85 ED 41 0F 95 C4 4C 8B 71 10 4C 89 F7 49 0F 44 FD 48 85 FF 0F 84 AC 00 00 00 4D 85 ED 0F 84 74 06 00 00 4C 89 E8 4D 85 FF 0F 84 87 00 00 00 4C 89 F9 48 83 E1 07 0F 84 B2 05 00 00 31 D2 4C 89 E8 0F 1F 80 00 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11693, 11697, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 49 89 D7 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 CC 00 00 00 41 8B 4F 18 89 08 48 C7 45 D8 20 00 00 00 48 89 45 E0 66 C7 45 F0 A9 00 C6 40 04 00 48 C7 45 E8 05 00 00 00 49 8B 7F 08 49 8B 5F 10 48 8B 45 D8 48 83 C0 FB 48 39 C3 77 61 41 BE 05 00 00 00 48 85 DB", true, true, "", "", nullptr},
+    // complete wrapper
+    {11729, 11733, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {11796, 11800, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 28 48 8D 6C 24 20 48 C7 45 00 FE FF FF FF 48 8B 31 48 85 F6 0F 84 C6 01 00 00 4C 8B 71 08 48 8B 79 10 48 85 FF 0F 84 C2 01 00 00 31 C9 BB 50 00 00 00 48 89 F0 EB 22 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 49 FF C6 B8 00 00 00 00 48 89 F1 48 FF CF 0F 84 F2 01 00 00 48 85 C9 74 27 0F B7 51 36 49 39 D6 0F 83 AA 00 00 00 49 89 C7", true, true, "", "", nullptr},
+    // complete wrapper
+    {11854, 11858, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {11995, 11999, reference_kind::relative_call, 0, {}, "56 48 83 EC 50 0F 29 7C 24 40 0F 29 74 24 30 0F 28 F2 0F 28 F9 48 89 CE E8 ?? ?? ?? ?? A8 01 75 32 48 83 7E 58 FF 74 23 48 8D 56 58 48 8D 4C 24 20 0F 28 D7 0F 28 DE E8 ?? ?? ?? ?? 83 7C 24 20 01 75 08 F3 0F 10 44 24 2C EB 08 F3 0F 10 86 C0 00 00 00 0F 28 74 24 30 0F 28 7C 24 40 48 83 C4 50 5E C3", true, true, "", "", nullptr},
+    // scalar constant
+    {12038, 12042, reference_kind::rip_data, 4, {0x00, 0x00, 0xc0, 0x40}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12051, 12055, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC F8 00 00 00 48 8D AC 24 80 00 00 00 0F 29 7D 60 0F 29 75 50 48 C7 45 48 FE FF FF FF 0F 28 F3 4C 89 C3 41 89 D7 48 89 CF 8B 81 BC 0E 00 00 FF C0 89 81 BC 0E 00 00 48 BE 00 00 00 00 00 00 00 F1 48 09 C6 89 D1 E8 ?? ?? ?? ?? A8 01 75 0A F3 0F 10 3D ?? ?? ?? ?? EB 07 0F 28 FE F3 0F 5E F8 48 C7 45 F8 00 00 00 00 48 C7 45 08 00 00 00 00 4C 8D 75 F8 4C 89 F1", true, true, "", "", nullptr},
+    // complete wrapper
+    {12090, 12094, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // scalar constant
+    {12100, 12104, reference_kind::rip_data, 4, {0x00, 0x00, 0x20, 0x41}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {12113, 12117, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12195, 12199, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 48 89 CE E8 ?? ?? ?? ?? B9 01 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 74 23 C6 00 7B 48 C7 06 01 00 00 00 48 89 46 08 48 C7 46 10 01 00 00 00 C6 46 18 01 48 89 F0 48 83 C4 20 5E C3 B9 01 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12210, 12214, reference_kind::rip_data, 2, {0x68, 0x7a}, "", false, false, "", "", nullptr},
+    // Serializer type key has explicit native length4.
+    {12231, 12235, reference_kind::rip_data, 4, {0x74, 0x79, 0x70, 0x65}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12256, 12260, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 4C 8B 45 68 48 8B 55 60 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12275, 12279, reference_kind::rip_data, 2, {0x69, 0x64}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12300, 12304, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 8B 45 60 F2 48 0F 2A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12315, 12319, reference_kind::rip_data, 4, {0x6d, 0x65, 0x6e, 0x64}, "", false, false, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12336, 12340, reference_kind::rip_data, 4, {0x6b, 0x69, 0x6e, 0x64}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12361, 12365, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 4C 8B 45 68 48 8B 55 60 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12383, 12387, reference_kind::rip_data, 1, {0x78}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12408, 12412, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12429, 12433, reference_kind::rip_data, 1, {0x79}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12454, 12458, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12476, 12480, reference_kind::rip_data, 1, {0x7a}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12501, 12505, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12525, 12529, reference_kind::rip_data, 1, {0x61}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12550, 12554, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F2 0F 10 4D 60 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08 48 01 D9", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12565, 12569, reference_kind::rip_data, 6, {0x63, 0x69, 0x72, 0x63, 0x6c, 0x65}, "", false, false, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12586, 12590, reference_kind::rip_data, 5, {0x73, 0x68, 0x61, 0x70, 0x65}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12611, 12615, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 4C 8B 45 68 48 8B 55 60 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12634, 12638, reference_kind::rip_data, 1, {0x72}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12659, 12663, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12681, 12685, reference_kind::rip_data, 2, {0x74, 0x30}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12706, 12710, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12728, 12732, reference_kind::rip_data, 2, {0x74, 0x31}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12753, 12757, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {12775, 12779, reference_kind::rip_data, 1, {0x74}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12800, 12804, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 58 48 8D 6C 24 50 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F8 48 89 D1 4C 89 C2 4D 89 C8 E8 ?? ?? ?? ?? 90 F3 0F 10 45 60 F3 0F 5A C8 48 8D 4D D8 E8 ?? ?? ?? ?? 90 4C 8B 7D E0 48 8B 7D E8 4C 8B 75 F8 49 8B 06 49 8B 5E 10 48 29 D8 48 39 C7 77 5C 48 85 FF 74 12 49 8B 4E 08", true, true, "", "", nullptr},
+    // specific native/import callee
+    {12827, 12831, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 40 48 8D 6C 24 40 48 C7 45 F8 FE FF FF FF 48 89 CE 48 8B 7A 10 48 89 55 F0 48 39 3A 74 28 48 8B 4D F0 48 8B 41 08 C6 04 38 7D 48 FF C7 48 89 79 10 48 89 7E 10 0F 10 01 0F 11 06 48 89 F0 48 83 C4 40 5F 5E 5D C3 48 C7 44 24 20 01 00 00 00 41 B8 01 00 00 00 41 B9 01 00 00 00 48 8B 4D F0 48 89 FA E8 ?? ?? ?? ?? 90", true, true, "", "", nullptr},
+    // complete wrapper
+    {12884, 12888, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 18 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_2},
+    // Active stat lookup: exact key/tag; five bounded Rust strings, cosmetic views may vary.
+    {12958, 12962, reference_kind::rip_string_table, 88, {}, "", false, false, "", "e42107e87710a83ca00921fe145fd1e2152cc8010eb33e6cb8b6eecf32741f6e", nullptr},
+    // specific native/import callee
+    {13007, 13011, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 20 48 89 CE 41 8B 00 48 8D 0D ?? ?? ?? ?? 48 63 04 81 48 01 C8 FF E0 41 8B 40 04 89 06 48 C7 46 08 FE FF FF FF E9 50 01 00 00 49 8B 40 08 48 3B 82 38 0A 00 00 0F 83 C0 00 00 00 4C 8B A2 30 0A 00 00 4C 8D 2C 80 4B 8B 5C EC 08 4B 83 3C EC FF 4B 8B 7C EC 10 0F 84 A9 00 00 00 48 85 FF 0F 89 A9 00 00 00 45 31 F6 4C 89 F1 48 89 FA", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13088, 13092, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 44 0F 29 45 20 0F 29 7D 10 0F 29 75 00 48 C7 45 F8 FE FF FF FF 44 89 C7 0F 28 F9 48 89 CE 31 C0 80 B9 F7 03 00 00 05 0F 93 C0 48 8D 0D ?? ?? ?? ?? F3 0F 59 3C 81 F3 0F 10 86 68 05 00 00 0F 28 C8 F3 0F 58 CF 0F 28 D1 F3 0F 5D 96 C8 05 00 00 48 8B 85 90 00 00 00 0F 28 F2 F3 0F C2 F2 03 0F 54 CE 0F 55 F2 0F 56 F1 F3 0F 11 B6 68 05 00 00", true, true, "", "", nullptr},
+    // Index is SETAE boolean (two floats) or explicit <=6 bound (seven floats).
+    {13303, 13307, reference_kind::rip_data, 8, {0x00, 0x00, 0x34, 0x43, 0x00, 0x00, 0x16, 0x43}, "", false, false, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {13344, 13348, reference_kind::rip_address, 94, {}, "25 73 20 69 73 20 73 6C 61 69 6E 21 20 49 74 73 20 6C 61 69 72 20 79 69 65 6C 64 73 20 74 72 65 61 73 75 72 65 20 61 6E 64 20 69 74 73 20 73 74 72 65 6E 67 74 68 2C 20 61 6E 64 20 74 68 65 20 6F 74 68 65 72 20 67 75 61 72 64 69 61 6E 73 20 67 72 6F 77 20 73 74 72 6F 6E 67 65 72 2E", false, false, "", "", nullptr},
+    // specific native/import callee
+    {13362, 13366, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 66 44 0F 7F 44 24 50 66 0F 7F 7C 24 40 66 0F 7F 74 24 30 48 89 D6 48 89 CF 8B 05 ?? ?? ?? ?? 85 C0 0F 85 24 02 00 00 48 8B 1D ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 8B 05 ?? ?? ?? ?? 65 48 8B 0C 25 58 00 00 00 48 8B 04 C1 80 B8 E8 03 00 00 00 74 09 48 8B 80 F0 03 00 00 EB 07 48 8B 05 ?? ?? ?? ?? 4C 8D 42 FF 4C 39 C0 4C 0F 42 C0 49 83 F8 0D B9 0D 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13415, 13419, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 54 56 57 53 48 81 EC 80 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 F8 FE FF FF FF 4C 89 CF 4C 89 C3 49 89 D6 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 F3 02 00 00 C6 00 5A C7 40 01 00 00 00 00 48 C7 45 B0 20 00 00 00 48 89 45 B8 48 C7 45 C0 05 00 00 00 66 C7 45 C8 96 00 B8 05 00 00 00 B1 01 84 C9 0F 84 EB 01 00 00 8D 4B 01 48 8B 55 B8", true, true, "", "", nullptr},
+    // complete wrapper
+    {13444, 13448, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {13516, 13520, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 28 89 D7 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 74 25 89 38 48 C7 06 20 00 00 00 48 89 46 08 48 C7 46 10 04 00 00 00 66 C7 46 18 D2 02 48 89 F0 48 83 C4 28 5F 5E C3 B9 01 00 00 00 BA 20 00 00 00 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // complete wrapper
+    {13545, 13549, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {13626, 13630, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 88 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F0 4C 89 45 F8 48 8D 3D ?? ?? ?? ?? BB 27 00 00 00 BA 27 00 00 00 48 89 F9 E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8 48 0F 45 DA 48 8D 05 ?? ?? ?? ?? 48 89 45 A8 48 C7 45 B0 04 00 00 00 48 8D 45 F0 48 89 45 B8 48 8D 05 ?? ?? ?? ?? 48 89 45 C0 48 C7 44 24 20 01 00 00 00 48 8D 4D C8 4C 8D 4D A8", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13649, 13653, reference_kind::relative_call, 0, {}, "55 56 57 53 48 81 EC 88 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 00 FE FF FF FF 48 89 CE BF 01 00 00 00 F0 0F C1 3D ?? ?? ?? ?? 48 8D 4D D0 48 89 55 F8 41 89 F8 E8 ?? ?? ?? ?? 90 48 8B 9E 28 07 00 00 48 3B 9E 18 07 00 00 75 0D 48 8D 8E 18 07 00 00 E8 ?? ?? ?? ?? 90 48 8B 86 20 07 00 00 48 8D 0C 5B 48 8B 55 E0 48 89 54 C8 10 0F 10 45 D0 0F 11 04 C8 48 FF C3 48 89 9E 28 07 00 00 48 8B 9E 38 05 00 00 48 8D 4D B8 48 8B 55 F8", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13692, 13696, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13715, 13719, reference_kind::relative_call, 0, {}, "56 57 53 48 83 EC 30 48 8B B9 78 09 00 00 48 85 FF 0F 84 E7 00 00 00 48 8B 81 70 09 00 00 F3 0F 10 00 0F 2E 81 88 0E 00 00 0F 87 CF 00 00 00 4C 8B 81 00 0E 00 00 4C 8B 89 E8 0D 00 00 4C 8B 91 F0 0D 00 00 4F 8D 1C 08 49 C1 C3 17 4D 01 CB 4C 89 D6 48 C1 E6 11 48 8B 99 F8 0D 00 00 4C 31 CB 4D 31 D0 49 31 DA 4C 89 91 F0 0D 00 00 4D 31 C1 4C 89 89 E8 0D 00 00 48 31 F3 48 89 99 F8 0D 00 00 49 C1 EB 28 0F 57 C0 F3 41 0F 2A C3 49 C1 C0 2D", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13903, 13907, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 83 EC 60 48 8D 6C 24 60 48 C7 45 F8 FE FF FF FF 48 89 CF 48 8D 41 40 48 89 45 C8 48 8D 05 ?? ?? ?? ?? 48 89 45 D0 48 8D 15 ?? ?? ?? ?? 48 8D 4D D8 4C 8D 45 C8 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 55 E8 48 8B 37 48 8B 5F 08 48 89 4D F0 E8 ?? ?? ?? ?? 90 48 89 C7 48 8B 45 D8 48 85 C0 74 18 41 B8 01 00 00 00 48 8B 4D F0 49 89 D6 48 89 C2", true, true, "", "", nullptr},
+    // Literal is paired with an exact immediate length in the audited native body.
+    {13924, 13928, reference_kind::rip_data, 13, {0x49, 0x6d, 0x70, 0x6f, 0x73, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x2e, 0x2e, 0x2e}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {13942, 13946, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 66 44 0F 7F 44 24 50 66 0F 7F 7C 24 40 66 0F 7F 74 24 30 48 89 D6 48 89 CF 8B 05 ?? ?? ?? ?? 85 C0 0F 85 24 02 00 00 48 8B 1D ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 8B 05 ?? ?? ?? ?? 65 48 8B 0C 25 58 00 00 00 48 8B 04 C1 80 B8 E8 03 00 00 00 74 09 48 8B 80 F0 03 00 00 EB 07 48 8B 05 ?? ?? ?? ?? 4C 8D 42 FF 4C 39 C0 4C 0F 42 C0 49 83 F8 0D B9 0D 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {13992, 13996, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 78 48 8D 6C 24 70 48 C7 45 00 FE FF FF FF 4C 89 CF 4C 89 C3 49 89 D6 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 61 03 00 00 C6 00 0C C7 40 01 00 00 00 00 48 C7 45 E0 20 00 00 00 48 89 45 E8 48 C7 45 F0 05 00 00 00 66 C7 45 F8 96 00 B8 05 00 00 00 B1 01 84 C9 0F 84 31 02 00 00 48 8B 4D E8 4C 89 34 01 48 83 C0 08", true, true, "", "", nullptr},
+    // complete wrapper
+    {14021, 14025, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {14084, 14088, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 83 EC 60 48 8D 6C 24 60 48 C7 45 F8 FE FF FF FF 48 89 CF 48 8D 41 40 48 89 45 C8 48 8D 05 ?? ?? ?? ?? 48 89 45 D0 48 8D 15 ?? ?? ?? ?? 48 8D 4D D8 4C 8D 45 C8 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 55 E8 48 8B 37 48 8B 5F 08 48 89 4D F0 E8 ?? ?? ?? ?? 90 48 89 C7 48 8B 45 D8 48 85 C0 74 18 41 B8 01 00 00 00 48 8B 4D F0 49 89 D6 48 89 C2", true, true, "", "", nullptr},
+    // specific native/import callee
+    {14110, 14114, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 88 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 00 FE FF FF FF 48 89 CE 48 89 55 F0 4C 89 45 F8 48 8D 3D ?? ?? ?? ?? BB 13 00 00 00 BA 13 00 00 00 48 89 F9 E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8 48 0F 45 DA 48 8D 05 ?? ?? ?? ?? 48 89 45 A8 48 C7 45 B0 04 00 00 00 48 8D 45 F0 48 89 45 B8 48 8D 05 ?? ?? ?? ?? 48 89 45 C0 48 C7 44 24 20 01 00 00 00 48 8D 4D C8 4C 8D 4D A8 48 89 FA 49 89 D8 E8 ?? ?? ?? ?? 48 8B 7D F8 4C 8B 65 C8 4C 8B 6D D0 48 85 FF 79 19 45 31 FF 4C 89 6D E8 4C 89 65 E0 4C 89 F9 48 89 FA E8 ?? ?? ?? ?? 90 0F 0B 74 34 4C 8B 75 F0 E8 ?? ?? ?? ?? 41 BF 01 00 00 00 BA 01 00 00 00 48 89 F9 E8 ?? ?? ?? ?? 48 85 C0 74 C7 48 89 C3 48 89 C1 4C 89 F2 49 89 F8 E8 ?? ?? ?? ?? EB 05 BB 01 00 00 00 48 8D 05 ?? ?? ?? ?? 48 89 46 30 48 C7 46 38 08 00 00 00 0F 10 45 C8 0F 11 06 48 8B 45 D8 48 89 46 10 48 89 7E 18 48 89 5E 20 48 89 7E 28 C6 46 40 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {14133, 14137, reference_kind::relative_call, 0, {}, "55 56 57 53 48 81 EC 88 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 00 FE FF FF FF 48 89 CE BF 01 00 00 00 F0 0F C1 3D ?? ?? ?? ?? 48 8D 4D D0 48 89 55 F8 41 89 F8 E8 ?? ?? ?? ?? 90 48 8B 9E 28 07 00 00 48 3B 9E 18 07 00 00 75 0D 48 8D 8E 18 07 00 00 E8 ?? ?? ?? ?? 90 48 8B 86 20 07 00 00 48 8D 0C 5B 48 8B 55 E0 48 89 54 C8 10 0F 10 45 D0 0F 11 04 C8 48 FF C3 48 89 9E 28 07 00 00 48 8B 9E 38 05 00 00 48 8D 4D B8 48 8B 55 F8", true, true, "", "", nullptr},
+    // specific native/import callee
+    {14176, 14180, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // scalar constant
+    {14211, 14215, reference_kind::rip_data, 8, {0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {14257, 14261, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // Rust panic Location is &path,len,line32,column32; pointer relocation must be verified separately.
+    {14310, 14314, reference_kind::rip_inactive, 24, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {14317, 14321, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 0F 29 7C 24 30 0F 29 74 24 20 48 89 D0 48 8B 71 10 48 39 F2 73 4E 48 89 CF 48 8B 51 08 48 8D 0C C2 F3 0F 10 34 C2 F3 0F 10 7C C2 04 48 8D 14 C2 48 83 C2 08 48 F7 D0 48 01 F0 48 C1 E0 03 49 89 C0 E8 ?? ?? ?? ?? 48 FF CE 48 89 77 10 0F 28 C6 0F 28 CF 0F 28 74 24 20 0F 28 7C 24 30 48 83 C4 48 5F 5E C3 48 89 C1", true, true, "", "", nullptr},
+    // scalar constant
+    {14326, 14330, reference_kind::rip_data, 16, {0x00, 0x00, 0x00, 0xc0, 0x00, 0x00, 0xc0, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {14369, 14373, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {14415, 14419, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 00 00 00 48 8D AC 24 80 00 00 00 44 0F 29 4D 00 44 0F 29 45 F0 0F 29 7D E0 0F 29 75 D0 48 C7 45 C8 FE FF FF FF 48 89 D3 48 89 CE 48 8B 89 58 03 00 00 48 8B 96 60 03 00 00 E8 ?? ?? ?? ?? 48 69 C8 F0 00 00 00 48 8D 05 ?? ?? ?? ?? 48 8B 94 01 88 00 00 00 48 39 DA 74 38 4C 8D 42 68 49 39 D8 74 33 4C 8D 82 D0 00 00 00 49 39 D8 74 2E 4C 8D 82 38 01 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {14468, 14472, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 10 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {14517, 14521, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 28 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 9D 90 00 00 00 44 0F 29 95 80 00 00 00 44 0F 29 4D 70 44 0F 29 45 60 0F 29 7D 50 0F 29 75 40 48 C7 45 38 FE FF FF FF 48 89 CE F2 0F 10 B1 50 05 00 00 F3 0F 16 FE 8B 81 58 05 00 00 89 45 2C F3 44 0F 10 81 88 0E 00 00 48 C7 45 10 00 00 00 00 48 C7 45 18 08 00 00 00 48 C7 45 20 00 00 00 00 48 8B 99 F0 06 00 00 48 8B 81 F8 06 00 00 48 8D 04 C0 48 8D 04 C3 45 31 F6 F3 44 0F 10 0D ?? ?? ?? ??", true, true, "", "", nullptr},
+    // scalar constant
+    {14729, 14733, reference_kind::rip_data, 4, {0x33, 0x33, 0xd3, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {14763, 14767, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {14802, 14806, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x33}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {14811, 14815, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!truncf", "", nullptr},
+    // specific native/import callee
+    {14859, 14863, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // scalar constant
+    {14882, 14886, reference_kind::rip_data, 4, {0xc3, 0xf5, 0x28, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {14892, 14896, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {15004, 15008, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x33}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {15049, 15053, reference_kind::relative_call, 0, {}, "56 57 53 48 83 EC 20 41 29 D0 76 75 48 89 C8 41 0F BD C8 F7 D1 45 89 C1 41 D3 E1 41 FF C9 4C 8B 18 48 8B 48 08 48 8B 70 18 4C 8B 50 10 0F 1F 00 49 8D 3C 33 48 C1 C7 17 4C 01 DF 48 89 CB 48 C1 E3 11 4D 31 DA 48 31 CE 4C 31 D1 49 31 F3 48 C1 C6 2D 49 31 DA 48 C1 EF 20 49 0F AF F8 41 39 F9 72 CE", true, true, "", "", nullptr},
+    // scalar constant
+    {15064, 15068, reference_kind::rip_data, 16, {0xcd, 0xcc, 0x4c, 0x3f, 0xcd, 0xcc, 0x4c, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {15118, 15122, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // scalar constant
+    {15141, 15145, reference_kind::rip_data, 16, {0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x80, 0xbf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {15173, 15177, reference_kind::relative_call, 0, {}, "56 48 83 EC 50 0F 29 7C 24 40 0F 29 74 24 30 0F 28 F2 0F 28 F9 48 89 CE E8 ?? ?? ?? ?? A8 01 75 32 48 83 7E 58 FF 74 23 48 8D 56 58 48 8D 4C 24 20 0F 28 D7 0F 28 DE E8 ?? ?? ?? ?? 83 7C 24 20 01 75 08 F3 0F 10 44 24 2C EB 08 F3 0F 10 86 C0 00 00 00 0F 28 74 24 30 0F 28 7C 24 40 48 83 C4 50 5E C3", true, true, "", "", nullptr},
+    // specific native/import callee
+    {15217, 15221, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 68 01 00 00 48 8D AC 24 80 00 00 00 66 44 0F 7F 8D D0 00 00 00 44 0F 29 85 C0 00 00 00 0F 29 BD B0 00 00 00 0F 29 B5 A0 00 00 00 48 C7 85 98 00 00 00 FE FF FF FF 4D 89 CE 45 89 C4 41 89 D7 48 89 CF 48 8B 89 58 03 00 00 48 8B 97 60 03 00 00 E8 ?? ?? ?? ?? 48 69 F0 F0 00 00 00 48 8D 1D ?? ?? ?? ?? F2 41 0F 10 36 F2 0F 10 BC 1E C8 00 00 00 44 0F 28 C6 44 0F 5C C7 F3 41 0F 16 C8 41 0F 28 C0 E8 ?? ?? ?? ?? F3 0F 10 8C 1E D8 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {15230, 15234, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 28 48 8D 6C 24 20 48 C7 45 00 FE FF FF FF 48 8B 31 48 85 F6 0F 84 C6 01 00 00 4C 8B 71 08 48 8B 79 10 48 85 FF 0F 84 C2 01 00 00 31 C9 BB 50 00 00 00 48 89 F0 EB 22 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 49 FF C6 B8 00 00 00 00 48 89 F1 48 FF CF 0F 84 F2 01 00 00 48 85 C9 74 27 0F B7 51 36 49 39 D6 0F 83 AA 00 00 00 49 89 C7", true, true, "", "", nullptr},
+    // All signed table entries resolve to the same audited owning function offsets.
+    {15404, 15408, reference_kind::rip_jump_table, 16, {}, "", false, false, "", "6d25066dabfee45d2060cbfcc6550314bde00b444909550d7adc1ab75fef18fd", nullptr},
+    // specific native/import callee
+    {15694, 15698, reference_kind::relative_call, 0, {}, "48 89 C8 F3 0F 10 8A B0 01 00 00 0F 57 C0 0F 2E C1 73 5E F3 0F 5C 92 AC 01 00 00 F3 0F 5E D1 F3 0F 5F C2 F3 0F 10 0D ?? ?? ?? ?? F3 0F 5D C8 F3 0F 10 82 9C 01 00 00 F3 0F 10 92 A8 01 00 00 F3 0F 5C D0 F3 0F 59 D1 F3 0F 58 D0 F2 0F 10 82 94 01 00 00 F2 0F 10 9A A0 01 00 00 0F 5C D8 F3 0F 12 C9 0F 59 CB 0F 58 C8 0F 13 08 F3 0F 11 50 08 C3", true, false, "", "", nullptr},
+    // specific native/import callee
+    {15742, 15746, reference_kind::relative_call, 0, {}, "56 57 48 8B 41 10 48 85 C0 74 23 4C 8B 41 08 4C 8B 0A 31 D2 66 66 66 2E 0F 1F 84 00 00 00 00 00 4D 39 0C D0 74 0B 48 FF C2 48 39 D0 75 F2 5F 5E C3 4C 8D 52 01 49 39 C2 73 31 4C 8D 58 FE 8D 3C 10 48 89 D6 40 F6 C7 01 75 19 4D 8B 54 D0 08 48 89 D6 4D 39 CA 74 08 4D 89 14 D0 48 8D 72 01 4C 8D 52 02", true, true, "", "", nullptr},
+    // specific native/import callee
+    {15892, 15896, reference_kind::relative_call, 0, {}, "55 56 57 53 48 81 EC D8 00 00 00 48 8D AC 24 80 00 00 00 0F 29 75 40 48 C7 45 38 FE FF FF FF 66 0F 6F F3 48 89 D7 48 89 CE 48 C7 45 C8 00 00 00 00 48 C7 45 D8 00 00 00 00 48 8D 5D C8 48 89 5D E0 0F 57 C0 0F 11 45 E8 48 C7 45 00 83 00 00 00 48 8D 4D A8 48 8D 55 E0 E8 ?? ?? ?? ?? 90 48 8B 45 C8 48 85 C0 74 72 48 8B 4D D0 66 BA 04 00 44 0F B7 40 36 45 89 C2 45 01 D2 49 C7 C1 FF FF FF FF 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {15925, 15929, reference_kind::relative_call, 0, {}, "56 57 48 8B 41 10 48 85 C0 74 23 4C 8B 41 08 4C 8B 0A 31 D2 66 66 66 2E 0F 1F 84 00 00 00 00 00 4D 39 0C D0 74 0B 48 FF C2 48 39 D0 75 F2 5F 5E C3 4C 8D 52 01 49 39 C2 73 31 4C 8D 58 FE 8D 3C 10 48 89 D6 40 F6 C7 01 75 19 4D 8B 54 D0 08 48 89 D6 4D 39 CA 74 08 4D 89 14 D0 48 8D 72 01 4C 8D 52 02", true, true, "", "", nullptr},
+    // scalar constant
+    {16078, 16082, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x40}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {16113, 16117, reference_kind::rip_data, 4, {0x00, 0x00, 0xc8, 0x42}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {16149, 16153, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC 58 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 8D C0 00 00 00 44 0F 29 85 B0 00 00 00 0F 29 BD A0 00 00 00 0F 29 B5 90 00 00 00 48 C7 85 88 00 00 00 FE FF FF FF F3 0F 10 05 ?? ?? ?? ?? 0F 2E 81 FC 0A 00 00 0F 87 3C 04 00 00 48 89 CE F3 0F 10 81 88 0E 00 00 48 8B 89 68 0A 00 00 F3 0F 10 0D ?? ?? ?? ?? 48 85 C9 74 5B 48 8B 86 60 0A 00 00 48 C1 E1 03 48 8D 14 49 31 C9 49 B8 62 6C 6F 6F 64 72 61 67 EB 18 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 48 83 C1 18 48 39 CA 74 26", true, true, "", "", nullptr},
+    // scalar constant
+    {16284, 16288, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {16410, 16414, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x40}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {16433, 16437, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!floorf", "", nullptr},
+    // scalar constant
+    {16477, 16481, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {16523, 16527, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 78 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 9D E0 00 00 00 44 0F 29 95 D0 00 00 00 44 0F 29 8D C0 00 00 00 44 0F 29 85 B0 00 00 00 0F 29 BD A0 00 00 00 0F 29 B5 90 00 00 00 48 C7 85 88 00 00 00 FE FF FF FF 83 B9 08 0B 00 00 05 0F 82 FB 04 00 00 48 89 CE F3 0F 10 81 88 0E 00 00 48 8B 89 68 0A 00 00 F3 0F 10 0D ?? ?? ?? ?? 48 85 C9 74 4F 48 8B 86 60 0A 00 00 48 C1 E1 03 48 8D 14 49 31 C9 49 B8 73 65 61 6C 5F 66 61 74 EB 0C 0F 1F 00", true, true, "", "", nullptr},
+    // scalar constant
+    {16592, 16596, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {16609, 16613, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0xbf}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {16932, 16936, reference_kind::relative_call, 0, {}, "48 89 C8 F3 0F 10 8A B0 01 00 00 0F 57 C0 0F 2E C1 73 5E F3 0F 5C 92 AC 01 00 00 F3 0F 5E D1 F3 0F 5F C2 F3 0F 10 0D ?? ?? ?? ?? F3 0F 5D C8 F3 0F 10 82 9C 01 00 00 F3 0F 10 92 A8 01 00 00 F3 0F 5C D0 F3 0F 59 D1 F3 0F 58 D0 F2 0F 10 82 94 01 00 00 F2 0F 10 9A A0 01 00 00 0F 5C D8 F3 0F 12 C9 0F 59 CB 0F 58 C8 0F 13 08 F3 0F 11 50 08 C3", true, false, "", "", nullptr},
+    // spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section.
+    {17002, 17006, reference_kind::rip_address, 28, {}, "00 00 00 3F 00 00 00 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 3F", false, false, "", "", nullptr},
+    // specific native/import callee
+    {17059, 17063, reference_kind::relative_call, 0, {}, "48 83 EC 38 0F 29 74 24 20 48 8B 01 F3 0F 10 41 1C F3 0F 59 41 44 F3 0F 59 40 50 F3 0F 59 42 2C F3 0F 10 0D ?? ?? ?? ?? 0F 2E C8 73 25 F3 0F 58 05 ?? ?? ?? ?? F3 0F 10 35 ?? ?? ?? ?? F3 0F 5E C6 E8 ?? ?? ?? ?? F3 0F 59 C6 F3 0F 58 05 ?? ?? ?? ?? 0F 28 74 24 20 48 83 C4 38 C3", true, true, "", "", nullptr},
+    // specific native/import callee
+    {17119, 17123, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // scalar constant
+    {17141, 17145, reference_kind::rip_data, 4, {0xcd, 0xcc, 0x4c, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {17149, 17153, reference_kind::rip_data, 4, {0x9a, 0x99, 0x99, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {17171, 17175, reference_kind::rip_data, 4, {0x33, 0x33, 0xb3, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {17421, 17425, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {17457, 17461, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // scalar constant
+    {17715, 17719, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {17757, 17761, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {17805, 17809, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 48 8B 81 50 06 00 00 48 85 C0 0F 84 93 06 00 00 48 8B B1 48 06 00 00 49 89 C2 49 C1 E2 09 49 8D 04 C2 EB 1C 66 0F 1F 84 00 00 00 00 00 48 81 C6 08 02 00 00 48 05 F8 FD FF FF 0F 84 63 06 00 00 48 39 96 F0 00 00 00 75 E4 83 BE B0 00 00 00 01 74 DB 44 8B BE 38 01 00 00 45 84 C9 0F 84 89 01 00 00 F3 0F 6F 8E 3C 01 00 00 F3 0F 6F 86 4C 01 00 00", true, true, "", "", nullptr},
+    // spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section.
+    {18063, 18067, reference_kind::rip_address, 28, {}, "00 00 00 3F 00 00 00 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 3F", false, false, "", "", nullptr},
+    // scalar constant
+    {18078, 18082, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {18131, 18135, reference_kind::relative_call, 0, {}, "48 83 EC 38 0F 29 74 24 20 48 8B 01 F3 0F 10 41 1C F3 0F 59 41 44 F3 0F 59 40 50 F3 0F 59 42 2C F3 0F 10 0D ?? ?? ?? ?? 0F 2E C8 73 25 F3 0F 58 05 ?? ?? ?? ?? F3 0F 10 35 ?? ?? ?? ?? F3 0F 5E C6 E8 ?? ?? ?? ?? F3 0F 59 C6 F3 0F 58 05 ?? ?? ?? ?? 0F 28 74 24 20 48 83 C4 38 C3", true, true, "", "", nullptr},
+    // specific native/import callee
+    {18181, 18185, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {18273, 18277, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {18311, 18315, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // scalar constant
+    {18320, 18324, reference_kind::rip_data, 4, {0x9a, 0x99, 0x19, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {18342, 18346, reference_kind::rip_data, 4, {0x33, 0x33, 0xb3, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {18480, 18484, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x33}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {18804, 18808, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 38 0F 29 74 24 20 48 85 D2 74 4D 4C 89 CE 4C 89 C7 48 89 D3 49 89 CE 49 83 C6 10 F3 0F 10 35 ?? ?? ?? ?? EB 0C 0F 1F 00 49 83 C6 40 48 FF CB 74 2F 41 80 7E F0 0D 75 F0 49 39 36 75 EB 49 8B 4E F8 48 89 FA 49 89 F0 E8 ?? ?? ?? ?? 85 C0 75 D8 F3 41 0F 58 76 F4 EB D0 F3 0F 10 35 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // specific native/import callee
+    {18873, 18877, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 48 48 8D 6C 24 40 48 C7 45 00 FE FF FF FF 48 89 CE 4C 8B 32 4C 8B 7A 08 4D 39 FE 74 69 4C 8B 62 10 49 8B 44 24 08 49 8B 4C 24 10 49 89 C8 49 C1 E0 09 49 8D 0C C8 49 8B 3E 49 83 C6 08 49 89 C8 49 89 C1 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 4D 85 C0 74 2B 4D 89 CA 49 81 C1 08 02 00 00 49 81 C0 F8 FD FF FF", true, true, "", "", nullptr},
+    // complete wrapper
+    {19013, 19017, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {19061, 19065, reference_kind::relative_call, 0, {}, "56 57 48 81 EC 98 00 00 00 0F 29 B4 24 80 00 00 00 48 8B 91 08 04 00 00 48 85 D2 0F 84 1C 01 00 00 48 8B 81 00 04 00 00 4C 6B CA 58 31 D2 49 BA 73 6F 75 6C 5F 66 69 72 EB 13 66 0F 1F 44 00 00 48 83 C2 58 49 39 D1 0F 84 F0 00 00 00 4C 8B 04 10 49 83 78 08 09 75 E8 4D 8B 18 49 8B 33 4C 31 D6 45 0F B6 5B 08 49 83 F3 65 49 09 F3 75 D1 44 8B 4C 10 08 F3 0F 10 44 10 14 44 8B 54 10 18 F2 0F 10 4C 10 0C F2 0F 10 54 10 1C 44 8B 5C 10 34", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19097, 19101, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 38 0F 29 74 24 20 48 8B 81 08 04 00 00 48 85 C0 0F 84 DE 01 00 00 4C 8B 91 00 04 00 00 48 6B F0 58 45 31 DB 48 BF 72 65 64 65 6D 70 74 69 EB 12 0F 1F 44 00 00 49 83 C3 58 4C 39 DE 0F 84 B2 01 00 00 4B 8B 04 1A 48 83 78 08 0A 75 E8 48 8B 18 4C 8B 33 49 31 FE 0F B7 5B 08 48 81 F3 6F 6E 00 00 4C 09 F3 75 CF 48 8B B1 98 0A 00 00 48 83 FE 03", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19140, 19144, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 01 00 00 0F 29 B4 24 F0 00 00 00 48 8B 81 08 04 00 00 48 85 C0 0F 84 3C 04 00 00 4C 8B 81 00 04 00 00 4C 6B D0 58 45 31 C9 49 BB 70 6F 6C 79 6D 6F 72 70 EB 18 66 66 2E 0F 1F 84 00 00 00 00 00 49 83 C1 58 4D 39 CA 0F 84 0A 04 00 00 4B 8B 2C 08 48 83 7D 08 09 75 E8 48 8B 45 00 48 8B 30 4C 31 DE 0F B6 78 08 48 83 F7 68 48 09 F7 75 D1", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19169, 19173, reference_kind::relative_call, 0, {}, "56 57 48 81 EC 98 00 00 00 0F 29 B4 24 80 00 00 00 48 8B 91 08 04 00 00 48 85 D2 0F 84 1C 01 00 00 48 8B 81 00 04 00 00 4C 6B CA 58 31 D2 49 BA 73 6F 75 6C 5F 66 69 72 EB 13 66 0F 1F 44 00 00 48 83 C2 58 49 39 D1 0F 84 F0 00 00 00 4C 8B 04 10 49 83 78 08 09 75 E8 4D 8B 18 49 8B 33 4C 31 D6 45 0F B6 5B 08 49 83 F3 65 49 09 F3 75 D1 44 8B 4C 10 08 F3 0F 10 44 10 14 44 8B 54 10 18 F2 0F 10 4C 10 0C F2 0F 10 54 10 1C 44 8B 5C 10 34", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19205, 19209, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 38 0F 29 74 24 20 48 8B 81 08 04 00 00 48 85 C0 0F 84 DE 01 00 00 4C 8B 91 00 04 00 00 48 6B F0 58 45 31 DB 48 BF 72 65 64 65 6D 70 74 69 EB 12 0F 1F 44 00 00 49 83 C3 58 4C 39 DE 0F 84 B2 01 00 00 4B 8B 04 1A 48 83 78 08 0A 75 E8 48 8B 18 4C 8B 33 49 31 FE 0F B7 5B 08 48 81 F3 6F 6E 00 00 4C 09 F3 75 CF 48 8B B1 98 0A 00 00 48 83 FE 03", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19293, 19297, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 55 53 48 83 EC 38 0F 29 74 24 20 48 8B 81 08 04 00 00 48 85 C0 0F 84 DE 01 00 00 4C 8B 91 00 04 00 00 48 6B F0 58 45 31 DB 48 BF 72 65 64 65 6D 70 74 69 EB 12 0F 1F 44 00 00 49 83 C3 58 4C 39 DE 0F 84 B2 01 00 00 4B 8B 04 1A 48 83 78 08 0A 75 E8 48 8B 18 4C 8B 33 49 31 FE 0F B7 5B 08 48 81 F3 6F 6E 00 00 4C 09 F3 75 CF 48 8B B1 98 0A 00 00 48 83 FE 03", true, true, "", "", nullptr},
+    // scalar constant
+    {19377, 19381, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {19679, 19683, reference_kind::relative_call, 0, {}, "41 57 41 56 56 57 53 48 83 EC 30 0F 29 74 24 20 48 8B 41 10 F3 0F 10 35 ?? ?? ?? ?? 48 85 C0 74 49 4C 89 C6 48 89 D7 48 8B 59 08 48 C1 E0 03 4C 8D 3C 40 45 31 F6 EB 11 0F 1F 84 00 00 00 00 00 49 83 C6 18 4D 39 F7 74 21 4A 39 74 33 08 75 F0 4A 8B 0C 33 48 89 FA 49 89 F0 E8 ?? ?? ?? ?? 85 C0 75 DD F3 42 0F 10 74 33 10 0F 28 C6", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19710, 19714, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 88 00 00 00 48 8D AC 24 80 00 00 00 0F 29 7D F0 0F 29 75 E0 48 C7 45 D8 FE FF FF FF 48 89 D7 48 89 CE 48 8D 91 C8 05 00 00 48 89 F9 E8 ?? ?? ?? ?? A8 01 0F 84 28 02 00 00 0F 28 F0 48 8B 07 48 8B 38 48 89 45 D0 48 8B 58 08 F3 0F 10 BE 88 0E 00 00 F3 0F 58 F8 4C 8B A6 60 0A 00 00 4C 8B BE 68 0A 00 00 4D 85 FF 74 57 4A 8D 04 FD 00 00 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19757, 19761, reference_kind::relative_call, 0, {}, "48 83 EC 38 0F 29 74 24 20 48 8B 01 F3 0F 10 41 1C F3 0F 59 41 44 F3 0F 59 40 50 F3 0F 59 42 2C F3 0F 10 0D ?? ?? ?? ?? 0F 2E C8 73 25 F3 0F 58 05 ?? ?? ?? ?? F3 0F 10 35 ?? ?? ?? ?? F3 0F 5E C6 E8 ?? ?? ?? ?? F3 0F 59 C6 F3 0F 58 05 ?? ?? ?? ?? 0F 28 74 24 20 48 83 C4 38 C3", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19810, 19814, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {19909, 19913, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {19945, 19949, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // spell_id=0 skips ability definition lookups; borrowed equipped spells_count=0 skips the inline spell-proc section.
+    {20013, 20017, reference_kind::rip_address, 28, {}, "00 00 00 3F 00 00 00 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 00 3F", false, false, "", "", nullptr},
+    // scalar constant
+    {20028, 20032, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {20085, 20089, reference_kind::rip_data, 4, {0x33, 0x33, 0xb3, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {20148, 20152, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x33}, "", false, false, "", "", nullptr},
+    // complete wrapper
+    {20418, 20422, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {20489, 20493, reference_kind::relative_call, 0, {}, "56 57 48 8B 41 10 48 85 C0 74 2A 4C 8B 41 08 48 8B 12 4D 8D 58 10 49 89 C1 49 F7 D9 45 31 D2 90 49 39 53 F0 74 12 49 FF C2 49 83 C3 10 4C 89 CE 4C 01 D6 75 EB 5F 5E C3 49 8D 7A 01 48 39 C7 73 31 4D 89 D1 49 29 C1 49 8D 71 02 41 F6 C1 01 75 28 4D 89 D1 49 39 13", true, true, "", "", nullptr},
+    // scalar constant
+    {20694, 20698, reference_kind::rip_data, 4, {0x00, 0x00, 0x40, 0x41}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {20706, 20710, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 54 56 57 53 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 0F 29 75 00 48 C7 45 F8 FE FF FF FF 48 89 D7 48 89 CE F3 0F 10 82 88 0E 00 00 F3 0F 11 45 F4 4C 8B B2 B0 0A 00 00 4D 85 F6 74 62 4D 89 C4 0F 28 F3 4C 8B BF A8 0A 00 00 4A 8D 1C F5 00 00 00 00 E8 ?? ?? ?? ?? BA 08 00 00 00 48 89 D9 E8 ?? ?? ?? ?? 48 85 C0 0F 84 A7 01 00 00 49 83 FE 10 0F 28 DE 4D 89 E0 76 22", true, true, "", "", nullptr},
+    // specific native/import callee
+    {20746, 20750, reference_kind::relative_call, 0, {}, "55 56 57 53 48 81 EC 88 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 00 FE FF FF FF 48 89 D6 48 89 CF 48 8B 99 B0 0A 00 00 48 3B 99 A0 0A 00 00 75 0C 48 8D 8F A0 0A 00 00 E8 ?? ?? ?? ?? 48 8B 87 A8 0A 00 00 48 89 D9 48 C1 E1 04 48 89 34 08 C7 44 08 08 00 00 80 40 48 FF C3 48 89 9F B0 0A 00 00 48 8B 97 38 05 00 00 48 89 75 F8 48 89 75 F0 C7 45 E8 00 00 00 00 C7 45 DC 00 00 00 00 48 8D 45 DC 48 89 44 24 30 48 8D 45 E8 48 89 44 24 28 48 C7 44 24 20 01 00 00 00 48 8D 4D B8", true, true, "", "", nullptr},
+    // complete wrapper
+    {20781, 20785, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {21159, 21163, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC F8 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 60 02 00 00 44 0F 29 B5 50 02 00 00 44 0F 29 AD 40 02 00 00 44 0F 29 A5 30 02 00 00 44 0F 29 9D 20 02 00 00 44 0F 29 95 10 02 00 00 44 0F 29 8D 00 02 00 00 44 0F 29 85 F0 01 00 00 0F 29 BD E0 01 00 00 0F 29 B5 D0 01 00 00 48 C7 85 C8 01 00 00 FE FF FF FF 49 89 CF 48 8B 99 20 0A 00 00 49 89 DC 49 C1 E4 06 48 89 D8 48 C1 E8 3A 0F 95 C0 48 B9 F8 FF FF FF FF FF FF 7F 49 39 CC 0F 97 C1 08 C1", true, true, "", "", nullptr},
+    // specific native/import callee
+    {21359, 21363, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC F8 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 60 02 00 00 44 0F 29 B5 50 02 00 00 44 0F 29 AD 40 02 00 00 44 0F 29 A5 30 02 00 00 44 0F 29 9D 20 02 00 00 44 0F 29 95 10 02 00 00 44 0F 29 8D 00 02 00 00 44 0F 29 85 F0 01 00 00 0F 29 BD E0 01 00 00 0F 29 B5 D0 01 00 00 48 C7 85 C8 01 00 00 FE FF FF FF 49 89 CF 48 8B 99 20 0A 00 00 49 89 DC 49 C1 E4 06 48 89 D8 48 C1 E8 3A 0F 95 C0 48 B9 F8 FF FF FF FF FF FF 7F 49 39 CC 0F 97 C1 08 C1", true, true, "", "", nullptr},
+    // complete wrapper
+    {21394, 21398, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {21407, 21411, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 83 EC 28 48 8D 6C 24 20 48 C7 45 00 FE FF FF FF 48 8B 31 48 85 F6 0F 84 C6 01 00 00 4C 8B 71 08 48 8B 79 10 48 85 FF 0F 84 C2 01 00 00 31 C9 BB 50 00 00 00 48 89 F0 EB 22 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 49 FF C6 B8 00 00 00 00 48 89 F1 48 FF CF 0F 84 F2 01 00 00 48 85 C9 74 27 0F B7 51 36 49 39 D6 0F 83 AA 00 00 00 49 89 C7", true, true, "", "", nullptr},
+    // complete wrapper
+    {21438, 21442, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {21473, 21477, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {21737, 21741, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {21771, 21775, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 30 48 8D 6C 24 30 48 C7 45 F8 FE FF FF FF 48 89 55 F0 48 89 CE 48 8B 79 10 48 3B 39 75 09 48 89 F1 E8 ?? ?? ?? ?? 90 48 8B 46 08 48 89 F9 48 C1 E1 05 48 8B 55 F0 0F 10 02 0F 10 4A 10 0F 11 4C 08 10 0F 11 04 08 48 FF C7 48 89 7E 10 48 83 C4 30 5F 5E 5D C3", true, true, "", "", &v139_helper_5},
+    // specific native/import callee
+    {21985, 21989, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {22021, 22025, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // complete wrapper
+    {22556, 22560, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // complete wrapper
+    {22590, 22594, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // Formatting callback for no-ability panic branch; no normal spell_id==0 lookup reaches it.
+    {22630, 22634, reference_kind::rip_inactive, 16, {}, "", true, false, "", "", nullptr},
+    // Panic text formatting header and no-ability literal; tail only.
+    {22644, 22648, reference_kind::rip_inactive, 16, {}, "", false, false, "", "", nullptr},
+    // Rust panic Location is &path,len,line32,column32; pointer relocation must be verified separately.
+    {22651, 22655, reference_kind::rip_inactive, 24, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {22663, 22667, reference_kind::relative_call, 0, {}, "55 48 83 EC 50 48 8D 6C 24 50 48 89 4D F0 48 89 55 F8 48 8D 45 F0 48 89 45 D8 4C 89 45 E0 66 C7 45 E8 01 00 48 8D 4D D8 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // complete wrapper
+    {22783, 22787, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 89 C8 48 89 D1 48 89 C2 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_6},
+    // complete wrapper
+    {22808, 22812, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 89 C8 48 89 D1 48 89 C2 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_6},
+};
+static constexpr function_certificate v139_damage{
+    "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09",
+    22815,
+    "6c6a8d3bc66ac45873df9b2c4b66302b0ffd05d7f3fdc016a28115bdba5c9f6f", v139_damage_references
+};
+
+static constexpr relocation_rule v139_dispatcher_references[] = {
+    // specific native/import callee
+    {172, 176, reference_kind::relative_call, 0, {}, "55 48 83 EC 20 48 8D 6C 24 20 48 85 C9 75 07 E8 ?? ?? ?? ?? 0F 0B E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {214, 218, reference_kind::relative_call, 0, {}, "C3", true, false, "", "", nullptr},
+    // specific native/import callee
+    {232, 236, reference_kind::relative_call, 0, {}, "55 56 57 48 83 EC 20 48 8D 6C 24 20 48 83 FA 11 73 11 31 D2 49 89 C8 48 83 C4 20 5F 5E 5D E9 3D 78 01 00 48 89 D6 48 01 D1 31 FF 31 D2 49 89 C8 E8 ?? ?? ?? ?? 48 85 C0 74 18 48 8D 4E FF 48 89 C2 48 21 C1 48 29 CE 48 01 F0 48 89 54 32 F8 48 89 C7 48 89 F8 48 83 C4 20 5F", true, true, "", "", nullptr},
+    // specific native/import callee
+    {266, 270, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcpy", "", nullptr},
+    // scalar constant
+    {545, 549, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x33}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {554, 558, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {567, 571, reference_kind::rip_data, 4, {0x00, 0x00, 0x20, 0x41}, "", false, false, "", "", nullptr},
+    // Entire native dispatcher returns immediately while current-thread God TLS scope is active.
+    {813, 817, reference_kind::rip_jump_table, 172, {}, "", false, false, "", "eaca47dbd6ba22b713bd5e5d3f31b391350301eaec3abb8627ba9c07a72d313e", nullptr},
+    // specific native/import callee
+    {887, 891, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {1194, 1198, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {1514, 1518, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {1664, 1668, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // specific native/import callee
+    {1714, 1718, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {1865, 1869, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {2038, 2042, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // specific native/import callee
+    {2085, 2089, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {2174, 2178, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // Entire native dispatcher returns immediately while current-thread God TLS scope is active.
+    {2282, 2286, reference_kind::rip_jump_table, 28, {}, "", false, false, "", "2fdf1a7a4bc5f95157d1667ce6bde1c7070d50c57d16ef873bc2e03912c27440", nullptr},
+    // specific native/import callee
+    {2366, 2370, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // specific native/import callee
+    {2584, 2588, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // Entire native dispatcher returns immediately while current-thread God TLS scope is active.
+    {2611, 2615, reference_kind::rip_jump_table, 20, {}, "", false, false, "", "e23451d98bb43421bd76d4ef2788f83391997a7aa35ec4f235125604ec976303", nullptr},
+    // specific native/import callee
+    {2647, 2651, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {2782, 2786, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {3177, 3181, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3308, 3312, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3326, 3330, reference_kind::relative_call, 0, {}, "", true, false, "api-ms-win-crt-math-l1-1-0.dll!roundf", "", nullptr},
+    // scalar constant
+    {3355, 3359, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {3600, 3604, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3680, 3684, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {3777, 3781, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {3813, 3817, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {3984, 3988, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4053, 4057, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4204, 4208, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4451, 4455, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4669, 4673, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4883, 4887, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // specific native/import callee
+    {4952, 4956, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {5052, 5056, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // scalar constant
+    {5170, 5174, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {5317, 5321, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {5348, 5352, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {5420, 5424, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 81 EC 80 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 F8 FE FF FF FF 44 89 CF 4C 89 C3 49 89 D6 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 BB 04 00 00 0F B6 4D 50 C1 E1 07 83 C9 02 89 08 48 C7 45 D0 20 00 00 00 48 89 45 D8 48 C7 45 E0 04 00 00 00 66 C7 45 E8 4A 01 48 8D 55 D0 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 D0 0F 10 4D E0", true, true, "", "", nullptr},
+    // complete wrapper
+    {5451, 5455, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {5564, 5568, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // complete wrapper
+    {5624, 5628, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {5676, 5680, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // scalar constant
+    {5893, 5897, reference_kind::rip_data, 4, {0xff, 0xff, 0x7f, 0x4f}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {5955, 5959, reference_kind::relative_call, 0, {}, "55 41 56 56 57 53 48 81 EC 80 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 F8 FE FF FF FF 44 89 CF 4C 89 C3 49 89 D6 48 89 CE E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 BB 04 00 00 0F B6 4D 50 C1 E1 07 83 C9 02 89 08 48 C7 45 D0 20 00 00 00 48 89 45 D8 48 C7 45 E0 04 00 00 00 66 C7 45 E8 4A 01 48 8D 55 D0 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 D0 0F 10 4D E0", true, true, "", "", nullptr},
+    // complete wrapper
+    {5993, 5997, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {6110, 6114, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // specific native/import callee
+    {6192, 6196, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // God TLS scope returns before dispatcher body; ordinary events delegate unchanged.
+    {6364, 6368, reference_kind::rip_inactive, 16, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {6369, 6373, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 48 48 89 D6 48 89 CF 48 89 4C 24 28 48 89 54 24 30 45 31 F6 48 8D 1D ?? ?? ?? ?? EB 18 66 66 2E 0F 1F 84 00 00 00 00 00 49 83 C6 78 49 81 FE 70 35 00 00 74 2A 49 39 74 1E 08 75 EC 49 8B 0C 1E 48 89 FA 49 89 F0 E8 ?? ?? ?? ?? 85 C0 75 D9 4C 01 F3 48 89 D8 48 83 C4 48 5B 5F 5E 41 5E C3", true, true, "", "", nullptr},
+    // scalar constant
+    {6495, 6499, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {6534, 6538, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // Entire native dispatcher returns immediately while current-thread God TLS scope is active.
+    {6556, 6560, reference_kind::rip_jump_table, 28, {}, "", false, false, "", "6c30fc55bb08feb88096b0a593209ac1c49121247515fd8c76bd05424971b899", nullptr},
+    // specific native/import callee
+    {6650, 6654, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // Entire native dispatcher returns immediately while current-thread God TLS scope is active.
+    {6663, 6667, reference_kind::rip_jump_table, 28, {}, "", false, false, "", "0a61552568c1fce905aa1f87accf44141c2697b0c5b04b31600b8ae3c7bdcac2", nullptr},
+    // specific native/import callee
+    {6696, 6700, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {6764, 6768, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {6907, 6911, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7119, 7123, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 8B 02 4C 8D 0D ?? ?? ?? ?? 49 63 04 81 4C 01 C8 FF E0 44 0F B6 4A 09 41 80 78 1D 00 74 0B 41 80 78 22 00 0F 84 B9 02 00 00 48 83 C2 08 44 0F B6 1A 41 8B 40 08 45 0F B6 50 1E 49 83 FB 06 0F 87 89 02 00 00 48 8D 35 ?? ?? ?? ?? 4E 63 1C 9E 49 01 F3 41 FF E3 45 38 48 1C 0F 94 C1 41 80 FA 02 E9 29 02 00 00 41 80 78 1D 07 0F 94 C0 48 83 C4 20 5E C3 41 80 78 1D 01", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7200, 7204, reference_kind::relative_call, 0, {}, "48 83 EC 38 44 0F 29 44 24 20 0F 29 7C 24 10 0F 29 34 24 F3 0F 10 61 04 0F 2E DC 73 15 F3 0F 10 39 F3 0F 10 69 08 F3 0F 10 41 0C 0F 2E DC 72 33 EB 42 F3 0F 10 61 0C 0F 2E E3 0F 28 C3 F3 0F C2 C4 01 F3 0F 10 79 08 0F 54 F8 0F 57 C0 77 03 0F 57 E4 F3 0F 11 39 F3 0F 11 61 04 0F 57 ED 0F 2E DC 73 11 0F 2E CF 77 0C 0F 2E D4 76 7C 0F 2E CF", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7266, 7270, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7291, 7295, reference_kind::relative_call, 0, {}, "41 57 41 56 41 54 56 57 53 48 83 EC 28 0F B6 01 40 B6 01 4C 8D 05 ?? ?? ?? ?? 49 63 04 80 4C 01 C0 FF E0 31 F6 EB 2E 4C 8B 41 10 4C 39 42 08 75 F2 48 8B 02 48 8B 51 08 48 89 C1 E8 ?? ?? ?? ?? 85 C0 EB 0D 0F B6 42 74 EB 04 0F B6 42 75 3A 41 01 40 0F 94 C6 89 F0 48 83 C4 28 5B", true, true, "", "", nullptr},
+    // complete wrapper
+    {7427, 7431, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 04 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_8},
+    // specific native/import callee
+    {7568, 7572, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {7604, 7608, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // complete wrapper
+    {7684, 7688, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 04 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_8},
+    // specific native/import callee
+    {7766, 7770, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // specific native/import callee
+    {7870, 7874, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // Entire native dispatcher returns immediately while current-thread God TLS scope is active.
+    {7896, 7900, reference_kind::rip_jump_table, 28, {}, "", false, false, "", "39f667048eea5e302aa9c3c5348ffd26e1ac3d72e2306c51e65f850486e152c7", nullptr},
+    // specific native/import callee
+    {7929, 7933, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {8014, 8018, reference_kind::relative_call, 0, {}, "", true, false, "VCRUNTIME140.dll!memcmp", "", nullptr},
+    // specific native/import callee
+    {8120, 8124, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8225, 8229, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 89 C8 48 8B 0A 4C 8B 42 10 4C 8B 4A 30 49 89 CA 4D 85 C9 0F 84 22 01 00 00 4C 8B 5A 08 48 8B 72 18 49 89 CA 49 39 F3 0F 84 0E 01 00 00 48 8B 7A 20 48 8B 52 28 49 89 CA EB 22 66 0F 1F 84 00 00 00 00 00 49 89 1A 49 83 C2 08 49 FF C9 0F 84 E8 00 00 00 49 39 F3 0F 84 DF 00 00 00 49 8B 1B", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8352, 8356, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 48 8B 81 50 06 00 00 48 85 C0 0F 84 93 06 00 00 48 8B B1 48 06 00 00 49 89 C2 49 C1 E2 09 49 8D 04 C2 EB 1C 66 0F 1F 84 00 00 00 00 00 48 81 C6 08 02 00 00 48 05 F8 FD FF FF 0F 84 63 06 00 00 48 39 96 F0 00 00 00 75 E4 83 BE B0 00 00 00 01 74 DB 44 8B BE 38 01 00 00 45 84 C9 0F 84 89 01 00 00 F3 0F 6F 8E 3C 01 00 00 F3 0F 6F 86 4C 01 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8558, 8562, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 44 0F 29 8C 24 90 00 00 00 44 0F 29 84 24 80 00 00 00 0F 29 7C 24 70 0F 29 74 24 60 0F 28 F3 44 89 C5 89 D7 48 89 CB 4C 8B A4 24 30 01 00 00 4C 8B AC 24 28 01 00 00 4C 8B 71 10 4D 85 F6 0F 84 EC 03 00 00 48 8B 4B 08 41 F6 C5 01 48 89 4C 24 30 74 32 31 C0 EB 16 66 0F 1F 44 00 00 48 FF C0 48 83 C1 38 49 39 C6", true, true, "", "", nullptr},
+    // specific native/import callee
+    {8652, 8656, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {8692, 8696, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // complete wrapper
+    {8733, 8737, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {8756, 8760, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 10 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+    // God TLS scope returns before dispatcher body; ordinary events delegate unchanged.
+    {8858, 8862, reference_kind::rip_inactive, 88, {}, "", false, false, "", "", nullptr},
+    // God TLS scope returns before dispatcher body; ordinary events delegate unchanged.
+    {8883, 8887, reference_kind::rip_inactive, 88, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {8922, 8926, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 20 48 89 CE 41 8B 00 48 8D 0D ?? ?? ?? ?? 48 63 04 81 48 01 C8 FF E0 41 8B 40 04 89 06 48 C7 46 08 FE FF FF FF E9 50 01 00 00 49 8B 40 08 48 3B 82 38 0A 00 00 0F 83 C0 00 00 00 4C 8B A2 30 0A 00 00 4C 8D 2C 80 4B 8B 5C EC 08 4B 83 3C EC FF 4B 8B 7C EC 10 0F 84 A9 00 00 00 48 85 FF 0F 89 A9 00 00 00 45 31 F6 4C 89 F1 48 89 FA", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9018, 9022, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 44 0F 29 45 20 0F 29 7D 10 0F 29 75 00 48 C7 45 F8 FE FF FF FF 44 89 C7 0F 28 F9 48 89 CE 31 C0 80 B9 F7 03 00 00 05 0F 93 C0 48 8D 0D ?? ?? ?? ?? F3 0F 59 3C 81 F3 0F 10 86 68 05 00 00 0F 28 C8 F3 0F 58 CF 0F 28 D1 F3 0F 5D 96 C8 05 00 00 48 8B 85 90 00 00 00 0F 28 F2 F3 0F C2 F2 03 0F 54 CE 0F 55 F2 0F 56 F1 F3 0F 11 B6 68 05 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {9171, 9175, reference_kind::relative_call, 0, {}, "48 8B 51 10 48 85 D2 74 16 48 8B 41 08 48 83 FA 01 75 16 F3 0F 10 05 ?? ?? ?? ?? 31 C9 EB 5B F3 0F 10 05 ?? ?? ?? ?? EB 5D 49 89 D0 49 83 E0 FE F3 0F 10 05 ?? ?? ?? ?? 31 C9 EB 0D 0F 1F 40 00 48 83 C1 02 49 39 C8 74 2C 80 3C C8 20 74 11 80 7C C8 08 20 75 EA EB 15 0F 1F 84 00 00 00 00 00 F3 0F 58 44 C8 04 80 7C C8 08 20 75 D3 F3 0F 58 44 C8 0C EB CB F6 C2 01", true, false, "", "", nullptr},
+    // scalar constant
+    {9487, 9491, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9507, 9511, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9514, 9518, reference_kind::rip_data, 8, {0x68, 0x65, 0x6c, 0x6c, 0x66, 0x69, 0x72, 0x65}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9524, 9528, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9543, 9547, reference_kind::rip_data, 8, {0x64, 0x69, 0x76, 0x69, 0x6e, 0x65, 0x5f, 0x73}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9550, 9554, reference_kind::rip_data, 8, {0x65, 0x5f, 0x73, 0x68, 0x69, 0x65, 0x6c, 0x64}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9561, 9565, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9577, 9581, reference_kind::rip_data, 4, {0x33, 0x33, 0xb3, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9599, 9603, reference_kind::rip_data, 4, {0x00, 0x00, 0xc0, 0x40}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9621, 9625, reference_kind::rip_data, 4, {0x33, 0x33, 0xb3, 0x3f}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9688, 9692, reference_kind::rip_data, 4, {0x00, 0x00, 0x80, 0x3e}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9843, 9847, reference_kind::rip_data, 4, {0xcd, 0xcc, 0x4c, 0x3d}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9920, 9924, reference_kind::rip_data, 4, {0xcd, 0xcc, 0x4c, 0x3d}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {9951, 9955, reference_kind::rip_data, 4, {0xcd, 0xcc, 0x4c, 0x3d}, "", false, false, "", "", nullptr},
+    // complete wrapper
+    {9970, 9974, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 04 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_8},
+    // specific native/import callee
+    {10107, 10111, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {10143, 10147, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {10209, 10213, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 85 D2 0F 84 21 01 00 00 89 D6 0F B6 81 DC 03 00 00 04 FE 3C 09 77 10 0F B6 C0 48 8D 15 ?? ?? ?? ?? 48 8B 14 C2 EB 07 48 8D 15 ?? ?? ?? ?? 48 8B 42 30 48 8B 6A 38 48 C1 E5 04 48 01 C5 4C 8B A9 00 04 00 00 48 8B 91 08 04 00 00 48 89 54 24 28 48 8B 91 B8 00 00 00 48 89 54 24 30 48 8B 89 C0 00 00 00 48 89 4C 24 20", true, true, "", "", nullptr},
+    // complete wrapper
+    {10326, 10330, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 04 00 00 00 48 C7 44 24 20 04 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_8},
+    // specific native/import callee
+    {10454, 10458, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {10490, 10494, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {10622, 10626, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10755, 10759, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10859, 10863, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 44 0F 29 8C 24 90 00 00 00 44 0F 29 84 24 80 00 00 00 0F 29 7C 24 70 0F 29 74 24 60 0F 28 F3 44 89 C5 89 D7 48 89 CB 4C 8B A4 24 30 01 00 00 4C 8B AC 24 28 01 00 00 4C 8B 71 10 4D 85 F6 0F 84 EC 03 00 00 48 8B 4B 08 41 F6 C5 01 48 89 4C 24 30 74 32 31 C0 EB 16 66 0F 1F 44 00 00 48 FF C0 48 83 C1 38 49 39 C6", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10889, 10893, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 48 8B 81 50 06 00 00 48 85 C0 0F 84 93 06 00 00 48 8B B1 48 06 00 00 49 89 C2 49 C1 E2 09 49 8D 04 C2 EB 1C 66 0F 1F 84 00 00 00 00 00 48 81 C6 08 02 00 00 48 05 F8 FD FF FF 0F 84 63 06 00 00 48 39 96 F0 00 00 00 75 E4 83 BE B0 00 00 00 01 74 DB 44 8B BE 38 01 00 00 45 84 C9 0F 84 89 01 00 00 F3 0F 6F 8E 3C 01 00 00 F3 0F 6F 86 4C 01 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {10986, 10990, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11152, 11156, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11211, 11215, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 48 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 8D B0 00 00 00 44 0F 29 85 A0 00 00 00 0F 29 BD 90 00 00 00 0F 29 B5 80 00 00 00 48 C7 45 78 FE FF FF FF 48 89 D7 48 89 CE 44 8B BD 30 01 00 00 F3 0F 10 B1 88 0E 00 00 41 8B 00 48 8D 0D ?? ?? ?? ?? 48 63 04 81 48 01 C8 FF E0 0F 28 B5 80 00 00 00 0F 28 BD 90 00 00 00 44 0F 28 85 A0 00 00 00 44 0F 28 8D B0 00 00 00 48 81 C4 48 01 00 00 5B 5F 5E", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11246, 11250, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 48 48 89 D6 48 89 CF 48 89 4C 24 28 48 89 54 24 30 45 31 F6 48 8D 1D ?? ?? ?? ?? EB 18 66 66 2E 0F 1F 84 00 00 00 00 00 49 83 C6 78 49 81 FE 70 35 00 00 74 2A 49 39 74 1E 08 75 EC 49 8B 0C 1E 48 89 FA 49 89 F0 E8 ?? ?? ?? ?? 85 C0 75 D9 4C 01 F3 48 89 D8 48 83 C4 48 5B 5F 5E 41 5E C3", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11269, 11273, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 4C 89 44 24 28 48 89 D3 48 89 CE 4C 8B AA 00 04 00 00 48 8B 82 08 04 00 00 48 89 44 24 30 48 85 C0 0F 84 A1 00 00 00 4C 6B 64 24 30 58 48 8B 44 24 28 4C 8B 30 4C 8B 78 08 31 ED EB 0C 0F 1F 00 48 83 C5 58 49 39 EC 74 7F 49 8B 7C 2D 00 4C 39 7F 08 75 EC 48 8B 0F 4C 89 F2", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11319, 11323, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 78 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD E0 01 00 00 44 0F 29 B5 D0 01 00 00 44 0F 29 AD C0 01 00 00 44 0F 29 A5 B0 01 00 00 44 0F 29 9D A0 01 00 00 44 0F 29 95 90 01 00 00 44 0F 29 8D 80 01 00 00 44 0F 29 85 70 01 00 00 0F 29 BD 60 01 00 00 0F 29 B5 50 01 00 00 48 C7 85 48 01 00 00 FE FF FF FF 49 89 D4 48 89 CF 48 8B 32 80 79 40 00 49 BE F0 FF FF FF FF FF FF 1F 0F 85 DA 00 00 00 80 BF 24 0B 00 00 00 0F 85 CD 00 00 00 48 8B 87 C8 01 00 00 48 8B 9F D0 01 00 00 44 8B 7E 40", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11336, 11340, reference_kind::relative_call, 0, {}, "41 56 56 57 53 48 83 EC 48 48 89 D6 48 89 CF 48 89 4C 24 28 48 89 54 24 30 45 31 F6 48 8D 1D ?? ?? ?? ?? EB 18 66 66 2E 0F 1F 84 00 00 00 00 00 49 83 C6 78 49 81 FE 70 35 00 00 74 2A 49 39 74 1E 08 75 EC 49 8B 0C 1E 48 89 FA 49 89 F0 E8 ?? ?? ?? ?? 85 C0 75 D9 4C 01 F3 48 89 D8 48 83 C4 48 5B 5F 5E 41 5E C3", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11359, 11363, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 4C 89 44 24 28 48 89 D3 48 89 CE 4C 8B AA 00 04 00 00 48 8B 82 08 04 00 00 48 89 44 24 30 48 85 C0 0F 84 A1 00 00 00 4C 6B 64 24 30 58 48 8B 44 24 28 4C 8B 30 4C 8B 78 08 31 ED EB 0C 0F 1F 00 48 83 C5 58 49 39 EC 74 7F 49 8B 7C 2D 00 4C 39 7F 08 75 EC 48 8B 0F 4C 89 F2", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11409, 11413, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 78 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD E0 01 00 00 44 0F 29 B5 D0 01 00 00 44 0F 29 AD C0 01 00 00 44 0F 29 A5 B0 01 00 00 44 0F 29 9D A0 01 00 00 44 0F 29 95 90 01 00 00 44 0F 29 8D 80 01 00 00 44 0F 29 85 70 01 00 00 0F 29 BD 60 01 00 00 0F 29 B5 50 01 00 00 48 C7 85 48 01 00 00 FE FF FF FF 49 89 D4 48 89 CF 48 8B 32 80 79 40 00 49 BE F0 FF FF FF FF FF FF 1F 0F 85 DA 00 00 00 80 BF 24 0B 00 00 00 0F 85 CD 00 00 00 48 8B 87 C8 01 00 00 48 8B 9F D0 01 00 00 44 8B 7E 40", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11523, 11527, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11662, 11666, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // complete wrapper
+    {11717, 11721, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // God TLS scope returns before dispatcher body; ordinary events delegate unchanged.
+    {11742, 11746, reference_kind::rip_inactive, 88, {}, "", false, false, "", "", nullptr},
+    // God TLS scope returns before dispatcher body; ordinary events delegate unchanged.
+    {11767, 11771, reference_kind::rip_inactive, 88, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {11806, 11810, reference_kind::relative_call, 0, {}, "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 20 48 89 CE 41 8B 00 48 8D 0D ?? ?? ?? ?? 48 63 04 81 48 01 C8 FF E0 41 8B 40 04 89 06 48 C7 46 08 FE FF FF FF E9 50 01 00 00 49 8B 40 08 48 3B 82 38 0A 00 00 0F 83 C0 00 00 00 4C 8B A2 30 0A 00 00 4C 8D 2C 80 4B 8B 5C EC 08 4B 83 3C EC FF 4B 8B 7C EC 10 0F 84 A9 00 00 00 48 85 FF 0F 89 A9 00 00 00 45 31 F6 4C 89 F1 48 89 FA", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11894, 11898, reference_kind::relative_call, 0, {}, "55 41 57 41 56 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 44 0F 29 45 20 0F 29 7D 10 0F 29 75 00 48 C7 45 F8 FE FF FF FF 44 89 C7 0F 28 F9 48 89 CE 31 C0 80 B9 F7 03 00 00 05 0F 93 C0 48 8D 0D ?? ?? ?? ?? F3 0F 59 3C 81 F3 0F 10 86 68 05 00 00 0F 28 C8 F3 0F 58 CF 0F 28 D1 F3 0F 5D 96 C8 05 00 00 48 8B 85 90 00 00 00 0F 28 F2 F3 0F C2 F2 03 0F 54 CE 0F 55 F2 0F 56 F1 F3 0F 11 B6 68 05 00 00", true, true, "", "", nullptr},
+    // specific native/import callee
+    {11953, 11957, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 48 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 8D B0 00 00 00 44 0F 29 85 A0 00 00 00 0F 29 BD 90 00 00 00 0F 29 B5 80 00 00 00 48 C7 45 78 FE FF FF FF 48 89 D7 48 89 CE 44 8B BD 30 01 00 00 F3 0F 10 B1 88 0E 00 00 41 8B 00 48 8D 0D ?? ?? ?? ?? 48 63 04 81 48 01 C8 FF E0 0F 28 B5 80 00 00 00 0F 28 BD 90 00 00 00 44 0F 28 85 A0 00 00 00 44 0F 28 8D B0 00 00 00 48 81 C4 48 01 00 00 5B 5F 5E", true, true, "", "", nullptr},
+    // specific native/import callee
+    {12051, 12055, reference_kind::relative_call, 0, {}, "55 56 57 48 81 EC 90 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 08 FE FF FF FF 48 89 CE 0F 28 45 50 F3 0F 10 8A 88 0E 00 00 F3 0F 11 4D 00 F3 0F 59 DB F3 0F 11 5D FC 48 8B 82 48 06 00 00 48 8B 8A 50 06 00 00 48 89 CA 48 C1 E2 09 48 8D 0C CA 48 01 C1 48 89 45 A0 48 89 4D A8 0F 11 45 B0 48 89 E8 48 89 45 C0 4C 89 45 C8 48 8D 45 FC 48 89 45 D0 48 8D 4D D8 48 8D 55 A0 E8 ?? ?? ?? ?? 48 8B 4D E0 48 8B 7D E8 48 8D 45 07", true, true, "", "", nullptr},
+    // specific native/import callee
+    {12267, 12271, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 48 C7 45 30 FE FF FF FF 4C 89 CF 44 89 C3 49 89 D6 48 89 CE 48 8B 85 B0 00 00 00 44 8B 20 E8 ?? ?? ?? ?? B9 20 00 00 00 BA 01 00 00 00 E8 ?? ?? ?? ?? 48 85 C0 0F 84 1D 05 00 00 66 C7 45 28 32 01 48 C7 45 10 20 00 00 00 48 89 45 18 48 C7 45 20 00 00 00 00 48 8D 55 10 4C 89 F1 E8 ?? ?? ?? ?? 90 0F 10 45 10", true, true, "", "", nullptr},
+    // complete wrapper
+    {12296, 12300, reference_kind::relative_call, 0, {}, "56 57 48 83 EC 48 48 89 CE 48 8B 11 48 8D 04 12 48 83 F8 05 BF 04 00 00 00 48 0F 43 F8 4C 8B 41 08 48 C7 44 24 28 20 00 00 00 48 C7 44 24 20 08 00 00 00 48 8D 4C 24 30 49 89 F9 E8 ?? ?? ?? ?? 83 7C 24 30 01 74 13 48 8B 44 24 38 48 89 46 08 48 89 3E 48 83 C4 48 5F 5E C3 48 8B 4C 24 38 48 8B 54 24 40 E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", &v139_helper_4},
+    // specific native/import callee
+    {12405, 12409, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // scalar constant
+    {12509, 12513, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {12677, 12681, reference_kind::rip_data, 4, {0xdb, 0x0f, 0xc9, 0x40}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12682, 12686, reference_kind::relative_call, 0, {}, "56 48 83 EC 20 0F 2E D1 0F 86 38 01 00 00 0F 28 DA F3 0F 5C D9 66 41 0F 7E DA 44 89 D0 25 FF FF FF 7F 3D FF FF 7F 7F 0F 8F 33 01 00 00 4C 8B 01 48 8B 41 08 4C 8B 49 18 48 8B 51 10 66 0F 7E CE 81 E6 FF FF FF 7F 66 41 0F 7E D3 41 81 E3 FF FF FF 7F 41 81 FB 00 00 80 7F 41 0F 9C C3 81 FE FF FF 7F 7F 0F 8F 7E 00 00 00 45 84 DB 74 79 F3 0F 10 1D ?? ?? ?? ?? 66 2E 0F 1F 84 00 00 00 00 00 4F 8D 1C 08 49 C1 C3 17 4D 01 C3 48 89 C6 48 C1 E6 11", true, true, "", "", nullptr},
+    // specific native/import callee
+    {12730, 12734, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 54 56 57 53 48 81 EC 40 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 95 B0 00 00 00 44 0F 29 8D A0 00 00 00 44 0F 29 85 90 00 00 00 0F 29 BD 80 00 00 00 0F 29 75 70 48 C7 45 68 FE FF FF FF 4C 89 CB 0F 28 F2 48 89 D7 48 89 CE 4C 8B B5 20 01 00 00 F3 44 0F 10 91 5C 05 00 00 0F 28 FA F3 41 0F 58 FA 0F 28 C7 E8 ?? ?? ?? ?? 44 0F 28 C0 0F 28 C7 E8 ?? ?? ?? ?? F2 0F 10 8E 50 05 00 00 44 0F 14 C0 44 0F 59 05 ?? ?? ?? ?? 44 0F 58 C1", true, true, "", "", nullptr},
+    // scalar constant
+    {12892, 12896, reference_kind::rip_data, 4, {0xcd, 0xcc, 0x4c, 0x3e}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {12938, 12942, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 28 01 00 00 48 8D AC 24 80 00 00 00 44 0F 29 8D 90 00 00 00 44 0F 29 85 80 00 00 00 0F 29 7D 70 0F 29 75 60 48 C7 45 58 FE FF FF FF 0F 28 F3 44 89 C7 48 89 CE F3 0F 10 B9 88 0E 00 00 0F B6 5A 39 80 FB 06 75 64 F3 0F 10 86 F4 05 00 00 F3 0F 59 05 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 49 89 D6 0F 2E C8 73 28 F3 0F 58 05 ?? ?? ?? ?? F3 44 0F 10 05 ?? ?? ?? ?? F3 41 0F 5E C0 E8 ?? ?? ?? ??", true, true, "", "", nullptr},
+    // scalar constant
+    {13127, 13131, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {13313, 13317, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {13347, 13351, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // scalar constant
+    {13549, 13553, reference_kind::rip_data, 4, {0x00, 0x00, 0x00, 0x80}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {13767, 13771, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 98 0A 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 00 0A 00 00 66 44 0F 29 B5 F0 09 00 00 44 0F 29 AD E0 09 00 00 44 0F 29 A5 D0 09 00 00 44 0F 29 9D C0 09 00 00 44 0F 29 95 B0 09 00 00 44 0F 29 8D A0 09 00 00 44 0F 29 85 90 09 00 00 0F 29 BD 80 09 00 00 0F 29 B5 70 09 00 00 48 C7 85 68 09 00 00 FE FF FF FF 80 B9 4B 0F 00 00 01 0F 85 63 53 00 00 45 89 CC 0F 28 F2 48 89 D3 49 89 CA F3 0F 10 B9 88 0E 00 00 4C 8B 99 48 06 00 00 48 8B B1 50 06 00 00 48 89 F0 48 C1 E0 09", true, true, "", "", nullptr},
+    // complete wrapper
+    {13819, 13823, reference_kind::relative_call, 0, {}, "55 56 48 83 EC 28 48 8D 6C 24 20 48 89 CE 49 83 F8 11 72 04 48 8B 76 F8 FF 15 ?? ?? ?? ?? 48 89 C1 31 D2 49 89 F0 48 83 C4 28 5E 5D 48 FF 25 ?? ?? ?? ??", true, true, "", "", &v139_helper_3},
+    // specific native/import callee
+    {13842, 13846, reference_kind::relative_call, 0, {}, "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC 08 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 70 01 00 00 44 0F 29 B5 60 01 00 00 44 0F 29 AD 50 01 00 00 44 0F 29 A5 40 01 00 00 44 0F 29 9D 30 01 00 00 44 0F 29 95 20 01 00 00 44 0F 29 8D 10 01 00 00 44 0F 29 85 00 01 00 00 0F 29 BD F0 00 00 00 0F 29 B5 E0 00 00 00 48 C7 85 D8 00 00 00 FE FF FF FF 48 89 CE 0F B6 81 DC 03 00 00 04 FE 3C 09 77 24 0F B6 C0 48 8D 0D ?? ?? ?? ?? 48 8B 14 C1 0F B6 86 DD 03 00 00 04 FE 3C 06", true, true, "", "", nullptr},
+    // God TLS scope returns before dispatcher body; ordinary events delegate unchanged.
+    {13973, 13977, reference_kind::rip_inactive, 24, {}, "", false, false, "", "", nullptr},
+    // specific native/import callee
+    {13981, 13985, reference_kind::relative_call, 0, {}, "55 48 83 EC 50 48 8D 6C 24 50 48 8D 45 F8 48 89 08 48 8D 4D F0 48 89 11 48 8D 55 D0 48 89 0A 48 8D 0D ?? ?? ?? ?? 48 89 4A 08 48 89 42 10 48 89 4A 18 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F 0B", true, true, "", "", nullptr},
+};
+static constexpr function_certificate v139_dispatcher{
+    "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC F8 02 00 00 48 8D AC 24 80 00 00 00 44 0F 29 BD 60 02 00 00 44 0F 29 B5 50 02 00 00 44 0F 29 AD 40 02 00 00 44 0F 29 A5 30 02 00 00 44 0F 29 9D 20 02 00 00 44 0F 29 95 10 02 00 00 44 0F 29 8D 00 02 00 00 44 0F 29 85 F0 01 00 00 0F 29 BD E0 01 00 00 0F 29 B5 D0 01 00 00 48 C7 85 C8 01 00 00 FE FF FF FF 49 89 CF 48 8B 99 20 0A 00 00 49 89 DC 49 C1 E4 06 48 89 D8 48 C1 E8 3A 0F 95 C0 48 B9 F8 FF FF FF FF FF FF 7F 49 39 CC 0F 97 C1 08 C1",
+    13988,
+    "732bbab95487b87dd9a9224cec06c380b03fb94577fcd1ea499a76769cbc0e35", v139_dispatcher_references
+};
+
 static constexpr family_certificate families[] = {
     {v132_damage, v132_dispatcher, 0x5b8, 0x1f8, 0x1b6, 0xec3, 0x388, {19917, 20121}, 7443},
     {modern_damage, modern_dispatcher, 0x640, 0x200, 0x236, 0xf4b, 0x408, {19680, 19875}, 7584},
+    {v139_damage, v139_dispatcher, 0x640, 0x208, 0x236, 0xf4b, 0x408, {21159, 21359}, 8251},
 };

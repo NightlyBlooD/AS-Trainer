@@ -365,9 +365,17 @@ bool native_addresses::resolve_file(const pattern_scanner& scanner, const signat
                 "guard_loot_record", "guard_zone_record", "guard_lifesteal_abi"
             };
             std::array<bool, required_guards.size()> guard_seen{};
+            constexpr std::array<std::string_view, 4> choice_payload_guards{
+                "guard_choice_payload", "guard_choice_payload_rarity",
+                "guard_choice_payload_custom", "guard_choice_payload_effects"
+            };
+            std::array<bool, choice_payload_guards.size()> choice_payload_seen{};
             bool bits_seen = false, float_seen = false;
             for (const auto& guard : guards) {
                 const auto name = std::string_view(guard.rule->name);
+                const auto payload = std::find(choice_payload_guards.begin(), choice_payload_guards.end(), name);
+                if (payload != choice_payload_guards.end())
+                    choice_payload_seen[static_cast<std::size_t>(payload - choice_payload_guards.begin())] = true;
                 const auto found = std::find(required_guards.begin(), required_guards.end(), name);
                 if (found != required_guards.end()) {
                     const auto index = static_cast<std::size_t>(found - required_guards.begin());
@@ -380,7 +388,7 @@ bool native_addresses::resolve_file(const pattern_scanner& scanner, const signat
                     if (float_seen) { error = "duplicate object-field float ABI guard"; return false; }
                     float_seen = true;
                 } else if (name != "guard_set_object_field_abi" && name != "guard_swap_player_entry" &&
-                    name != "guard_lifesteal_entry" && name != "guard_choice_payload") {
+                    name != "guard_lifesteal_entry" && payload == choice_payload_guards.end()) {
                     error = guard.rule->name + ": unknown ABI guard";
                     return false;
                 }
@@ -392,6 +400,7 @@ bool native_addresses::resolve_file(const pattern_scanner& scanner, const signat
                 else if (name == "guard_swap_player_abi" || name == "guard_swap_player_entry") linked = native_symbol::swap_player;
                 else if (name == "guard_lifesteal_abi" || name == "guard_lifesteal_entry") linked = native_symbol::lifesteal;
                 else if (name.starts_with("guard_set_object_field_")) linked = native_symbol::set_object_field;
+                else if (name == "guard_choice_record" || payload != choice_payload_guards.end()) linked = native_symbol::apply_choice;
                 else has_link = false;
                 if (has_link) {
                     const auto address = pending.symbols[static_cast<std::size_t>(linked)];
@@ -406,6 +415,13 @@ bool native_addresses::resolve_file(const pattern_scanner& scanner, const signat
                         return false;
                     }
                 }
+            }
+            const bool split_choice_payload = std::any_of(choice_payload_seen.begin() + 1,
+                choice_payload_seen.end(), [](bool present) { return present; });
+            if (split_choice_payload && std::any_of(choice_payload_seen.begin(), choice_payload_seen.end(),
+                    [](bool present) { return !present; })) {
+                error = "split choice payload certificate is incomplete";
+                return false;
             }
             for (const auto present : guard_seen) if (!present) { error = "required adaptive ABI guard is missing"; return false; }
             if (bits_seen == float_seen) { error = "adaptive object-field ABI needs exactly one typed mode guard"; return false; }
@@ -468,15 +484,22 @@ bool native_addresses::resolve_auto(const pattern_scanner& scanner, candidate& r
             error.clear();
             return true;
         }
-        signature_profile profile;
-        const auto* catalog = hash == current_hash ? current_signature_profile : adaptive_signature_profile;
-        if (!signature_profiles::parse(catalog, profile, error)) return false;
-        if ((hash == current_hash && profile.layout != "current") ||
-            (hash != current_hash && profile.layout != "adaptive")) {
-            error = "embedded catalog has an incompatible binding policy";
-            return false;
+        const bool exact = hash == current_hash;
+        const std::array catalogs{exact ? current_signature_profile : adaptive_signature_profile,
+            exact ? current_signature_profile : previous_adaptive_signature_profile};
+        std::string first_error;
+        for (std::size_t index = 0; index < (exact ? 1u : catalogs.size()); ++index) {
+            signature_profile profile;
+            if (!signature_profiles::parse(catalogs[index], profile, error)) return false;
+            if (profile.layout != (exact ? "current" : "adaptive")) {
+                error = "embedded catalog has an incompatible binding policy";
+                return false;
+            }
+            if (resolve_file(scanner, profile, result, error)) return true;
+            if (index == 0) first_error = error;
         }
-        return resolve_file(scanner, profile, result, error);
+        if (!exact) error = "adaptive: " + first_error + "; previous adaptive: " + error;
+        return false;
     } catch (...) {
         try { error = "automatic native binding selection failed"; } catch (...) {}
         return false;

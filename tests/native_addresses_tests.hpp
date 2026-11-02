@@ -97,6 +97,12 @@ private:
      */
     static void test_section_and_setter_contract();
 
+    /** @brief Verify independent choice payload anchors form one complete linked certificate.
+     * @return None; accepts a complete set and legacy monolithic proof, then rejects missing
+     * split guards, a guard moved outside apply_choice and changed semantic allocator/field bytes.
+     */
+    static void test_split_choice_payload();
+
     /** @brief Ensure the automatic runtime catalog path rejects unrelated toy bytes without stale output.
      * @return None; external toy catalogs do not become embedded runtime admission authorities.
      */

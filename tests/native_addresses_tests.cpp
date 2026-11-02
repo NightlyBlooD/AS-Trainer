@@ -328,6 +328,61 @@ void native_addresses_tests::test_section_and_setter_contract() {
     reject(competing_abis, previous, "two claimed setter modes are rejected instead of selecting one by profile order");
 }
 
+void native_addresses_tests::test_split_choice_payload() {
+    auto good = make_fixture(0x1000, 0x140000000, false);
+    constexpr const char* names[]{"guard_choice_payload", "guard_choice_payload_rarity",
+        "guard_choice_payload_custom", "guard_choice_payload_effects"};
+    const std::vector<std::uint8_t> anchors[]{
+        {0x48, 0x8b, 0x87, 0x80, 0, 0, 0},
+        {0x4c, 0x8b, 0xbf, 0x98, 0, 0, 0},
+        {0xb9, 0x70, 0, 0, 0, 0xba, 8, 0, 0, 0},
+        {0x48, 0x8b, 0x87, 0x88, 0, 0, 0, 0x48, 0x8b, 0x97, 0x90, 0, 0, 0}
+    };
+    constexpr std::size_t payload_offset = 0x400 + 8 * 0x80 + 0x30;
+    for (std::size_t index = 0; index < std::size(names); ++index) {
+        const auto& anchor = anchors[index];
+        std::copy(anchor.begin(), anchor.end(), good.bytes.begin() + payload_offset + index * 0x10);
+        signature_rule rule;
+        rule.name = names[index];
+        rule.section = ".text";
+        rule.pattern = pattern_text(anchor);
+        rule.resolve = pattern_resolve_mode::match;
+        good.profile.rules.push_back(std::move(rule));
+    }
+    pattern_scanner scanner;
+    check(scanner.load_bytes(good.bytes), "split choice proof fixture loads");
+    native_addresses::candidate previous;
+    std::string error;
+    check(native_addresses::resolve_file(scanner, good.profile, previous, error),
+        "independent choice field/allocator anchors form a complete linked payload certificate");
+    for (const auto* name : names) {
+        auto missing = good;
+        std::erase_if(missing.profile.rules, [name](const signature_rule& rule) { return rule.name == name; });
+        reject(missing, previous, "each split payload guard is required before atomic admission",
+            "split choice payload certificate is incomplete");
+    }
+    auto unrelated = good;
+    const auto& rarity = anchors[1];
+    std::copy(rarity.begin(), rarity.end(), unrelated.bytes.begin() + 0xa30);
+    std::fill_n(unrelated.bytes.begin() + payload_offset + 0x10, rarity.size(), std::uint8_t{0x90});
+    reject(unrelated, previous, "a unique choice field anchor in an unrelated function cannot certify the layout",
+        "ABI guard is not linked to its native function");
+    auto changed_size = good;
+    changed_size.bytes[payload_offset + 0x21] = 0x78;
+    reject(changed_size, previous, "a changed custom payload allocation size invalidates the semantic anchor");
+    auto changed_rarity = good;
+    changed_rarity.bytes[payload_offset + 0x13] = 0x90;
+    reject(changed_rarity, previous, "a changed rarity field invalidates the semantic anchor");
+    auto monolithic = good;
+    std::erase_if(monolithic.profile.rules, [](const signature_rule& rule) {
+        return rule.name.starts_with("guard_choice_payload_");
+    });
+    pattern_scanner old_scanner;
+    check(old_scanner.load_bytes(monolithic.bytes)
+        && native_addresses::resolve_file(old_scanner, monolithic.profile, previous, error),
+        "a linked legacy monolithic choice payload certificate remains supported");
+}
+
 void native_addresses_tests::test_automatic_refusal() {
     const auto input = make_fixture(0x9000, 0x180000000, false);
     pattern_scanner scanner;
@@ -346,6 +401,7 @@ int native_addresses_tests::run() noexcept {
         test_complete_relocation();
         test_incomplete_and_ambiguous();
         test_section_and_setter_contract();
+        test_split_choice_payload();
         test_automatic_refusal();
     } catch (const std::exception& error) {
         std::fprintf(stderr, "Native certificate test exception: %s\n", error.what());
